@@ -1,10 +1,22 @@
-from flask import Flask, render_template
-from flask_wtf import FlaskForm, CSRFProtect
-from wtforms import StringField, SubmitField
+import secrets
 
+from flask import Flask
+from flask_wtf import CSRFProtect
+from routes.main import main_bp
+from routes.question import question_bp
 
 app = Flask(__name__)
+# Set a secret key for the application
+foo = secrets.token_urlsafe(16)
+app.secret_key = foo
+
+# registering blueprints
+app.register_blueprint(main_bp, url_prefix="/")
+app.register_blueprint(question_bp, url_prefix="/question")
+
+# Line required for flask_wtf
+csrf = CSRFProtect(app)
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
