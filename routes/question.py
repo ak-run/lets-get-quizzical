@@ -11,7 +11,6 @@ class QuestionForm(FlaskForm):
     submit = SubmitField("Submit")
 
 
-# route for question
 @question_bp.route("/", methods=['GET', 'POST'])
 def question():
     """Route for question"""
