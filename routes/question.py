@@ -12,7 +12,7 @@ class QuestionForm(FlaskForm):
 
 
 # route for question
-@question_bp.route("/")
+@question_bp.route("/", methods=['GET', 'POST'])
 def question():
     """Route for question"""
     form = QuestionForm()
