@@ -1,0 +1,8 @@
+{
+    "database": {
+        "host": "localhost",
+        "user": "username",
+        "password": "your password",
+        "database_name": "tba"
+    }
+}
