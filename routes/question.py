@@ -4,7 +4,7 @@ from wtforms import SubmitField
 
 
 # blueprint for question
-question_bp = Blueprint("question", __name__)
+question_bp = Blueprint("question", __name__, static_folder="static", template_folder="templates")
 
 
 class QuestionForm(FlaskForm):
