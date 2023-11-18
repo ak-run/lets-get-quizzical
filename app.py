@@ -10,12 +10,14 @@ app = Flask(__name__)
 foo = secrets.token_urlsafe(16)
 app.secret_key = foo
 
+
 # registering blueprints
 app.register_blueprint(main_bp, url_prefix="/")
 app.register_blueprint(question_bp, url_prefix="/question")
 
 # Line required for flask_wtf
 csrf = CSRFProtect(app)
+
 
 
 if __name__ == '__main__':
