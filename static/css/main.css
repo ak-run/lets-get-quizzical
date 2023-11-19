@@ -38,15 +38,15 @@ h4 {
 	top: 0;
 }
 
-li.nav-item {
+.nav-item {
 	list-style-type: none;
 	text-transform: uppercase;
 	text-decoration: none;
 }
 
-nav {
+.nav {
 	height: 65px;
-	background-color: transparent;
+	background-color: transparent !important;
 	line-height: 60px;
 	position: fixed;
 	width: 100%;
@@ -66,11 +66,15 @@ nav {
 	font-weight: bold;
 }
 
-ul {
+.navbar-toggler {
+	color: white !important;
+}
+
+/* ul {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-evenly;
-}
+} */
 
 .intro {
 	display: flex;
@@ -78,7 +82,7 @@ ul {
 	align-items: center;
 	justify-content: center;
 	margin: 120px auto;
-	width: 800px;
+	width: 80%;
 	border-radius: 5px;
 	background: transparent;
 	text-align: center;
