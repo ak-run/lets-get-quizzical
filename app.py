@@ -18,5 +18,7 @@ app.register_blueprint(question_bp, url_prefix="/question")
 # Line required for flask_wtf
 csrf = CSRFProtect(app)
 
+
 if __name__ == '__main__':
     app.run(debug=True)
+    
