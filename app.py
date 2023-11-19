@@ -19,6 +19,6 @@ app.register_blueprint(question_bp, url_prefix="/question")
 csrf = CSRFProtect(app)
 
 
-
 if __name__ == '__main__':
     app.run(debug=True)
+    
