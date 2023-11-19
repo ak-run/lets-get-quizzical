@@ -1,0 +1,114 @@
+* {
+	box-sizing: border-box;
+	padding: 0px;
+	margin: 0px;
+	font-weight: 100;
+	font-family: 'Lato';
+}
+
+body {
+	background-image: url('https://www.mahablog.com/wp-content/uploads/2019/02/dreamstime_m_80592987-1024x683.jpg');
+	background-position: center;
+	width: 100%;
+	background-size: 100%;
+}
+
+h3 {
+	text-transform: uppercase;
+	font-size: 50px;
+	margin-bottom: 40px;
+	font-family: 'Pacifico';
+	color: rgba(255, 255, 255, 0.7);
+}
+
+h4 {
+	text-transform: uppercase;
+	font-size: 40px;
+	margin-bottom: 40px;
+	font-family: 'Pacifico';
+	color: rgba(255, 255, 255, 0.7);
+}
+
+.mainnav {
+	height: 60px;
+	background-color: transparent;
+	line-height: 40px;
+	position: fixed;
+	width: 100%;
+	top: 0;
+}
+
+li.nav-item {
+	list-style-type: none;
+	text-transform: uppercase;
+	text-decoration: none;
+}
+
+nav {
+	height: 65px;
+	background-color: transparent;
+	line-height: 60px;
+	position: fixed;
+	width: 100%;
+	top: 0;
+}
+
+.link {
+	color: white;
+	text-decoration: none;
+	transition: color 0.2s ease;
+}
+
+.link:hover {
+	text-decoration: none;
+	color: white;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+ul {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+}
+
+.intro {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin: 120px auto;
+	width: 80%;
+	border-radius: 5px;
+	background: transparent;
+	text-align: center;
+}
+
+.main-button {
+	display: block;
+	padding: 10px 20px;
+	text-decoration: none;
+	color: #fff;
+	margin: 10px;
+	border-radius: 5px;
+	transition: background-color 0.3s ease;
+	border-radius: 20px;
+	border: 5px solid white;
+	text-transform: uppercase;
+}
+
+.answer {
+	width: 400px;
+	height: 60px;
+	background: transparent;
+}
+
+p.question {
+	font-size: 35px;
+	color: white;
+}
+
+.main-button:hover {
+	background-color: rgba(255, 255, 255, 0.4);
+	text-decoration: none;
+}

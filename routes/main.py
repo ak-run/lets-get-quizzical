@@ -8,3 +8,10 @@ main_bp = Blueprint("/", __name__, static_folder="static", template_folder="temp
 def main():
     """Route for main page"""
     return render_template("index.html")
+
+
+@main_bp.route("/single.html")
+def single():
+    """Route for the single player page"""
+    return render_template("single.html")
+    
