@@ -67,7 +67,9 @@ h4 {
 }
 
 .navbar-toggler {
-	color: white !important;
+	background-color: rgba(255, 255, 255, 0.60) !important;
+
+
 }
 
 /* ul {
@@ -115,4 +117,29 @@ p.question {
 .main-button:hover {
 	background-color: rgba(255, 255, 255, 0.4);
 	text-decoration: none;
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 120px auto;
+  width: 80%;
+  border-radius: 5px;
+  background: transparent;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  a.nav-link {
+    font-size:35px;
+    margin-left:20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .intro {
+    display: none;
+  }
 }
