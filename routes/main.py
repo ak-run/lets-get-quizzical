@@ -12,4 +12,4 @@ def main():
 def single():
     """Route for the single player page"""
     return render_template("single.html")
-    
+    z
