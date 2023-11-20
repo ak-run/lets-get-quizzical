@@ -72,11 +72,11 @@ h4 {
 
 }
 
-/* ul {
+ul {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-evenly;
-} */
+}
 
 .intro {
 	display: flex;
@@ -132,14 +132,17 @@ p.question {
 }
 
 @media (max-width: 768px) {
-  a.nav-link {
-    font-size:35px;
-    margin-left:20px;
+  .navbar-collapse {
+    background-color: rgba(34, 34, 34, 1) !important;
+    opacity: 1 !important;
   }
-}
 
-@media (max-width: 768px) {
-  .intro {
-    display: none;
+  .navbar-toggler {
+    background-color: rgba(255, 255, 255, 1) !important;
+  }
+
+  a.nav-link {
+    font-size: 35px;
+    margin-left: 20px;
   }
 }
