@@ -131,6 +131,22 @@ p.question {
   text-align: center;
 }
 
+button.answer {
+	position: relative;
+
+}
+
+
+.check {
+	top:30%;
+	position: absolute;
+	height: 20px;
+	width: 20px;
+	border:2px solid white;
+	z-index: 10;
+
+}
+
 @media (max-width: 768px) {
   .navbar-collapse {
     background-color: rgba(34, 34, 34, 1) !important;
