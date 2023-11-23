@@ -1,34 +1,58 @@
-let checkChecks;
-let selectedAnswer = null;
+let button = document.querySelector('button');
 
-const main = () => {
-	prepareDOMelements();
-	prepareDOMevents();
-};
+document.addEventListener('DOMContentLoaded', function () {
+	let quizData = {
+		response_code: 0,
+		results: [
+			{
+				question: 'In Mulan (1998), who is the leader of the Huns?',
+				correct_answer: 'Shan Yu',
+				incorrect_answers: ['Chien-Po', 'Li Shang', 'Fa Zhou'],
+			},
+			{
+				question:
+					'Which country do cities of Perth, Adelaide & Brisbane belong to?',
+				correct_answer: 'Australia',
+				incorrect_answers: ['Germany', 'Malta', 'France'],
+			},
+		],
+	};
 
-const prepareDOMelements = () => {
-	checkChecks = document.querySelectorAll('.check');
-};
+	let currentQuestionIndex = 0;
 
-const prepareDOMevents = () => {
-	checkChecks.forEach((check) => {
-		check.addEventListener('click', changeColour);
-	});
-};
+	function loadQuestion() {
+		let currentQuestion = quizData.results[currentQuestionIndex];
+		document.getElementById('question-number').innerText =
+			currentQuestionIndex + 1;
+		document.getElementById('question-content').innerText =
+			currentQuestion.question;
+		let answersContainer = document.getElementById('answers-container');
+		answersContainer.innerHTML = '';
 
-const changeColour = (event) => {
-	const clickedCheck = event.currentTarget;
+		let allAnswers = [
+			currentQuestion.correct_answer,
+			...currentQuestion.incorrect_answers,
+		];
 
-	checkChecks.forEach((check) => {
-		check.style.backgroundColor = '';
-	});
-
-	if (clickedCheck !== selectedAnswer) {
-		clickedCheck.style.backgroundColor = 'rgba(255, 255, 255, 0.67)';
-		selectedAnswer = clickedCheck;
-	} else {
-		selectedAnswer = null;
+		allAnswers.forEach(function (answer) {
+			let answerDiv = document.createElement('div');
+			answerDiv.classList.add('answer');
+			answerDiv.innerHTML = `<input type="radio" name="answer" value="${answer}" class="main-button">
+                                    <span>${answer}</span>`;
+			answersContainer.appendChild(answerDiv);
+		});
 	}
-};
 
-document.addEventListener('DOMContentLoaded', main);
+	button.addEventListener('click', nextQuestion);
+
+	function nextQuestion() {
+		currentQuestionIndex++;
+		if (currentQuestionIndex < quizData.results.length) {
+			loadQuestion();
+		} else {
+			alert('Quiz completed!');
+		}
+	}
+
+	loadQuestion();
+});
