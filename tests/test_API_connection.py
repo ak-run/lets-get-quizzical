@@ -18,3 +18,8 @@ class TestAPI(TestCase):
         for question in player_one_q:
             count += 1
         self.assertEqual(count, 10)
+        
+        
+     
+if __name__ == '__main__':
+    unittest.main()
