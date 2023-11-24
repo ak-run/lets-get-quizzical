@@ -9,7 +9,7 @@ def get_ten_rand_questions():
         questions = response.json()
         if response.status_code != 200:
             raise ConnectionError
-    except ConnectionError as ce:
+    except requests.exceptions.RequestException as ce: 
         print('''An error has occurred when trying to
               connect to the API: {} '''.format(ce))
     else:
