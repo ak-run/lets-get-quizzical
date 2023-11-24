@@ -11,7 +11,7 @@ class TestAPI(TestCase):
         response = requests.get(self.url)
         self.assertEqual(response.status_code, 200)
 
-    def test_get_ten_rand_questions(self):
+    def test_valid_get_ten_rand_questions(self):
         # checking that 10 dictionaries/ questions are returned
         player_one_q = get_ten_rand_questions()
         count = 0
