@@ -56,7 +56,7 @@ class Leaderboard:
         return self.execute_sql_query(self._add_user_score_sql_query), 200
 
 
-# with open('../config.json') as config_file:
+# with open('../config/config.json') as config_file:
 #     config = json.load(config_file)
 #
 # conn = DatabaseConnection(config)
