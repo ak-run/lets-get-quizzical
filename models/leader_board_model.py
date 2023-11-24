@@ -53,17 +53,16 @@ class LeaderBoard:
         return self.execute_sql_query(self._display_top10_sql_query, fetch_results=True)
 
     def add_user_score(self):
-        print(self.add_user_score_sql_query)
-        return self.execute_sql_query(self._add_user_score_sql_query)
+        return self.execute_sql_query(self._add_user_score_sql_query), 200
 
 
-with open('../config.json') as config_file:
-    config = json.load(config_file)
-
-conn = DatabaseConnection(config)
-conn.get_connection_to_db()
-leaderboard = LeaderBoard(conn)
-leaderboard.display_top10_sql_query = "SELECT nickname, score FROM top_scores_view;"
-leaderboard.add_user_score_sql_query = "CALL AddUserScore('Robot', 10);"
-leaderboard.add_user_score()
-pprint(leaderboard.display_top_scores())
+# with open('../config.json') as config_file:
+#     config = json.load(config_file)
+#
+# conn = DatabaseConnection(config)
+# conn.get_connection_to_db()
+# leaderboard = LeaderBoard(conn)
+# leaderboard.display_top10_sql_query = "SELECT nickname, score FROM top_scores_view;"
+# leaderboard.add_user_score_sql_query = "CALL AddUserScore('TESTING', 10);"
+# leaderboard.add_user_score()
+# pprint(leaderboard.display_top_scores())
