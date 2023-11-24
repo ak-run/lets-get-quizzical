@@ -29,23 +29,31 @@ class LeaderBoard:
     def add_user_score_sql_query(self, query):
         self._add_user_score_sql_query = query
 
-    def execute_sql_query(self, query):
+    def execute_sql_query(self, query, fetch_results=False):
         try:
             connection = self.db_connection.get_connection_to_db()
             cur = connection.cursor()
             cur.execute(query)
-            result = cur.fetchall()
+
+            if fetch_results:
+                result = cur.fetchall()  # Only fetch results if the query produces a result set
+            else:
+                result = None
+
+            connection.commit()  # commit the transaction
             cur.close()
             return result
         except Exception as e:
+            connection.rollback()  # Rollback the transaction in case of an error
             raise DbConnectionError(f"Failed to execute query. Exception: {e}")
         finally:
             connection.close()
 
     def display_top_scores(self):
-        return self.execute_sql_query(self._display_top10_sql_query)
+        return self.execute_sql_query(self._display_top10_sql_query, fetch_results=True)
 
     def add_user_score(self):
+        print(self.add_user_score_sql_query)
         return self.execute_sql_query(self._add_user_score_sql_query)
 
 
@@ -56,4 +64,6 @@ conn = DatabaseConnection(config)
 conn.get_connection_to_db()
 leaderboard = LeaderBoard(conn)
 leaderboard.display_top10_sql_query = "SELECT nickname, score FROM top_scores_view;"
+leaderboard.add_user_score_sql_query = "CALL AddUserScore('Robot', 10);"
+leaderboard.add_user_score()
 pprint(leaderboard.display_top_scores())
