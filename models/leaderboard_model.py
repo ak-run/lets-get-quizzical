@@ -7,7 +7,7 @@ class DbConnectionError(Exception):
     pass
 
 
-class LeaderBoard:
+class Leaderboard:
     def __init__(self, db_connection):
         self.db_connection = db_connection
         self._display_top10_sql_query = ""

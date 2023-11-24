@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import MagicMock
 from models.db_connection_model import DatabaseConnection
-from models.leader_board_model import DbConnectionError, LeaderBoard
+from models.leaderboard_model import DbConnectionError, Leaderboard
 
 
 class TestLeaderBoard(unittest.TestCase):
@@ -14,7 +14,7 @@ class TestLeaderBoard(unittest.TestCase):
         Set up the test by creating a mock DatabaseConnection.
         """
         self.mock_db_connection = MagicMock(spec=DatabaseConnection)
-        self.mock_leaderboard = LeaderBoard(self.mock_db_connection)
+        self.mock_leaderboard = Leaderboard(self.mock_db_connection)
 
     def test_valid_display_top_scores(self):
         """
