@@ -1,12 +1,19 @@
-{% extends "base.html"%}
-{%block title%}
+{% extends "base.html" %}
+{% block title %}
 Leaderboard
 {% endblock %}
 
-{% for score in scores %}
-    {{ score.nickname }} - {{ score.score }}<br>
-{% endfor %}
-
-{% block content%}
-
+{% block content %}
+<table>
+  <tr>
+    <th>Nickname</th>
+    <th>Score</th>
+  </tr>
+  {% for nickname, score in scores %}
+    <tr>
+      <td>{{ nickname }}</td>
+      <td>{{ score }}</td>
+    </tr>
+  {% endfor %}
+</table>
 {% endblock %}
