@@ -6,7 +6,7 @@ class TestAPI(TestCase):
     url = "https://the-trivia-api.com/v2/questions"
 
 
-    def test_API_connection(self):
+    def test_valid_API_connection(self):
         # test that API connection returns status code 200
         response = requests.get(self.url)
         self.assertEqual(response.status_code, 200)
