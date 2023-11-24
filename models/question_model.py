@@ -6,7 +6,7 @@ import requests
 
 class QuizQuestions:
     def __init__(self, category):
-        self.url = "https://opentdb.com/api.php?type=multiple"
+        self.url = # Need to add API url here
         self.questions_category = category
 
     def api_call(self, category):
