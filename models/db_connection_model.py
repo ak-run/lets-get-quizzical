@@ -20,13 +20,18 @@ class DatabaseConnection:
 
     def get_connection_to_db(self):
         """Establish a connection to a MySQL database."""
-        self.connection = mysql.connector.connect(
-            host=self.db_host,
-            user=self.db_user,
-            password=self.db_password,
-            database=self.db_name
-        )
-        return self.connection
+        try:
+            self.connection = mysql.connector.connect(
+                host=self.db_host,
+                user=self.db_user,
+                password=self.db_password,
+                database=self.db_name
+            )
+            return self.connection
+
+        except mysql.connector.Error as err:
+            print(f"Error connecting to the database: {err}")
+            raise
 
     def conn_close(self):
         """Close the database connection."""
