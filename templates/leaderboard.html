@@ -3,6 +3,10 @@
 Leaderboard
 {% endblock %}
 
+{% for score in scores %}
+    {{ score.nickname }} - {{ score.score }}<br>
+{% endfor %}
+
 {% block content%}
 
 {% endblock %}

@@ -14,4 +14,10 @@ def leaderboard():
     """Route for Leaderboard"""
     leaderboard_instance = Leaderboard(conn)
     leaderboard_instance.display_top10_sql_query = "SELECT nickname, score FROM top_scores_view;"
-    return render_template("leaderboard.html", leaderboard=leaderboard_instance)
+    scores = leaderboard_instance.display_top_scores()
+    return render_template("leaderboard.html", scores=scores)
+
+
+leaderboard1 = Leaderboard(conn)
+leaderboard1.display_top10_sql_query = "SELECT nickname, score FROM top_scores_view;"
+print(leaderboard1.display_top_scores())
