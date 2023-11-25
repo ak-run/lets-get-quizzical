@@ -1,4 +1,3 @@
-import json
 from flask import Blueprint, render_template
 from flask_wtf import FlaskForm
 from models.db_connection_model import DatabaseConnection, config
