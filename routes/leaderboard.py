@@ -20,5 +20,6 @@ def leaderboard():
     leaderboard_instance = Leaderboard(conn)
     leaderboard_instance.display_top10_sql_query = "SELECT nickname, score FROM top_scores_view;"
     scores = leaderboard_instance.display_top_scores()
-    return render_template("leaderboard.html", scores=scores)
+    form = LeaderboardForm
+    return render_template("leaderboard.html", form=form, scores=scores)
 

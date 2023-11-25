@@ -5,18 +5,20 @@ Leaderboard
 
 {% block content %}
  <form id="LeaderboardForm" method="GET">
-<table>
-  <tr>
-    <th>Nickname</th>
-    <th>Score</th>
-  </tr>
-  {% for nickname, score in scores %}
-    <tr>
-      <td>{{ nickname }}</td>
-      <td>{{ score }}</td>
-    </tr>
-  {% endfor %}
-</table>
+   <div class="form-group">
+    <table>
+      <tr>
+        <th>Nickname</th>
+        <th>Score</th>
+      </tr>
+      {% for nickname, score in scores %}
+        <tr>
+          <td>{{ nickname }}</td>
+          <td>{{ score }}</td>
+        </tr>
+      {% endfor %}
+    </table>
+</div>
 </form>
 
 {% endblock %}
