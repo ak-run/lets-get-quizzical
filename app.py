@@ -1,5 +1,4 @@
 import secrets
-
 from flask import Flask
 from flask_wtf import CSRFProtect
 from routes.main import main_bp

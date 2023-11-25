@@ -1,5 +1,6 @@
 import json
 from flask import Blueprint, render_template
+from flask_wtf import FlaskForm
 from models.db_connection_model import DatabaseConnection, config
 from models.leaderboard_model import Leaderboard
 
@@ -7,6 +8,10 @@ leaderboard_bp = Blueprint("leaderboard", __name__, static_folder="static", temp
 
 conn = DatabaseConnection(config)
 conn.get_connection_to_db()
+
+
+class LeaderboardForm(FlaskForm):
+    pass
 
 
 @leaderboard_bp.route("/")
@@ -17,7 +22,3 @@ def leaderboard():
     scores = leaderboard_instance.display_top_scores()
     return render_template("leaderboard.html", scores=scores)
 
-
-leaderboard1 = Leaderboard(conn)
-leaderboard1.display_top10_sql_query = "SELECT nickname, score FROM top_scores_view;"
-print(leaderboard1.display_top_scores())
