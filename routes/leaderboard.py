@@ -18,7 +18,7 @@ class LeaderboardForm(FlaskForm):
 def leaderboard():
     """Route for Leaderboard"""
     leaderboard_instance = Leaderboard(conn)
-    leaderboard_instance.display_top10_sql_query = "SELECT nickname, score FROM top_scores_view;"
+    leaderboard_instance.display_top10_sql_query = "SELECT position, nickname, score FROM top_scores_view;"
     scores = leaderboard_instance.display_top_scores()
     form = LeaderboardForm
     return render_template("leaderboard.html", form=form, scores=scores)

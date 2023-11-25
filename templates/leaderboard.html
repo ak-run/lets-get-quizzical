@@ -6,13 +6,15 @@ Leaderboard
 {% block content %}
  <form id="LeaderboardForm" method="GET">
    <div class="form-group">
-    <table>
+    <table class="leaderboard-table">
       <tr>
+          <th>#</th>
         <th>Nickname</th>
         <th>Score</th>
       </tr>
-      {% for nickname, score in scores %}
+      {% for position, nickname, score in scores %}
         <tr>
+            <td>{{ position }}</td>
           <td>{{ nickname }}</td>
           <td>{{ score }}</td>
         </tr>
