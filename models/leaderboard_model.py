@@ -26,8 +26,8 @@ class Leaderboard:
         return self._add_user_score_sql_query
 
     @add_user_score_sql_query.setter
-    def add_user_score_sql_query(self, query):
-        self._add_user_score_sql_query = query
+    def add_user_score_sql_query(self, score_tuple):
+        self._add_user_score_sql_query = "CALL AddUserScore('%s', %s)" % score_tuple
 
     def execute_sql_query(self, query, fetch_results=False):
         try:
@@ -61,8 +61,8 @@ class Leaderboard:
 #
 # conn = DatabaseConnection(config)
 # conn.get_connection_to_db()
-# leaderboard = LeaderBoard(conn)
+# leaderboard = Leaderboard(conn)
 # leaderboard.display_top10_sql_query = "SELECT nickname, score FROM top_scores_view;"
-# leaderboard.add_user_score_sql_query = "CALL AddUserScore('TESTING', 10);"
+# leaderboard.add_user_score_sql_query = ("TESTUSER", 5)
 # leaderboard.add_user_score()
 # pprint(leaderboard.display_top_scores())

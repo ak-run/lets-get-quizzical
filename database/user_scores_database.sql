@@ -8,11 +8,15 @@ CREATE TABLE quiz_scores(
     SCORE INT NOT NULL CHECK (score BETWEEN 1 AND 10)
 );
 
--- View for top 10 scores
 CREATE VIEW top_scores_view AS
-SELECT nickname, score
-FROM quiz_scores
-ORDER BY score DESC, nickname
+SELECT
+    ROW_NUMBER() OVER (ORDER BY score DESC, nickname) AS position,
+    nickname,
+    score
+FROM
+    quiz_scores
+ORDER BY
+    score DESC, nickname
 LIMIT 10;
 
 -- Stored procedure to add data to user_scores
