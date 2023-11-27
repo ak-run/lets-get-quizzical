@@ -39,4 +39,4 @@ class Leaderboard:
     def add_user_score(self, nickname, score):
         """Method to add score to database"""
         result = self.execute_sql_query(self._add_user_score_sql_query, nickname, score)
-        return result
+        return result, 200

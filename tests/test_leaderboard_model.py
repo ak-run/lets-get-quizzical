@@ -33,12 +33,7 @@ class TestLeaderBoard(unittest.TestCase):
         Test the add_user_score method with valid input.
         The method should add a user score to the database and return a success status code, 200
         """
-        # Values for the Mock
-        self.mock_leaderboard.add_user_score_sql_query = "CALL AddUserScore('TestUser', 10);"
-        self.mock_db_connection.get_connection_to_db.return_value.cursor.return_value.fetchall.return_value = None
-
-        result, status_code = self.mock_leaderboard.add_user_score()
-
+        result, status_code = self.mock_leaderboard.add_user_score("TestUser", 10)
         self.assertEqual(status_code, 200)
 
     def test_execute_sql_query_with_exception(self):
