@@ -1,10 +1,9 @@
-from unittest import TestCase
+import unittest
 import requests
 from API.API_connection import get_ten_rand_questions
 
-class TestAPI(TestCase):
+class TestAPI(unittest.TestCase):
     url = "https://the-trivia-api.com/v2/questions"
-
 
     def test_valid_API_connection(self):
         # test that API connection returns status code 200
@@ -18,6 +17,10 @@ class TestAPI(TestCase):
         for question in player_one_q:
             count += 1
         self.assertEqual(count, 10)
+
+    def test_ConnectionError_is_raised(self):
+        # check ConnectionError raised when status code is not 200
+        pass
         
         
      
