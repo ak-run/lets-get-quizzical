@@ -5,6 +5,7 @@ Score
 
 {% block content %}
 
+<div class = "score">
   <h3>Add Score</h3>
     <form id="ScoreForm" method="POST" action="{{ url_for('score.score') }}">
       {{ form.hidden_tag() }}
@@ -20,5 +21,6 @@ Score
         {{ form.submit }}
       </div>
     </form>
+</div>
 
 {% endblock %}
