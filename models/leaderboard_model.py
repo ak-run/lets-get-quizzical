@@ -10,16 +10,9 @@ class Leaderboard:
         self.db_connection = db_connection
         self._display_top10_sql_query = "SELECT position, nickname, score FROM top_scores_view;"
         self._add_user_score_sql_query = "CALL AddUserScore('%s', %s)"
-    #
-    # @property
-    # def add_user_score_sql_query(self):
-    #     print("To set this query pass username and score")
-    #
-    # @add_user_score_sql_query.setter
-    # def add_user_score_sql_query(self, nickname, score):
-    #     self._add_user_score_sql_query = "CALL AddUserScore('%s', %s)" % (nickname, score)
 
     def execute_sql_query(self, query, *params, fetch_results=False):
+        """Method to execute an SQL query. Optional **param are for queries requiring values being passed"""
         try:
             with self.db_connection.get_connection_to_db() as connection:
                 cur = connection.cursor()
@@ -40,9 +33,10 @@ class Leaderboard:
             raise DbConnectionError(f"Failed to execute query. MySQL Connector Error: {e}")
 
     def display_top_scores(self):
+        """Method to display leaderboard of top scores"""
         return self.execute_sql_query(self._display_top10_sql_query, fetch_results=True)
 
     def add_user_score(self, nickname, score):
-        query = "CALL AddUserScore(%s, %s)"
-        result = self.execute_sql_query(query, nickname, score)
+        """Method to add score to database"""
+        result = self.execute_sql_query(self._add_user_score_sql_query, nickname, score)
         return result
