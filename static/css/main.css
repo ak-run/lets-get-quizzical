@@ -196,24 +196,6 @@ p.question {
 
 /* Styles for the leaderboard */
 .leaderboard-table {
-  width: 80%;
-  margin: 0 auto;
-  border-collapse: collapse;
-  background-color: rgba(255, 255, 255, 0.7);
-}
-
-.leaderboard-table th, .leaderboard-table td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: left;
-}
-
-.leaderboard-table th {
-  background-color: #f2f2f2;
-}
-
-/* New styles for the leaderboard */
-.leaderboard-table {
   width: 60%;
   margin: 5em auto;
   border-collapse: collapse;
@@ -221,7 +203,7 @@ p.question {
 }
 
 .leaderboard-table th, .leaderboard-table td {
-  border: 3px solid #ddd;
+  border: 0.25em solid #ddd;
   padding: 0.5em;
   text-align: left;
 }
