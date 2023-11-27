@@ -28,9 +28,8 @@ def score():
         score = form.score.data
 
         leaderboard_instance = Leaderboard(conn)
-        leaderboard_instance.add_user_score_sql_query = "CALL AddUserScore('%s', %s)" % (nickname, score)
         # Execute the query to add the user score to the database
-        leaderboard_instance.add_user_score()
+        leaderboard_instance.add_user_score(nickname, score)
 
         # Redirect back to the leaderboard after adding the score
         return redirect(url_for("leaderboard.leaderboard"))
