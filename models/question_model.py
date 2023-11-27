@@ -1,3 +1,5 @@
+import random
+
 import requests
 
 
@@ -32,6 +34,21 @@ class QuizQuestions:
         else:
             return questions
 
+    def create_quiz_question_dict(self):
+        # creates a dict with q's and a's. 4 possible answers but correct answer is given an index 0-3
+        quiz_questions = []
+        for raw_question in self.get_ten_rand_questions():
+            correct_ans_index = random.randint(0, 3)
+            ans = raw_question['incorrectAnswers']
+            ans.insert(correct_ans_index, raw_question['correctAnswer'])
+            quiz_dict = {
+                'category': raw_question['category'],
+                'question': raw_question['question']["text"],
+                'answers': ans,
+                'correct_answer': correct_ans_index
+            }
+            quiz_questions.append(quiz_dict)
+        return quiz_questions
     # def get_questions(self):
     #     # Get questions from a specific category
     #     raw_questions = self.get_ten_rand_questions(self.questions_category)
