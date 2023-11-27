@@ -196,17 +196,16 @@ p.question {
 
 /* Styles for the leaderboard */
 .leaderboard-table {
-  width: 60%;
-  border-collapse: collapse;
-  background-color: rgba(255, 255, 255, 0.7);
+    width: 60%;
+    border-collapse: collapse;
+
 }
 
 .leaderboard-table th, .leaderboard-table td {
-  border: 0.25em solid #ddd;
-  padding: 0.5em;
-  text-align: left;
-}
-
-.leaderboard-table th {
-  background-color: #f2f2f2;
+    border: 0.25em solid #ddd;
+    padding: 0.5em;
+    text-align: left;
+    font-family: 'Pacifico';
+    font-size: 1.5em;
+    color: rgba(255, 255, 255, 0.7);
 }
