@@ -9,7 +9,7 @@ class TestMainBlueprint(unittest.TestCase):
         """Test Flask application, register the blueprint, set up templates folder and test client"""
         self.app = Flask(__name__)
         self.app.config['TESTING'] = True
-        self.app.register_blueprint(main_bp)
+        self.app.register_blueprint(main_bp, url_prefix="/")
         self.app.template_folder = '../templates'
         # Flaks test client for making requests
         self.client = self.app.test_client()
