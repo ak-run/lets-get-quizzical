@@ -197,6 +197,28 @@ p.question {
     font-size: 2.5em;
 }
 
+/* Styles for user score page */
+#nickname-label, #score-label {
+    font-size: 1.3em;
+    color: rgba(255, 255, 255, 0.7);
+    display: block;
+    margin-top: 0.7em;
+    margin-bottom: 0.5em;
+}
+
+#nickname-input, #score-input {
+    width: 100%;
+    padding: 0.5em;
+    border: 0.2em solid #ccc;
+    border-radius: 0.3em;
+    font-size: 1.2em;
+}
+
+#score-submit-button {
+	margin: 1em 0em 1em 2em;
+	background: none;
+}
+
 /* Styles for smaller screens */
 @media (max-width: 768px) {
   .navbar-collapse {
@@ -212,26 +234,4 @@ p.question {
     font-size: 35px;
     margin-left: 20px;
   }
-}
-
-
-#nickname-label, #score-label {
-    font-size: 1.3em;
-    color: rgba(255, 255, 255, 0.7);
-    display: block;
-    margin-top: 0.7em;
-    margin-bottom: 0.5em;
-}
-
-#nickname-input, #score-input {
-  width: 100%;
-  padding: 0.5em;
-  border: 0.2em solid #ccc;
-  border-radius: 0.3em;
-  font-size: 1.2em;
-}
-
-#score-submit-button {
-	margin: 1em 0em 1em 2em;
-	background: none;
 }

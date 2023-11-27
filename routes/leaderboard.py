@@ -10,6 +10,7 @@ conn.get_connection_to_db()
 
 
 class LeaderboardForm(FlaskForm):
+    """pass because there are no special fields in the Flask Form needed"""
     pass
 
 

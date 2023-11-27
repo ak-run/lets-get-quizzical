@@ -14,9 +14,6 @@ class DatabaseConnection:
     Class to connect to a database using a configuration file.
     Parameter: config (dict): A dictionary containing the database configuration.
                       Expected keys: 'host', 'user', 'password', 'database_name'.
-    Methods:
-        get_connection_to_db(): establishes a connection to a MySQL database.
-        conn_close(): Closes the database connection.
     """
     def __init__(self, config):
         self.db_config = config['database']

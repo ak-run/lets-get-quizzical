@@ -6,6 +6,7 @@ class DbConnectionError(Exception):
 
 
 class Leaderboard:
+    """Class to add new users' score and then display top scores on Leadaerboard"""
     def __init__(self, db_connection):
         self.db_connection = db_connection
         self._display_top10_sql_query = "SELECT position, nickname, score FROM top_scores_view;"
@@ -38,4 +39,4 @@ class Leaderboard:
         """Method to add score to database"""
         formatted_query = self._add_user_score_sql_query % (nickname, score)
         result = self.execute_sql_query(formatted_query)
-        return result
+        return result, 200
