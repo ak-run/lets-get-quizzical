@@ -10,16 +10,8 @@ class DbConnectionError(Exception):
 class Leaderboard:
     def __init__(self, db_connection):
         self.db_connection = db_connection
-        self._display_top10_sql_query = ""
+        self._display_top10_sql_query = "SELECT position, nickname, score FROM top_scores_view;"
         self._add_user_score_sql_query = ""
-
-    @property
-    def display_top10_sql_query(self):
-        return self._display_top10_sql_query
-
-    @display_top10_sql_query.setter
-    def display_top10_sql_query(self, query):
-        self._display_top10_sql_query = query
 
     @property
     def add_user_score_sql_query(self):
