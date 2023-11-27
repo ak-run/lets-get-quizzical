@@ -2,8 +2,23 @@ import requests
 
 
 class QuizQuestions:
-    def __init__(self, category):
-        self._url = f"https://the-trivia-api.com/v2/questions?categories={category}"
+    """Class to make API call and receive 10 random questions in a given category"""
+    def __init__(self):
+        self.question_categories = ["music", "sport_and_leisure", "film_and_tv", "arts_and_literature", "history",
+                                    "society_and_culture", "science", "geography", "food_and_drink",
+                                    "general_knowledge"]
+        self._url = f"https://the-trivia-api.com/v2/questions"
+
+    @property
+    def url(self):
+        return self._url
+
+    @url.setter
+    def url(self, category):
+        if category in self.question_categories:
+            self._url = f"{self._url}?categories={category}"
+        else:
+            raise ValueError(f"Invalid category: {category}")
 
     def get_ten_rand_questions(self):
         try:
@@ -23,6 +38,7 @@ class QuizQuestions:
     #     return raw_questions
 
 
-# quiz = QuizQuestions("music")
+# quiz = QuizQuestions()
+# quiz.url = "music"
 # questions = quiz.get_ten_rand_questions()
 # print(questions)
