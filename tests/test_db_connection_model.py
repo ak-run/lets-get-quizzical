@@ -1,9 +1,9 @@
 import unittest
 import json
 import mysql.connector
-from models.db_connection_model import DatabaseConnection
+from models.db_connection_model import DatabaseConnection, config_file_path
 
-with open('../config.json') as config_file:
+with open(config_file_path) as config_file:
     config = json.load(config_file)
 
 
