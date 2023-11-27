@@ -57,5 +57,4 @@ class QuizQuestions:
 
 # quiz = QuizQuestions()
 # quiz.url = "music"
-# questions = quiz.get_ten_rand_questions()
-# print(questions)
+# print(quiz.create_quiz_question_dict())
