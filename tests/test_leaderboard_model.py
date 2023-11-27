@@ -21,11 +21,11 @@ class TestLeaderBoard(unittest.TestCase):
         Test the display_top_scores method with valid input.
         The method should return top scores from the database.
         """
-        # Values for the Mock
-        self.mock_leaderboard.display_top10_sql_query = "SELECT nickname, score FROM top_scores_view;"
-        self.mock_db_connection.get_connection_to_db.return_value.cursor.return_value.fetchall.return_value = \
-            [("Player1", 100), ("Player2", 90)]
-        result = self.mock_leaderboard.display_top_scores()
+        with unittest.mock.patch.object(self.mock_leaderboard, 'execute_sql_query',
+                                        return_value=[("Player1", 100), ("Player2", 90)]):
+            result = self.mock_leaderboard.display_top_scores()
+
+        # Assert that the result is what you expect
         self.assertEqual(result, [("Player1", 100), ("Player2", 90)])
 
     def test_valid_add_user_score(self):
