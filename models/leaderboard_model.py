@@ -28,7 +28,7 @@ class Leaderboard:
 
                 connection.commit()
                 return result
-        except mysql.connector.Error as e:
+        except Exception as e:
             connection.rollback()
             raise DbConnectionError(f"Failed to execute query. MySQL Connector Error: {e}")
 

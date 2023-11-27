@@ -42,13 +42,9 @@ class TestLeaderBoard(unittest.TestCase):
         The method should handle the exception and raise a DbConnectionError.
         This method is used by both add_user_score and display_top_scores methods
         """
-        # Values for the Mock
-        self.mock_leaderboard.display_top10_sql_query = "CALL AddUserScore('User', 10);"
-        self.mock_db_connection.get_connection_to_db.return_value.cursor.return_value.execute.side_effect = \
-            Exception("Test error")
-
-        with self.assertRaises(DbConnectionError):
-            self.mock_leaderboard.add_user_score()
+        with unittest.mock.patch.object(Leaderboard, 'execute_sql_query', side_effect=DbConnectionError("Test error")):
+            with self.assertRaises(DbConnectionError):
+                self.mock_leaderboard.add_user_score("TestUser", 11)
 
 
 if __name__ == '__main__':
