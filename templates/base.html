@@ -28,20 +28,40 @@
 
 
 
+	<!-- <nav>
+			<ul class="mainnav">
+				<li class="nav-item">
+					<a href="/" class="link style">Home</a>
+				</li>
+				<li class="nav-item">
+					<a href=# class="link style">How to play</a>
+				</li>
+				<li class="nav-item">
+					<a href="single.html" class="link style">Single player</a>
+				</li>
+				<li class="nav-item">
+					<a href=# class="link style">Two players</a>
+				</li>
+				<li class="nav-item">
+					<a href=# class="link style">Leader board</a>
+				</li>
+			</ul>
+		</nav> -->
 
 
-    <nav class="nav navbar navbar-expand-md navbar-light bg-light">
-		<a class="navbar-brand link style" href="#">Pub Quiz</a>
+
+    <nav class="nav navbar navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand link style" href="{{ url_for('/.main')}}">Pub Quiz</a>
 		<button class="navbar-toggler link style" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
 		  <span class="navbar-toggler-icon link style"></span>
 		</button>
 		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 		  <div class="navbar-nav">
-			<a class="nav-item nav-link link style" href="/">Home</a>
-			<a class="nav-item nav-link link style" href="#">How to Play</a>
-			<a class="nav-item nav-link link style" href="/single.html">Single Player</a>
+			<a class="nav-item nav-link link style" href="{{ url_for('/.main')}}">Home</a>
+			<a class="nav-item nav-link link style" href="{{ url_for('/.how_to_play')}}">How to Play</a>
+			<a class="nav-item nav-link link style" href="{{ url_for('/.single')}}">Single Player</a>
 			<a class="nav-item nav-link link style" href="#">Two players	</a>
-			<a class="nav-item nav-link link style" href="/leaderboard/">Leader board</a>
+			<a class="nav-item nav-link link style" href="{{ url_for('/.leaderboard')}}">Leader board</a>
 
 		  </div>
 		</div>
@@ -65,6 +85,7 @@
       integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
       crossorigin="anonymous"
     ></script>
-  <script src="{{ url_for('static', filename='js/custom.js') }}"></script>
+    
+    <script src="{{ url_for('static', filename='js/custom.js') }}"></script>
   </body>
 </html>
