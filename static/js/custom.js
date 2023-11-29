@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    let button = document.querySelector('div.main-button');
+    let button = document.querySelector('button.next-button');
     button.addEventListener('click', nextQuestion);
 
     let quizData = {
