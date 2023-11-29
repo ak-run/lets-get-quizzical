@@ -79,7 +79,7 @@ ul {
 	justify-content: space-evenly;
 }
 
-.intro {
+.intro, .leaderboard, .score {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -91,7 +91,7 @@ ul {
 	text-align: center;
 }
 
-.main-button {
+.main-button, #score-submit-button {
 	display: block;
 	padding: 10px 20px;
 	text-decoration: none;
@@ -177,7 +177,49 @@ p.question {
 	color: white;
 }
 
+/* Styles for the leaderboard */
+.leaderboard-table {
+    width: 60%;
+    border-collapse: collapse;
 
+}
+
+.leaderboard-table th, .leaderboard-table td {
+    border: 0.25em solid #ddd;
+    padding: 0.5em;
+    text-align: left;
+    font-family: 'Pacifico';
+    font-size: 1.5em;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+#leaderboard-heading{
+    font-size: 2.5em;
+}
+
+/* Styles for user score page */
+#nickname-label, #score-label {
+    font-size: 1.3em;
+    color: rgba(255, 255, 255, 0.7);
+    display: block;
+    margin-top: 0.7em;
+    margin-bottom: 0.5em;
+}
+
+#nickname-input, #score-input {
+    width: 100%;
+    padding: 0.5em;
+    border: 0.2em solid #ccc;
+    border-radius: 0.3em;
+    font-size: 1.2em;
+}
+
+#score-submit-button {
+	margin: 1em 0em 1em 2em;
+	background: none;
+}
+
+/* Styles for smaller screens */
 @media (max-width: 768px) {
   .navbar-collapse {
     background-color: rgba(34, 34, 34, 1) !important;
