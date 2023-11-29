@@ -105,13 +105,15 @@ h4 {
 	width: 400px;
 	height: 60px;
 	margin: 10px;
-	border-radius: 5px;
 	display: flex;
 	align-items: center;
 	padding: 0 20px;
 	font-size: 1.2rem;
 	border-radius: 2px;
+	border:rgba(218,88,69,0.6) solid 8px;
+	background-color:rgb(250,248,240);
 	color:white;
+
 }
 
 p.question {
@@ -125,6 +127,7 @@ p.question {
 	text-align: left;
 	flex-grow: 1;
 	margin-left: 10px;
+	color:black;
 
 }
 
