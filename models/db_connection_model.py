@@ -4,6 +4,7 @@ import os
 
 
 config_file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../config/config.json"))
+print(config_file_path)
 
 with open(config_file_path) as config_file:
     config = json.load(config_file)
