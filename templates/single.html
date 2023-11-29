@@ -6,26 +6,12 @@ Quiz
 {% block content%}
 
 
-	<div class="intro">
-			<h4>Question 1</h4>
-			<p class="question">here is the question content</p>
-			<button class="main-button answer">
-				answer 1
-				<div class="check"></div>
-			</button>
-			<button class="main-button answer">
-				answer 2
-				<div class="check"></div>
-			</button>
-			<button class="main-button answer">
-				answer 3
-				<div class="check"></div>
-			</button>
-			<button class="main-button answer">
-				answer 3
-				<div class="check"></div>
-			</button>
-		</div>
+<div class="intro">
+        <h4>Question <span id="question-number">1</span></h4>
+        <p class="question" id="question-content"></p>
+        <div id="answers-container"></div>
+		<div class="main-button">Next</div>
+</div>
 
 
 

@@ -1,3 +1,36 @@
+{% extends "base.html" %}
+{% block title %}
+Leaderboard
+{% endblock %}
+
+{% block content %}
+ <form id="LeaderboardForm" method="GET">
+
+    <div class="leaderboard">
+
+        <h3 id="leaderboard-heading">Leaderboard</h3>
+
+        <table class="leaderboard-table">
+            <tr>
+                <th>#</th>
+                <th>Nickname</th>
+                <th>Score</th>
+            </tr>
+          {% for position, nickname, score in scores %}
+            <tr>
+                <td>{{ position }}</td>
+                <td>{{ nickname }}</td>
+                <td>{{ score }}</td>
+            </tr>
+          {% endfor %}
+        </table>
+
+    </div>
+
+</form>
+
+{% endblock %}
+
 {% extends "base.html"%}
 {%block title%}
 Homepage
