@@ -15,7 +15,7 @@
 
 body {
 	background-image: url('https://www.mahablog.com/wp-content/uploads/2019/02/dreamstime_m_80592987-1024x683.jpg');
-	background-position: center;
+	background-position: center absolute;
 	width: 100%;
 	background-size: 100%;
 }
