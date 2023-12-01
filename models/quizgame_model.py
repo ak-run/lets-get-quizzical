@@ -36,7 +36,7 @@ class QuizGame:
         """Ask current question and use class methods to check answer, save user answer and go to next question"""
         try:
             print(self.current_question, self.current_answers)
-            user_answer = int(input("ANSWER "))
+            user_answer = self.get_user_answer()
             self.check_answer(user_answer)
             self.save_user_answer(user_answer)
             self.next_question()
@@ -54,6 +54,7 @@ class QuizGame:
 
     def retrieve_user_answer_from_socket(self):
         """Retrieve the user's answer from socket communication"""
+        # this needs building, but for now I'm returning 1 just to check everything else is working
         return 1  # for now to return something
 
     def check_answer(self, user_answer):
@@ -67,11 +68,13 @@ class QuizGame:
         Saves user questions and answers in a dictionary so they can be displayed at the end of the quiz
         A question is saved as a key and a string with correct answer and user answer is added as value
         """
+        user_answer_text = self.question_list[self.question_number]["answers"][user_answer]
+        correct_answer_text = self.question_list[self.question_number]["answers"][self.current_correct_answer]
         if user_answer == self.current_correct_answer:
-            self.user_answers[self.current_question] = f"Your answer {user_answer} was correct"
+            self.user_answers[self.current_question] = f"Your answer {user_answer_text} was correct"
         else:
-            self.user_answers[self.current_question] = f"Your answer: {user_answer}, " \
-                                                       f"correct answer: {self.current_correct_answer}"
+            self.user_answers[self.current_question] = f"Your answer: {user_answer_text}, " \
+                                                       f"correct answer: {correct_answer_text}"
 
 
 quiz = QuizGame(questions_dict)
