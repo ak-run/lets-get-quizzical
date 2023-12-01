@@ -1,4 +1,6 @@
 import secrets
+from socket import SocketIO
+
 from flask import Flask
 from flask_wtf import CSRFProtect
 from routes.main import main_bp
@@ -7,6 +9,8 @@ from routes.leaderboard import leaderboard_bp
 from routes.score import score_bp
 
 app = Flask(__name__)
+# socketio = SocketIO(app)
+
 # Set a secret key for the application
 foo = secrets.token_urlsafe(16)
 app.secret_key = foo
