@@ -23,19 +23,24 @@ class QuizGame:
         """Check if questions are left in the set"""
         return self.question_number < len(self.question_list)
 
-    def next_question(self, user_answer):
+    def next_question(self):
         """Go to the next question"""
-        current_question = self.question_list[self.question_number]
+        # current_question = self.question_list[self.question_number]
         self.question_number += 1
-        self.check_answer(user_answer, current_question.answer)
+        # self.check_answer(user_answer, current_question.answer)
 
     def ask_question(self):
         """Loop through the question list"""
         try:
             for question in self.question_list:
                 # Display question to players (socket communication)
-                emit('question', {
-                     'question': question['question'], 'answers': question['answers']})
+                # emit('question', {
+                #      'question': question['question'], 'answers': question['answers']})
+                print('question', {'question': question['question'], 'answers': question['answers']})
+                user_answer = int(input("ANSWER  "))
+                self.check_answer(user_answer)
+                self.save_user_answer(user_answer)
+                self.next_question()
 
         except Exception as e:
             raise Exception(f'Error asking question: {e}')
@@ -61,22 +66,14 @@ class QuizGame:
             self.user_answers[question] = f"Your answer: {user_answer}, correct answer: {correct_answer}"
 
 
+quiz = QuizGame(questions_dict)
 
+while quiz.questions_left():
+    quiz.ask_question()
 
-    # def display_correct_answers(self):
-    #     """Display to users their answers vs. correct answers"""
-    #     try:
-    #         for question in self.user_answers:
-    #             correct_answer = question['correct_answer']
-    #             user_answer = self.user_answers[question['question']]
-    #
-    #             if correct_answer == user_answer:
-    #                 return f"Your answer to the question '{question['question']}' was correct!"
-    #             else:
-    #                 return f"Your answer to the question '{question['question']}' was incorrect. The correct answer was '{correct_answer}'."
-    #     except Exception as e:
-    #         raise Exception(f'Error displaying correct answers: {e}')
-
+print("Quiz Finished")
+print(quiz.user_answers)
+print(quiz.score)
 
 """
 
@@ -120,4 +117,17 @@ class QuizGame:
     def display_correct_answers(self):
         # Display to users their answers vs. correct answers
         pass
+        
+      def display_correct_answers(self):
+        try:
+            for question in self.user_answers:
+                correct_answer = question['correct_answer']
+                user_answer = self.user_answers[question['question']]
+
+                if correct_answer == user_answer:
+                    return f"Your answer to the question '{question['question']}' was correct!"
+                else:
+                    return f"Your answer to the question '{question['question']}' was incorrect. The correct answer was '{correct_answer}'."
+        except Exception as e:
+            raise Exception(f'Error displaying correct answers: {e}')
 """
