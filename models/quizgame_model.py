@@ -68,10 +68,11 @@ class QuizGame:
                 correct_answer = question['correct_answer']
 
                 if int(user_answer) == correct_answer + 1:
-                    print("Nice one! That's the right answer! ")
                     self.score += 1
-                else:
-                    print("Sorry, that's not the right answer. ")
+                    return "Nice one! That's the right answer! "
+                else: 
+                    self.next_question()
+                    return "Sorry, that's not the right answer. "
         except Exception as e:
             raise Exception(f'Error asking question: {e}')
 
