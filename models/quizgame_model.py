@@ -100,11 +100,9 @@ class QuizGame:
                 user_answer = self.user_answers[question['question']]
 
                 if correct_answer == user_answer:
-                    print(
-                        f"Your answer to the question '{question['question']}' was correct!")
+                    return f"Your answer to the question '{question['question']}' was correct!")
                 else:
-                    print(
-                        f"Your answer to the question '{question['question']}' was incorrect. The correct answer was '{correct_answer}'.")
+                    return f"Your answer to the question '{question['question']}' was incorrect. The correct answer was '{correct_answer}'."
         except Exception as e:
             raise Exception(f'Error displaying correct answers: {e}')
 
