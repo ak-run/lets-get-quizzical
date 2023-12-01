@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template
+from models.stopwatch_model import StopWatch
 
 # blueprint for main page
 main_bp = Blueprint("/", __name__, static_folder="static", template_folder="templates")
