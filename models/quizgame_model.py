@@ -27,9 +27,10 @@ class QuizGame:
     def next_question(self):
         """Go to the next question"""
         self.question_number += 1
-        self.current_question = self.question_list[self.question_number]["question"]
-        self.current_answers = self.question_list[self.question_number]["answers"]
-        self.current_correct_answer = self.question_list[self.question_number]["correct_answer"]
+        if self.questions_left():
+            self.current_question = self.question_list[self.question_number]["question"]
+            self.current_answers = self.question_list[self.question_number]["answers"]
+            self.current_correct_answer = self.question_list[self.question_number]["correct_answer"]
 
     def ask_question(self):
         """Ask current question"""
