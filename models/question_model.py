@@ -54,7 +54,3 @@ class QuizQuestions:
     #     raw_questions = self.get_ten_rand_questions(self.questions_category)
     #     return raw_questions
 
-
-# quiz = QuizQuestions()
-# quiz.url = "music"
-# print(quiz.create_quiz_question_dict())

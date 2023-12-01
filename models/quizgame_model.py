@@ -1,45 +1,30 @@
-import requests
-import mysql.connector
 import unittest
 from flask import Flask, render_template, request, jsonify
 from flask_socketio import SocketIO, emit
 
+from models.question_model import QuizQuestions
+
 app = Flask(__name__)
 socketio = SocketIO(app)
 
-"""
+quiz = QuizQuestions()
+quiz.url = "music"
+questions_dict = quiz.create_quiz_question_dict()
+user_answer_idx = 1
+user_answers = {}
+question_number = 1
 
----- API CALL CLASS WRITTEN ALREADY SO PROB DON'T NEED THIS -----
-class QuizQuestions:
-    def __init__(self, category):
-        self.url = "https://opentdb.com/api.php?type=multiple"
-        self.questions_category = category
+def save_user_answer():
+    question = questions_dict[question_number-1]["question"]
+    print(question)
+    correct_answer_idx = questions_dict[question_number-1]["correct_answer"]
+    print(correct_answer_idx)
+    correct_answer = questions_dict[question_number-1]["answers"][correct_answer_idx]
+    print(correct_answer)
+    user_answer = questions_dict[question_number-1]["answers"][user_answer_idx]
+    print(user_answer)
 
-    def api_call(self, category):
-        # Get data from API
-        try:
-            response = requests.get(f"{self.url}&category={category}")
-            response.raise_for_status()
-            data = response.json()
-
-            if data['response_code'] != 0:
-                raise Exception('Bad API data')
-
-            raw_questions = data['results']
-            return raw_questions
-        except requests.exceptions.RequestException as e:
-            raise Exception(f'Error making API request: {e}')
-
-    def get_questions(self):
-        # Get questions from a specific category
-        try:
-            raw_questions = self.api_call(self.questions_category)
-            return raw_questions
-        except Exception as e:
-            raise Exception(f'Error getting questions: {e}')
-
-"""
-
+save_user_answer()
 
 class QuizGame:
     def __init__(self, question_list):
@@ -51,9 +36,11 @@ class QuizGame:
         """Check if questions are left in the set"""
         return self.question_number < len(self.question_list)
 
-    def next_question(self):
+    def next_question(self, user_answer):
         """Go to the next question"""
+        current_question = self.question_list[self.question_number]
         self.question_number += 1
+        self.check_answer(user_answer, current_question.answer)
 
     def ask_question(self):
         """Loop through the question list"""
@@ -63,16 +50,6 @@ class QuizGame:
                 emit('question', {
                      'question': question['question'], 'answers': question['answers']})
 
-                user_answer = input(
-                    "Choose the number corresponding to the correct answer: ")
-                correct_answer = question['correct_answer']
-
-                if int(user_answer) == correct_answer + 1:
-                    self.score += 1
-                    return "Nice one! That's the right answer! "
-                else: 
-                    self.next_question()
-                    return "Sorry, that's not the right answer. "
         except Exception as e:
             raise Exception(f'Error asking question: {e}')
 
@@ -83,10 +60,8 @@ class QuizGame:
     def check_answer(self, correct_answer, user_answer):
         """Check if the user's answer is correct and update the score"""
         if int(user_answer) == correct_answer + 1:
-            print("Nice one! That's the right answer! ")
             self.score += 1
-        else:
-            print("Sorry, that's not the right answer. ")
+        self.save_user_answers()
 
     def save_user_answers(self):
         """Save user answers, maybe in a dictionary?"""
