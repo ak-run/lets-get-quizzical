@@ -5,10 +5,6 @@ from models.question_model import QuizQuestions
 app = Flask(__name__)
 socketio = SocketIO(app)
 
-quiz = QuizQuestions()
-quiz.url = "music"
-questions_dict = quiz.create_quiz_question_dict()
-
 
 class QuizGame:
     def __init__(self, question_list):
@@ -35,8 +31,9 @@ class QuizGame:
     def ask_question(self):
         """Ask current question and use class methods to check answer, save user answer and go to next question"""
         try:
-            print(self.current_question, self.current_answers)
-            user_answer = self.get_user_answer()
+            print(self.current_question, self.current_answers)  # this is temporary
+            # emit(self.current_question, self.current_answers)  # this is something to do with socket?
+            user_answer = self.retrieve_user_answer()
             self.check_answer(user_answer)
             self.save_user_answer(user_answer)
             self.next_question()
@@ -44,16 +41,8 @@ class QuizGame:
         except Exception as e:
             raise Exception(f'Error asking question: {e}')
 
-    def get_user_answer(self):
-        """Get the user's answer from socket communication"""
-        user_answer = None
-        while user_answer is None:
-            socketio.sleep(1)  # Wait for 1 second before checking again
-            user_answer = self.retrieve_user_answer_from_socket()
-        return int(user_answer)
-
-    def retrieve_user_answer_from_socket(self):
-        """Retrieve the user's answer from socket communication"""
+    def retrieve_user_answer(self):
+        """Retrieve the user's answer from Flask or Socket?"""
         # this needs building, but for now I'm returning 1 just to check everything else is working
         return 1  # for now to return something
 
@@ -77,68 +66,17 @@ class QuizGame:
                                                        f"correct answer: {correct_answer_text}"
 
 
-quiz = QuizGame(questions_dict)
-
-while quiz.questions_left():
-    quiz.ask_question()
-
-print("Quiz Finished")
-print(quiz.user_answers)
-print(quiz.score)
-
-"""
-
------ PREVIOUS DEMO CODE -----
-
-class QuizGame:
-    def __init__(self, question_list):
-        self.question_number = 0
-        self.score = 0
-        self.question_list = question_list
-
-    def questions_left(self):
-        # Check if questions are left in the set
-        return self.question_number < len(self.question_list)
-
-    def next_question(self):
-        # Go to the next question
-        self.question_number += 1
-
-    def ask_question(self):
-        # Loop through the question list
-        for question in self.question_list:
-            pass
-
-    def get_correct_answer(self, question):
-        # Get the correct answer for a question
-        return question['correct_answer']
-
-    def check_answer(self, correct_answer, user_answer):
-        # Check if the user's answer is correct and update the score
-        if int(user_answer) == correct_answer + 1:
-            print("Nice one! That's the right answer! ")
-            self.score += 1
-        else:
-            print("Sorry, that's not the right answer. ")
-
-    def save_user_answers(self):
-        # Save user answers, maybe in a dictionary?
-        pass
-
-    def display_correct_answers(self):
-        # Display to users their answers vs. correct answers
-        pass
-        
-      def display_correct_answers(self):
-        try:
-            for question in self.user_answers:
-                correct_answer = question['correct_answer']
-                user_answer = self.user_answers[question['question']]
-
-                if correct_answer == user_answer:
-                    return f"Your answer to the question '{question['question']}' was correct!"
-                else:
-                    return f"Your answer to the question '{question['question']}' was incorrect. The correct answer was '{correct_answer}'."
-        except Exception as e:
-            raise Exception(f'Error displaying correct answers: {e}')
-"""
+# ----------------------------------------
+# TO SEE IT's WORKING UNCOMMENT TEXT BELOW
+# ----------------------------------------
+# quiz = QuizQuestions()
+# quiz.url = "music"
+# questions_dict = quiz.create_quiz_question_dict()
+# quiz = QuizGame(questions_dict)
+#
+# while quiz.questions_left():
+#     quiz.ask_question()
+#
+# print("Quiz Finished")
+# print(quiz.user_answers)
+# print(quiz.score)
