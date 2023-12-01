@@ -25,7 +25,7 @@ class QuizGame:
         return self.question_number < len(self.question_list)
 
     def next_question(self):
-        """Go to the next question"""
+        """Update class attributes: question number, current question, current answers and current correct answer"""
         self.question_number += 1
         if self.questions_left():
             self.current_question = self.question_list[self.question_number]["question"]
@@ -33,7 +33,7 @@ class QuizGame:
             self.current_correct_answer = self.question_list[self.question_number]["correct_answer"]
 
     def ask_question(self):
-        """Ask current question"""
+        """Ask current question and use class methods to check answer, save user answer and go to next question"""
         try:
             print(self.current_question, self.current_answers)
             user_answer = int(input("ANSWER "))
@@ -57,7 +57,7 @@ class QuizGame:
         return 1  # for now to return something
 
     def check_answer(self, user_answer):
-        """Check if the user's answer is correct and update the score"""
+        """Check if the user's answer is correct, update the score and save the answer"""
         if user_answer == self.current_correct_answer:
             self.score += 1
         self.save_user_answer(user_answer)
@@ -67,14 +67,11 @@ class QuizGame:
         Saves user questions and answers in a dictionary so they can be displayed at the end of the quiz
         A question is saved as a key and a string with correct answer and user answer is added as value
         """
-        # question = self.question_list[self.question_number]["question"]
-        # correct_answer_idx = self.question_list[self.question_number]["correct_answer"]
-        # correct_answer = self.question_list[self.question_number]["answers"][correct_answer_idx]
-        # user_answer = self.question_list[self.question_number]["answers"][user_answer_idx]
         if user_answer == self.current_correct_answer:
             self.user_answers[self.current_question] = f"Your answer {user_answer} was correct"
         else:
-            self.user_answers[self.current_question] = f"Your answer: {user_answer}, correct answer: {self.current_correct_answer}"
+            self.user_answers[self.current_question] = f"Your answer: {user_answer}, " \
+                                                       f"correct answer: {self.current_correct_answer}"
 
 
 quiz = QuizGame(questions_dict)
