@@ -60,7 +60,7 @@ class QuizGame:
         user_answer_text = self.question_list[self.question_number]["answers"][user_answer]
         correct_answer_text = self.question_list[self.question_number]["answers"][self.current_correct_answer]
         if user_answer == self.current_correct_answer:
-            self.user_answers[self.current_question] = f"Your answer {user_answer_text} was correct"
+            self.user_answers[self.current_question] = f"Your answer, {user_answer_text}, was correct"
         else:
             self.user_answers[self.current_question] = f"Your answer: {user_answer_text}, " \
                                                        f"correct answer: {correct_answer_text}"
