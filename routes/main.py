@@ -25,3 +25,9 @@ def how_to_play():
 def leaderboard():
     """Route for the leader board"""
     return render_template("leaderboard.html")
+
+
+@main_bp.route("/setup")
+def setup():
+    """Route for the quiz setup"""
+    return render_template("quiz_setup.html")
