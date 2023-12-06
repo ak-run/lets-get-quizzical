@@ -1,6 +1,7 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request, session
 from flask_wtf import FlaskForm
 from wtforms import SubmitField
+from models.question_model import QuizQuestions
 
 
 # blueprint for question
@@ -11,10 +12,13 @@ class QuestionForm(FlaskForm):
     submit = SubmitField("Submit")
 
 
-@question_bp.route("/", methods=['GET', 'POST'])
-def question():
-    """Route for question"""
-    form = QuestionForm()
-    message = ""
-    results = []
-    return render_template("question.html", form=form, results=results, message=message)
+@question_bp.route("/single", methods=['GET', 'POST'])
+def single(category):
+    if request.method == 'POST':
+        session.permanent = True
+    quiz = QuizQuestions()
+    questions = quiz.create_quiz_question_dict()
+    quiz.url = category
+    session['quiz_questions'] = questions
+
+    return render_template("single.html", questions=questions)

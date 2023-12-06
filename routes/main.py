@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, session, request
 from models.question_model import QuizQuestions
 
 # blueprint for main page
@@ -11,11 +11,25 @@ def main():
     """Route for main page"""
     return render_template("index.html")
 
-@main_bp.route("/single")
+@main_bp.route("/single", methods=["POST", "GET"])
 def single():
     quiz = QuizQuestions()
+    if request.method == 'POST':
+        session.permanent = True
+        
     questions = quiz.create_quiz_question_dict()
-    return render_template("single.html", questions=questions)
+        # quiz.url = category
+    session['quiz_questions'] = questions
+    for question in questions:
+        current_question = questions[0]
+        # return current_question
+            # questions.loop.index +=1
+        
+        
+    
+    return render_template("single.html", questions=questions, current_question=current_question)
+    
+
 
     
 
