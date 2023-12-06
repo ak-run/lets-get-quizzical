@@ -1,12 +1,7 @@
-{% extends "base.html"%}
-{%block title%}
-Quiz
-{% endblock %}
-
-{% block content%}
-
+{% extends "base.html"%} {%block title%} Quiz {% endblock %} {% block content%}
 
 <div class="intro">
+
 +	{% for question in questions %}
 +
 +	<div id="quest-{{loop.index}}" class="quest">
@@ -23,10 +18,19 @@ Quiz
 +	</div>
 +	{% endfor %}
 
+
+
+<!-- 	<div class="stopwatch">
+		<div class="stopwatch-display"></div>
+		<div class="time" id="time"></div>
+		<div class="stopwatch-buttons">
+			<div class="stop-btn"></div>
+			<div class="stop-btn"></div>
+			<div class="stop-btn"></div>
+			<button class="next-button">NEXT</button>
+		</div>
+	</div> -->
+
 </div>
-
-
-
-
 
 {% endblock %}

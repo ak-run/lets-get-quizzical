@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template
+from models.question_model import QuizQuestions
 
 from models.question_model import QuizQuestions
 
@@ -13,6 +14,7 @@ def main():
     """Route for main page"""
     return render_template("quiz_setup.html", categories=quiz.question_categories)
 
+
 @main_bp.route("/single/<category>")
 def single(category):
     quiz = QuizQuestions()
@@ -21,6 +23,7 @@ def single(category):
     questions = quiz.create_quiz_question_dict()
     """Route for the single player page"""
     return render_template("single.html", questions=questions)
+
     
 
 @main_bp.route("/how_to_play")
@@ -32,3 +35,9 @@ def how_to_play():
 def leaderboard():
     """Route for the leader board"""
     return render_template("leaderboard.html")
+
+
+@main_bp.route("/setup")
+def setup():
+    """Route for the quiz setup"""
+    return render_template("quiz_setup.html")
