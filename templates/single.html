@@ -7,19 +7,22 @@ Quiz
 
 
 <div class="intro">
-			<h4>Question <span id="question-number">1</span></h4>
-			<p class="question" id="question-content"></p>
-			<div id="answers-container"></div>
-			<div class="stopwatch">
-				<div class="stopwatch-display"></div>
-                <div class="time" id="time"></div>
-				<div class="stopwatch-buttons">
-					<div class="stop-btn"></div>
-					<div class="stop-btn"></div>
-					<div class="stop-btn"></div>
-					<button class="next-button"> NEXT </button>
-				</div>
-			</div>
++	{% for question in questions %}
++
++	<div id="quest-{{loop.index}}" class="quest">
++		<h4>Question <span id="question-number">{{loop.index}}</span></h4>
++		<p class="question" id="question-content">{{question["question"]}}</p>
++		{% for answer in question["answers"] %}
++		<div id="answers-container">
++			<div class="answer">
++				<input type="radio" name="answer" value="0" class="main-button" />
++				<span>{{answer}}</span>
++			</div>
++		</div>
++		{% endfor %}
++	</div>
++	{% endfor %}
+
 </div>
 
 

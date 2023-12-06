@@ -1,5 +1,7 @@
 from flask import Blueprint, render_template
 
+from models.question_model import QuizQuestions
+
 # blueprint for main page
 main_bp = Blueprint("/", __name__, static_folder="static", template_folder="templates")
 
@@ -7,13 +9,18 @@ main_bp = Blueprint("/", __name__, static_folder="static", template_folder="temp
 
 @main_bp.route("/")
 def main():
+    quiz = QuizQuestions()
     """Route for main page"""
-    return render_template("index.html")
+    return render_template("quiz_setup.html", categories=quiz.question_categories)
 
-@main_bp.route("/single")
-def single():
+@main_bp.route("/single/<category>")
+def single(category):
+    quiz = QuizQuestions()
+    # select cateories
+    quiz.url = category
+    questions = quiz.create_quiz_question_dict()
     """Route for the single player page"""
-    return render_template("single.html")
+    return render_template("single.html", questions=questions)
     
 
 @main_bp.route("/how_to_play")
