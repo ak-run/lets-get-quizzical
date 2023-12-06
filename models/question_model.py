@@ -56,4 +56,3 @@ class QuizQuestions:
     #     return raw_questions
     
 
-print(QuizQuestions)
