@@ -1,23 +1,19 @@
 {% extends "base.html"%}
 {%block title%}
-Homepage
+Quiz
 {% endblock %}
 
 {% block content%}
 
-<div class="intro setup"> <h4>Pick a category</h4></div>
-<div class="category">
-  <button class="category-item">music</button>
-  <button class="category-item">sport and leisure</button>
-  <button class="category-item">film and tv</button>
-  <button class="category-item">arts and literature</button>
-  <button class="category-item">history</button>
-  <button class="category-item">society and culture</button>
-  <button class="category-item">science</button>
-  <button class="category-item">geography</button>
-  <button class="category-item">food and drink</button>
-  <button class="category-item">general knowledge</button>
 
-</div>
+
+	<div class="intro">
+                <h3>Select category</h3>
+          {% for category in categories %}
+                <a href="{{ url_for('/.single', category=category)}}" class="main-button link">{{category}}</a>
+          {% endfor %}
+    </div>
+
+
 
 {% endblock %}
