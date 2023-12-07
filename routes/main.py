@@ -1,6 +1,8 @@
 from flask import Blueprint, render_template, session, request
 from models.question_model import QuizQuestions
 
+from models.question_model import QuizQuestions
+
 # blueprint for main page
 main_bp = Blueprint("/", __name__, static_folder="static", template_folder="templates")
 
@@ -8,8 +10,10 @@ main_bp = Blueprint("/", __name__, static_folder="static", template_folder="temp
 
 @main_bp.route("/")
 def main():
+    quiz = QuizQuestions()
     """Route for main page"""
-    return render_template("index.html")
+    return render_template("quiz_setup.html", categories=quiz.question_categories)
+
 
 @main_bp.route("/single", methods=["POST", "GET"])
 def single():
@@ -28,8 +32,6 @@ def single():
         
     
     return render_template("single.html", questions=questions, current_question=current_question)
-    
-
 
     
 
