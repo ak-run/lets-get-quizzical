@@ -2,25 +2,23 @@
 
 <div class="intro">
 
-+	{% for question in questions %}
-+
-+	<div id="quest-{{loop.index}}" class="quest">
-+		<h4>Question <span id="question-number">{{loop.index}}</span></h4>
-+		<p class="question" id="question-content">{{question["question"]}}</p>
-+		{% for answer in question["answers"] %}
-+		<div id="answers-container">
-+			<div class="answer">
-+				<input type="radio" name="answer" value="0" class="main-button" />
-+				<span>{{answer}}</span>
-+			</div>
-+		</div>
-+		{% endfor %}
-+	</div>
-+	{% endfor %}
-
-
-
-<!-- 	<div class="stopwatch">
+	<form action="/single method='POST'"></form>
+		<div id="quest-{{current_question.index}}" class="quest">
+			<h4>Question <span id="question-number">{{current_question.index}}</span></h4>
+			<p class="question" id="question-content">{{current_question["question"]}}</p>
+			{% for answer in current_question["answers"] %}
+			<div id="answers-container">
+				<div class="answer">
+					<input type="radio" name="answer" value="0" class="main-button" />
+					<span>{{answer}}</span>`
+				</div>
+			</div>
+			{% endfor %}
+			
+		</div>
+	</form>
+	
+	<div class="stopwatch">
 		<div class="stopwatch-display"></div>
 		<div class="time" id="time"></div>
 		<div class="stopwatch-buttons">

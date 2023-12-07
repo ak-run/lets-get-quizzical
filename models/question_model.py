@@ -48,8 +48,11 @@ class QuizQuestions:
             }
             quiz_questions.append(quiz_dict)
         return quiz_questions
+        
+
     # def get_questions(self):
     #     # Get questions from a specific category
     #     raw_questions = self.get_ten_rand_questions(self.questions_category)
     #     return raw_questions
+    
 
