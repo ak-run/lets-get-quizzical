@@ -2,20 +2,20 @@
 
 <div class="intro">
 
-	<form action="/single" method='POST'>
-		{{ form.hidden_tag() }}
-		{{ form.csrf_token }}
-		<div id="quest-{{question_number}}" class="quest">
-			<h4>Question <span id="question-number">{{question_number}}</span></h4>
-			<p class="question" id="question-content">{{current_question}}</p>
-				<div id="answers-container">
-					{% for answer in current_answers %}
-					<div class="answer">
-						<input type="radio" name="user_answer" value="{{ loop.index0 }}" class="main-button" />
-						<span>{{answer}}</span>`
-					</div>
-					{% endfor %}
-				</div>
+    <form action="/single" method='POST'>
+        {{ form.hidden_tag() }}
+        {{ form.csrf_token }}
+        <div id="quest-{{question_number}}" class="quest">
+            <h4>Question <span id="question-number">{{question_number}}</span></h4>
+            <p class="question" id="question-content">{{current_question}}</p>
+            <div id="answers-container">
+                {% for answer in current_answers %}
+                <div class="answer">
+                    <input type="radio" name="user_answer" value="{{ loop.index0 }}" class="main-button" />
+                    <span>{{answer}}</span>
+                </div>
+                {% endfor %}
+            </div>
 
 			<div class="stopwatch">
 				<div class="stopwatch-display"></div>

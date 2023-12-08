@@ -34,16 +34,24 @@ def single():
         current_answers = session["quiz_game"]["current_answers"]
         session["quiz_questions"] = session["quiz_game"]["question_list"]
     else:
-        question_number = session["quiz_game"]["question_number"]+1
+        user_answer = form.user_answer.data
+        quiz_game = QuizGame.from_dict(quiz_questions, session["quiz_game"])
+        quiz_game.ask_question(user_answer)
+        session["quiz_game"] = quiz_game.to_dict()
+        # Now fetch the updated values from the session
+        question_number = session["quiz_game"]["question_number"]
         current_question = session["quiz_game"]["question_list"][question_number]["question"]
         current_answers = session["quiz_game"]["question_list"][question_number]["answers"]
-        session["quiz_questions"] = session["quiz_game"]["question_list"]
 
-    if form.validate_on_submit():
-        user_answer = form.user_answer.data
-    request.method = "POST"
-    # session.permanent = True
-    # user_answer = form.user_answer.data
+    # if form.validate_on_submit():
+    #     user_answer = form.user_answer.data
+    #     quiz_game = QuizGame.from_dict(quiz_questions, session["quiz_game"])
+    #     quiz_game.ask_question(user_answer)
+    #     session["quiz_game"] = quiz_game.to_dict()
+    #     # Now fetch the updated values from the session
+    #     question_number = session["quiz_game"]["question_number"]
+    #     current_question = session["quiz_game"]["question_list"][question_number]["question"]
+    #     current_answers = session["quiz_game"]["question_list"][question_number]["answers"]
 
     return render_template("single.html",
                            form=form,
