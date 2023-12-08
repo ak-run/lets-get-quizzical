@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, session, redirect, url_for
+from flask import Blueprint, render_template, session, redirect, url_for, request
 from flask_wtf import FlaskForm
 from wtforms import SubmitField, RadioField
 from models.question_model import QuizQuestions
@@ -22,10 +22,14 @@ def main():
 
 @main_bp.route("/single", methods=["POST", "GET"])
 def single():
+    """Route for quiz"""
     form = QuestionForm()
-    quiz_questions_obj = QuizQuestions()
-    quiz_questions = quiz_questions_obj.create_quiz_question_dict()
+
     if "quiz_game" not in session:
+        quiz_questions_obj = QuizQuestions()
+        category = request.args.get("category")
+        quiz_questions_obj.url = category
+        quiz_questions = quiz_questions_obj.create_quiz_question_dict()
         quiz_game = QuizGame(quiz_questions)
         session["quiz_game"] = quiz_game.to_dict()
         current_question = session["quiz_game"]["current_question"]
@@ -36,6 +40,7 @@ def single():
         current_user_score = None
         questions_left = True
     else:
+        quiz_questions = session["quiz_game"]["question_list"]
         user_answer = form.user_answer.data
         quiz_game = QuizGame.from_dict(quiz_questions, session["quiz_game"])
         quiz_game.ask_question(user_answer)
