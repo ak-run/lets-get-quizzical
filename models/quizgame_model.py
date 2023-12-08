@@ -28,23 +28,16 @@ class QuizGame:
             self.current_answers = self.question_list[self.question_number]["answers"]
             self.current_correct_answer = self.question_list[self.question_number]["correct_answer"]
 
-    def ask_question(self):
+    def ask_question(self, user_answer):
         """Ask current question and use class methods to check answer, save user answer and go to next question"""
         try:
-            print(self.current_question, self.current_answers)  # this is temporary
-            # emit(self.current_question, self.current_answers)  # this is something to do with socket?
-            user_answer = self.retrieve_user_answer()
             self.check_answer(user_answer)
             self.save_user_answer(user_answer)
             self.next_question()
+            return self.current_question, self.current_answers
 
         except Exception as e:
             raise Exception(f'Error asking question: {e}')
-
-    def retrieve_user_answer(self):
-        """Retrieve the user's answer from Flask or Socket?"""
-        # this needs building, but for now I'm returning 1 just to check everything else is working
-        return 1  # for now to return something
 
     def check_answer(self, user_answer):
         """Check if the user's answer is correct, update the score and save the answer"""
