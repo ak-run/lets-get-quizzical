@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, session
+from flask import Blueprint, render_template, session, redirect, url_for
 from flask_wtf import FlaskForm
 from wtforms import SubmitField, RadioField
 from models.question_model import QuizQuestions
@@ -32,6 +32,7 @@ def single():
         question_number = session["quiz_game"]["question_number"]
         current_answers = session["quiz_game"]["current_answers"]
         session["quiz_questions"] = session["quiz_game"]["question_list"]
+        current_user_answers = None
     else:
         user_answer = form.user_answer.data
         quiz_game = QuizGame.from_dict(quiz_questions, session["quiz_game"])
@@ -41,13 +42,18 @@ def single():
         question_number = session["quiz_game"]["question_number"]
         current_question = session["quiz_game"]["question_list"][question_number]["question"]
         current_answers = session["quiz_game"]["question_list"][question_number]["answers"]
+        current_user_answers = session["quiz_game"]["user_answers"]
+
+    if question_number == 10:
+        return redirect(url_for("score.score"))
 
     return render_template("single.html",
                            form=form,
                            questions=quiz_questions,
                            current_question=current_question,
                            question_number=question_number,
-                           current_answers=current_answers)
+                           current_answers=current_answers,
+                           current_user_answers=current_user_answers)
 
 
 @main_bp.route("/how_to_play")
