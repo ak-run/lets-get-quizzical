@@ -2,35 +2,33 @@
 
 <div class="intro">
 
-	<form action="/single" method='POST'>
-		<div id="quest-{{question_number}}" class="quest">
-			<h4>Question <span id="question-number">{{question_number}}</span></h4>
-			<p class="question" id="question-content">{{current_question}}</p>
-			<div id="answers-container">
-				{% for answer in current_answers %}
+    <form action="/single" method='POST'>
+        {{ form.hidden_tag() }}
+        {{ form.csrf_token }}
+        <div id="quest-{{question_number}}" class="quest">
+            <h4>Question <span id="question-number">{{question_number + 1}}</span></h4>
+            <p class="question" id="question-content">{{current_question}}</p>
+            <div id="answers-container">
+                {% for answer in current_answers %}
+                <div class="answer">
+                    <input type="radio" name="user_answer" value="{{ loop.index0 }}" class="main-button" />
+                    <span>{{answer}}</span>
+                </div>
+                {% endfor %}
+            </div>
 
-				<div class="answer">
-					<input type="radio" name="answer" value="0" class="main-button" />
-					<span>{{answer}}</span>`
+			<div class="stopwatch">
+				<div class="stopwatch-display"></div>
+					<div class="time" id="time"></div>
+						<div class="stopwatch-buttons">
+							<div class="stop-btn"></div>
+							<div class="stop-btn"></div>
+							<div class="stop-btn"></div>
+							<button type="submit" class="next-button">NEXT</button>
 				</div>
 			</div>
-			{% endfor %}
 		</div>
-		</form>
-		</div>
-
-	
-	<div class="stopwatch">
-		<div class="stopwatch-display"></div>
-		<div class="time" id="time"></div>
-		<div class="stopwatch-buttons">
-			<div class="stop-btn"></div>
-			<div class="stop-btn"></div>
-			<div class="stop-btn"></div>
-			<button class="next-button">NEXT</button>
-		</div>
-	</div> -->
-
+	</form>
 </div>
 
 {% endblock %}

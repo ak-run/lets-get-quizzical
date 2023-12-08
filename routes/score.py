@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, session
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, SubmitField
 from wtforms.validators import DataRequired, NumberRange, Length
@@ -14,7 +14,6 @@ conn.get_connection_to_db()
 
 class ScoreForm(FlaskForm):
     nickname = StringField('Nickname', validators=[DataRequired(), Length(min=3, max=25)])
-    score = IntegerField('Score', validators=[DataRequired(), NumberRange(min=0, max=10)])
     submit = SubmitField('Add Score')
 
 
@@ -25,13 +24,16 @@ def score():
 
     if request.method == "POST" and form.validate_on_submit():
         nickname = form.nickname.data
-        score = form.score.data
+        score = session["user_score"]
 
         leaderboard_instance = Leaderboard(conn)
         # Execute the query to add the user score to the database
         leaderboard_instance.add_user_score(nickname, score)
 
         # Redirect back to the leaderboard after adding the score
-        return redirect(url_for("leaderboard.leaderboard"))
+        return redirect(url_for("/.leaderboard"))
 
-    return render_template("score.html", form=form)
+    return render_template("score.html",
+                           form=form,
+                           user_score=session.get("user_score", None),
+                           user_answers=session.get("user_answers"))

@@ -14,12 +14,22 @@ Score
         {{ form.nickname(id="nickname-input") }}
       </div>
       <div class="form-group">
-        {{ form.score.label (id="score-label") }}
-        {{ form.score(id="score-input") }}
+        {{ user_score }}
       </div>
       <div class="form-group">
         {{ form.submit (id="score-submit-button")}}
       </div>
+      <h1>User Answers</h1>
+
+        <ul>
+            {% for question, answer in user_answers.items() %}
+            <li>
+                <strong>{{ question }}</strong><br>
+                {{ answer }}
+            </li>
+            {% endfor %}
+        </ul>
+
     </form>
 </div>
 

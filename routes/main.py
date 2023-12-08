@@ -1,16 +1,29 @@
-from flask import Blueprint, render_template, session, request, redirect, url_for
+from flask import Blueprint, render_template, session, redirect, url_for, request
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
+from wtforms import SubmitField, RadioField
 
+from models.db_connection_model import DatabaseConnection, config
+from models.leaderboard_model import Leaderboard
 from models.question_model import QuizQuestions
 from models.quizgame_model import QuizGame
 
 # blueprint for main page
 main_bp = Blueprint("/", __name__, static_folder="static", template_folder="templates")
 
+
+# Flask forms
 class QuestionForm(FlaskForm):
-    user_answer = StringField("Answer")
+    user_answer = RadioField('Answer', choices=[], coerce=int)
     submit = SubmitField("Submit")
+
+
+class LeaderboardForm(FlaskForm):
+    """pass because there are no special fields in the Flask Form needed"""
+    pass
+
+
+conn = DatabaseConnection(config)
+conn.get_connection_to_db()
 
 
 @main_bp.route("/")
@@ -22,33 +35,59 @@ def main():
 
 @main_bp.route("/single", methods=["POST", "GET"])
 def single():
+    """Route for quiz"""
     form = QuestionForm()
-    quiz = QuizQuestions()
-    user_answer = None
-    if request.method == 'POST':
-        session.permanent = True
-        user_answer = form.user_answer.data
 
-    questions = quiz.create_quiz_question_dict()
-    quiz_game = QuizGame(questions)
-    session['quiz_questions'] = quiz_game.question_list
-    session["user_answer"] = user_answer
-
-    if quiz_game.questions_left():
-        # quiz_game.ask_question(user_answer)
-        current_question = quiz_game.current_question
-        question_number = quiz_game.question_number + 1
-        current_answers = quiz_game.current_answers
+    if "quiz_game" not in session:
+        quiz_questions_obj = QuizQuestions()
+        category = request.args.get("category")
+        quiz_questions_obj.url = category
+        quiz_questions = quiz_questions_obj.create_quiz_question_dict()
+        quiz_game = QuizGame(quiz_questions)
+        session["quiz_game"] = quiz_game.to_dict()
+        current_question = session["quiz_game"]["current_question"]
+        question_number = session["quiz_game"]["question_number"]
+        current_answers = session["quiz_game"]["current_answers"]
+        session["quiz_questions"] = session["quiz_game"]["question_list"]
+        current_user_answers = None
+        current_user_score = None
+        questions_left = True
     else:
-        return redirect(url_for("score"))
+        quiz_questions = session["quiz_game"]["question_list"]
+        user_answer = form.user_answer.data
+        quiz_game = QuizGame.from_dict(quiz_questions, session["quiz_game"])
+        quiz_game.ask_question(user_answer)
+        session["quiz_game"] = quiz_game.to_dict()
+        # Fetch the updated values from the session
+        question_number = session["quiz_game"]["question_number"]
+        if quiz_game.questions_left():
+            current_question = session["quiz_game"]["question_list"][question_number]["question"]
+            current_answers = session["quiz_game"]["question_list"][question_number]["answers"]
+            current_user_answers = session["quiz_game"]["user_answers"]
+            current_user_score = session["quiz_game"]["score"]
+            questions_left = True
+        else:
+            # Case when there are no more questions left
+            current_question = "Quiz Finished"
+            current_answers = []
+            current_user_answers = session["quiz_game"]["user_answers"]
+            current_user_score = session["quiz_game"]["score"]
+            questions_left = False
+
+    if not questions_left:
+        session["user_score"] = current_user_score
+        session["user_answers"] = current_user_answers
+        return redirect(url_for("score.score"))
 
     return render_template("single.html",
                            form=form,
-                           questions=questions,
-                           user_answer=user_answer,
+                           questions=quiz_questions,
                            current_question=current_question,
                            question_number=question_number,
-                           current_answers=current_answers)
+                           current_answers=current_answers,
+                           current_user_answers=current_user_answers,
+                           current_user_score=current_user_score,
+                           questions_left=questions_left)
 
 
 @main_bp.route("/how_to_play")
@@ -57,10 +96,13 @@ def how_to_play():
     return render_template("how_to_play.html")
 
 
-@main_bp.route("/leaderboard")
+@main_bp.route("/leaderboard_main")
 def leaderboard():
-    """Route for the leader board"""
-    return render_template("leaderboard.html")
+    """Route for Leaderboard"""
+    leaderboard_instance = Leaderboard(conn)
+    scores = leaderboard_instance.display_top_scores()
+    form = LeaderboardForm
+    return render_template("leaderboard.html", form=form, scores=scores)
 
 
 @main_bp.route("/setup")
