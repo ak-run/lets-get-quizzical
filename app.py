@@ -2,7 +2,6 @@ import secrets
 from flask import Flask
 from flask_wtf import CSRFProtect
 from routes.main import main_bp
-from routes.leaderboard import leaderboard_bp
 from routes.score import score_bp
 
 app = Flask(__name__)
@@ -14,7 +13,6 @@ app.secret_key = foo
 
 # registering blueprints
 app.register_blueprint(main_bp, url_prefix="/")
-app.register_blueprint(leaderboard_bp, url_prefix="/leaderboard")
 app.register_blueprint(score_bp, url_prefix="/score")
 
 # Line required for flask_wtf

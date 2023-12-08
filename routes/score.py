@@ -31,7 +31,7 @@ def score():
         leaderboard_instance.add_user_score(nickname, score)
 
         # Redirect back to the leaderboard after adding the score
-        return redirect(url_for("leaderboard.leaderboard"))
+        return redirect(url_for("/.leaderboard"))
 
     return render_template("score.html",
                            form=form,
