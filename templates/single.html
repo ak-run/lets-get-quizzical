@@ -6,7 +6,7 @@
         {{ form.hidden_tag() }}
         {{ form.csrf_token }}
         <div id="quest-{{question_number}}" class="quest">
-            <h4>Question <span id="question-number">{{question_number}}</span></h4>
+            <h4>Question <span id="question-number">{{question_number + 1}}</span></h4>
             <p class="question" id="question-content">{{current_question}}</p>
             <div id="answers-container">
                 {% for answer in current_answers %}

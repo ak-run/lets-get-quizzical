@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, session
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, SubmitField
 from wtforms.validators import DataRequired, NumberRange, Length
@@ -34,4 +34,4 @@ def score():
         # Redirect back to the leaderboard after adding the score
         return redirect(url_for("leaderboard.leaderboard"))
 
-    return render_template("score.html", form=form)
+    return render_template("score.html", form=form, user_score=session.get("user_score", None))

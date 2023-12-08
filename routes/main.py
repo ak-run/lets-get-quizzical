@@ -33,6 +33,7 @@ def single():
         current_answers = session["quiz_game"]["current_answers"]
         session["quiz_questions"] = session["quiz_game"]["question_list"]
         current_user_answers = None
+        current_user_score = None
     else:
         user_answer = form.user_answer.data
         quiz_game = QuizGame.from_dict(quiz_questions, session["quiz_game"])
@@ -43,8 +44,10 @@ def single():
         current_question = session["quiz_game"]["question_list"][question_number]["question"]
         current_answers = session["quiz_game"]["question_list"][question_number]["answers"]
         current_user_answers = session["quiz_game"]["user_answers"]
+        current_user_score = session["quiz_game"]["score"]
 
-    if question_number == 10:
+    if question_number == 2:
+        session["user_score"] = current_user_score
         return redirect(url_for("score.score"))
 
     return render_template("single.html",
@@ -53,7 +56,8 @@ def single():
                            current_question=current_question,
                            question_number=question_number,
                            current_answers=current_answers,
-                           current_user_answers=current_user_answers)
+                           current_user_answers=current_user_answers,
+                           current_user_score = current_user_score)
 
 
 @main_bp.route("/how_to_play")
