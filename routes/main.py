@@ -27,17 +27,16 @@ def single():
     quiz_questions_obj = QuizQuestions()
     quiz_questions = quiz_questions_obj.create_quiz_question_dict()
     quiz_game = QuizGame(quiz_questions)
-    session['quiz_questions'] = quiz_game.question_list
     form.validate_on_submit()
     request.method = 'POST'
     session.permanent = True
     user_answer = form.user_answer.data
-    session["user_answer"] = user_answer
     # quiz_game.ask_question(user_answer)
     current_question = quiz_game.current_question
     question_number = quiz_game.question_number + 1
     current_answers = quiz_game.current_answers
-    print(user_answer)
+    session["user_answer"] = user_answer
+    session['quiz_questions'] = quiz_game.question_list
 
     return render_template("single.html",
                            form=form,
