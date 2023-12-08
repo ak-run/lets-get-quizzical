@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, session
 from flask_wtf import FlaskForm
-from wtforms import SubmitField
+from wtforms import SubmitField, StringField
 from models.question_model import QuizQuestions
 
 
@@ -9,6 +9,7 @@ question_bp = Blueprint("question", __name__, static_folder="static", template_f
 
 
 class QuestionForm(FlaskForm):
+    user_answer = StringField("Answer")
     submit = SubmitField("Submit")
 
 

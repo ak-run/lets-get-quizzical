@@ -2,21 +2,23 @@
 
 <div class="intro">
 
-	<form action="/single method='POST'"></form>
-		<div id="quest-{{current_question.index}}" class="quest">
-			<h4>Question <span id="question-number">{{current_question.index}}</span></h4>
-			<p class="question" id="question-content">{{current_question["question"]}}</p>
-			{% for answer in current_question["answers"] %}
+	<form action="/single" method='POST'>
+		<div id="quest-{{question_number}}" class="quest">
+			<h4>Question <span id="question-number">{{question_number}}</span></h4>
+			<p class="question" id="question-content">{{current_question}}</p>
 			<div id="answers-container">
+				{% for answer in current_answers %}
+
 				<div class="answer">
 					<input type="radio" name="answer" value="0" class="main-button" />
 					<span>{{answer}}</span>`
 				</div>
 			</div>
 			{% endfor %}
-			
 		</div>
-	</form>
+		</form>
+		</div>
+
 	
 	<div class="stopwatch">
 		<div class="stopwatch-display"></div>

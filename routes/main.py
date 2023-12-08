@@ -1,11 +1,16 @@
-from flask import Blueprint, render_template, session, request
-from models.question_model import QuizQuestions
+from flask import Blueprint, render_template, session, request, redirect, url_for
+from flask_wtf import FlaskForm
+from wtforms import StringField, SubmitField
 
 from models.question_model import QuizQuestions
+from models.quizgame_model import QuizGame
 
 # blueprint for main page
 main_bp = Blueprint("/", __name__, static_folder="static", template_folder="templates")
 
+class QuestionForm(FlaskForm):
+    user_answer = StringField("Answer")
+    submit = SubmitField("Submit")
 
 
 @main_bp.route("/")
@@ -17,28 +22,40 @@ def main():
 
 @main_bp.route("/single", methods=["POST", "GET"])
 def single():
+    form = QuestionForm()
     quiz = QuizQuestions()
+    user_answer = None
     if request.method == 'POST':
         session.permanent = True
-        
-    questions = quiz.create_quiz_question_dict()
-        # quiz.url = category
-    session['quiz_questions'] = questions
-    for question in questions:
-        current_question = questions[0]
-        # return current_question
-            # questions.loop.index +=1
-        
-        
-    
-    return render_template("single.html", questions=questions, current_question=current_question)
+        user_answer = form.user_answer.data
 
-    
+    questions = quiz.create_quiz_question_dict()
+    quiz_game = QuizGame(questions)
+    session['quiz_questions'] = quiz_game.question_list
+    session["user_answer"] = user_answer
+
+    if quiz_game.questions_left():
+        # quiz_game.ask_question(user_answer)
+        current_question = quiz_game.current_question
+        question_number = quiz_game.question_number + 1
+        current_answers = quiz_game.current_answers
+    else:
+        return redirect(url_for("score"))
+
+    return render_template("single.html",
+                           form=form,
+                           questions=questions,
+                           user_answer=user_answer,
+                           current_question=current_question,
+                           question_number=question_number,
+                           current_answers=current_answers)
+
 
 @main_bp.route("/how_to_play")
 def how_to_play():
     """Route for the rules of the game"""
     return render_template("how_to_play.html")
+
 
 @main_bp.route("/leaderboard")
 def leaderboard():
