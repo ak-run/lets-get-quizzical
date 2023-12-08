@@ -24,16 +24,15 @@ def main():
 @main_bp.route("/single", methods=["POST", "GET"])
 def single():
     form = QuestionForm()
-    quiz = QuizQuestions()
+    quiz_questions_obj = QuizQuestions()
+    quiz_questions = quiz_questions_obj.create_quiz_question_dict()
+    quiz_game = QuizGame(quiz_questions)
     user_answer = None
-    if request.method == 'POST':
-        session.permanent = True
-        user_answer = form.user_answer.data
-
-    questions = quiz.create_quiz_question_dict()
-    quiz_game = QuizGame(questions)
     session['quiz_questions'] = quiz_game.question_list
     session["user_answer"] = user_answer
+    if request.method == 'POST' and form.validate_on_submit():
+        session.permanent = True
+        user_answer = form.user_answer.data
 
     if quiz_game.questions_left():
         # quiz_game.ask_question(user_answer)
@@ -45,7 +44,7 @@ def single():
 
     return render_template("single.html",
                            form=form,
-                           questions=questions,
+                           questions=quiz_questions,
                            user_answer=user_answer,
                            current_question=current_question,
                            question_number=question_number,
