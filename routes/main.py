@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, session, request, redirect, url_for
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
+from wtforms import StringField, SubmitField, RadioField
 
 from models.question_model import QuizQuestions
 from models.quizgame_model import QuizGame
@@ -8,8 +8,9 @@ from models.quizgame_model import QuizGame
 # blueprint for main page
 main_bp = Blueprint("/", __name__, static_folder="static", template_folder="templates")
 
+
 class QuestionForm(FlaskForm):
-    user_answer = StringField("Answer")
+    user_answer = user_answer = RadioField('Answer', choices=[], coerce=int)
     submit = SubmitField("Submit")
 
 
