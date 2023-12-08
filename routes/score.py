@@ -33,4 +33,7 @@ def score():
         # Redirect back to the leaderboard after adding the score
         return redirect(url_for("leaderboard.leaderboard"))
 
-    return render_template("score.html", form=form, user_score=session.get("user_score", None))
+    return render_template("score.html",
+                           form=form,
+                           user_score=session.get("user_score", None),
+                           user_answers=session.get("user_answers"))

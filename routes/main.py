@@ -58,7 +58,7 @@ def single():
 
     if not questions_left:
         session["user_score"] = current_user_score
-        session["usser_answers"] = current_user_answers
+        session["user_answers"] = current_user_answers
         return redirect(url_for("score.score"))
 
     return render_template("single.html",
