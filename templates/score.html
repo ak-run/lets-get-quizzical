@@ -19,7 +19,17 @@ Score
       <div class="form-group">
         {{ form.submit (id="score-submit-button")}}
       </div>
-      <div>{{user_answers}}</div>
+      <h1>User Answers</h1>
+
+        <ul>
+            {% for question, answer in user_answers.items() %}
+            <li>
+                <strong>{{ question }}</strong><br>
+                {{ answer }}
+            </li>
+            {% endfor %}
+        </ul>
+
     </form>
 </div>
 
