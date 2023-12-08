@@ -49,7 +49,7 @@ def single():
             current_user_score = session["quiz_game"]["score"]
             questions_left = True
         else:
-            # Handle the case when there are no more questions left
+            # Case when there are no more questions left
             current_question = "Quiz Finished"
             current_answers = []
             current_user_answers = session["quiz_game"]["user_answers"]
@@ -58,6 +58,7 @@ def single():
 
     if not questions_left:
         session["user_score"] = current_user_score
+        session["usser_answers"] = current_user_answers
         return redirect(url_for("score.score"))
 
     return render_template("single.html",
