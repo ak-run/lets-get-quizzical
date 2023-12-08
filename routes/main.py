@@ -29,10 +29,10 @@ def single():
     quiz_game = QuizGame(quiz_questions)
     user_answer = None
     session['quiz_questions'] = quiz_game.question_list
-    session["user_answer"] = user_answer
     if request.method == 'POST' and form.validate_on_submit():
         session.permanent = True
         user_answer = form.user_answer.data
+        session["user_answer"] = user_answer
 
     if quiz_game.questions_left():
         # quiz_game.ask_question(user_answer)
