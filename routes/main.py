@@ -34,17 +34,14 @@ def single():
         current_answers = session["quiz_game"]["current_answers"]
         session["quiz_questions"] = session["quiz_game"]["question_list"]
     else:
-        quiz_game = QuizGame(quiz_questions)
-        session["quiz_game"] = quiz_game.to_dict()
-        current_question = session["quiz_game"]["current_question"]
-        question_number = session["quiz_game"]["question_number"]
-        current_answers = session["quiz_game"]["current_answers"]
+        question_number = session["quiz_game"]["question_number"]+1
+        current_question = session["quiz_game"]["question_list"][question_number]["question"]
+        current_answers = session["quiz_game"]["question_list"][question_number]["answers"]
         session["quiz_questions"] = session["quiz_game"]["question_list"]
     form.validate_on_submit()
     request.method = "POST"
     session.permanent = True
     user_answer = form.user_answer.data
-
 
     return render_template("single.html",
                            form=form,
