@@ -10,7 +10,7 @@ main_bp = Blueprint("/", __name__, static_folder="static", template_folder="temp
 
 
 class QuestionForm(FlaskForm):
-    user_answer = user_answer = RadioField('Answer', choices=[], coerce=int)
+    user_answer = RadioField('Answer', choices=[], coerce=int)
     submit = SubmitField("Submit")
 
 
@@ -27,20 +27,17 @@ def single():
     quiz_questions_obj = QuizQuestions()
     quiz_questions = quiz_questions_obj.create_quiz_question_dict()
     quiz_game = QuizGame(quiz_questions)
-    user_answer = None
     session['quiz_questions'] = quiz_game.question_list
-    if request.method == 'POST' and form.validate_on_submit():
-        session.permanent = True
-        user_answer = form.user_answer.data
-        session["user_answer"] = user_answer
-
-    if quiz_game.questions_left():
-        # quiz_game.ask_question(user_answer)
-        current_question = quiz_game.current_question
-        question_number = quiz_game.question_number + 1
-        current_answers = quiz_game.current_answers
-    else:
-        return redirect(url_for("score"))
+    form.validate_on_submit()
+    request.method = 'POST'
+    session.permanent = True
+    user_answer = form.user_answer.data
+    session["user_answer"] = user_answer
+    # quiz_game.ask_question(user_answer)
+    current_question = quiz_game.current_question
+    question_number = quiz_game.question_number + 1
+    current_answers = quiz_game.current_answers
+    print(user_answer)
 
     return render_template("single.html",
                            form=form,

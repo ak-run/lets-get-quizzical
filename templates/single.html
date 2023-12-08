@@ -3,6 +3,7 @@
 <div class="intro">
 
 	<form action="/single" method='POST'>
+		{{ form.hidden_tag() }}
 		<div id="quest-{{question_number}}" class="quest">
 			<h4>Question <span id="question-number">{{question_number}}</span></h4>
 			<p class="question" id="question-content">{{current_question}}</p>
@@ -16,7 +17,7 @@
 			</div>
 			{% endfor %}
 		</div>
-		<input type="button" value="Next">
+		<button type="submit" class="next-button">Next</button>
 		</form>
 		</div>
 
