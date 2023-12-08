@@ -31,7 +31,6 @@ def single():
     request.method = 'POST'
     session.permanent = True
     user_answer = form.user_answer.data
-    # quiz_game.ask_question(user_answer)
     current_question = quiz_game.current_question
     question_number = quiz_game.question_number + 1
     current_answers = quiz_game.current_answers
