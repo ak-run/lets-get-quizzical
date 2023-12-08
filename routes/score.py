@@ -14,7 +14,6 @@ conn.get_connection_to_db()
 
 class ScoreForm(FlaskForm):
     nickname = StringField('Nickname', validators=[DataRequired(), Length(min=3, max=25)])
-    score = IntegerField('Score', validators=[DataRequired(), NumberRange(min=0, max=10)])
     submit = SubmitField('Add Score')
 
 
@@ -25,7 +24,7 @@ def score():
 
     if request.method == "POST" and form.validate_on_submit():
         nickname = form.nickname.data
-        score = form.score.data
+        score = 10
 
         leaderboard_instance = Leaderboard(conn)
         # Execute the query to add the user score to the database
