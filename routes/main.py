@@ -38,10 +38,12 @@ def single():
         current_question = session["quiz_game"]["question_list"][question_number]["question"]
         current_answers = session["quiz_game"]["question_list"][question_number]["answers"]
         session["quiz_questions"] = session["quiz_game"]["question_list"]
-    form.validate_on_submit()
+
+    if form.validate_on_submit():
+        user_answer = form.user_answer.data
     request.method = "POST"
-    session.permanent = True
-    user_answer = form.user_answer.data
+    # session.permanent = True
+    # user_answer = form.user_answer.data
 
     return render_template("single.html",
                            form=form,
