@@ -16,6 +16,29 @@ class QuizGame:
         self.current_correct_answer = self.question_list[self.question_number]["correct_answer"]
         self.user_answers = {}
 
+    def to_dict(self):
+        return {
+            "question_number": self.question_number,
+            "score": self.score,
+            "current_question": self.current_question,
+            "current_answers": self.current_answers,
+            "current_correct_answer": self.current_correct_answer,
+            "user_answers": self.user_answers,
+            "question_list": self.question_list
+        }
+
+    @classmethod
+    def from_dict(cls, question_list, data):
+        quiz_game = cls(question_list)
+        quiz_game.question_number = data["question_number"]
+        quiz_game.score = data["score"]
+        quiz_game.current_question = data["current_question"]
+        quiz_game.current_answers = data["current_answers"]
+        quiz_game.current_correct_answer = data["current_correct_answer"]
+        quiz_game.user_answers = data["user_answers"]
+        quiz_game.question_list = data["question_list"]
+        return quiz_game
+
     def questions_left(self):
         """Check if questions are left in the set"""
         return self.question_number < len(self.question_list)
@@ -57,7 +80,6 @@ class QuizGame:
         else:
             self.user_answers[self.current_question] = f"Your answer: {user_answer_text}, " \
                                                        f"correct answer: {correct_answer_text}"
-
 
 # ----------------------------------------
 # TO SEE IT's WORKING UNCOMMENT TEXT BELOW

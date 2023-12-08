@@ -26,21 +26,29 @@ def single():
     form = QuestionForm()
     quiz_questions_obj = QuizQuestions()
     quiz_questions = quiz_questions_obj.create_quiz_question_dict()
-    quiz_game = QuizGame(quiz_questions)
+    if "quiz_game" not in session:
+        quiz_game = QuizGame(quiz_questions)
+        session["quiz_game"] = quiz_game.to_dict()
+        current_question = session["quiz_game"]["current_question"]
+        question_number = session["quiz_game"]["question_number"]
+        current_answers = session["quiz_game"]["current_answers"]
+        session["quiz_questions"] = session["quiz_game"]["question_list"]
+    else:
+        quiz_game = QuizGame(quiz_questions)
+        session["quiz_game"] = quiz_game.to_dict()
+        current_question = session["quiz_game"]["current_question"]
+        question_number = session["quiz_game"]["question_number"]
+        current_answers = session["quiz_game"]["current_answers"]
+        session["quiz_questions"] = session["quiz_game"]["question_list"]
     form.validate_on_submit()
     request.method = "POST"
     session.permanent = True
     user_answer = form.user_answer.data
-    current_question = quiz_game.current_question
-    question_number = quiz_game.question_number + 1
-    current_answers = quiz_game.current_answers
-    session["user_answer"] = user_answer
-    session["quiz_questions"] = quiz_game.question_list
+
 
     return render_template("single.html",
                            form=form,
                            questions=quiz_questions,
-                           user_answer=user_answer,
                            current_question=current_question,
                            question_number=question_number,
                            current_answers=current_answers)
