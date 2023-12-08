@@ -34,6 +34,7 @@ def single():
         session["quiz_questions"] = session["quiz_game"]["question_list"]
         current_user_answers = None
         current_user_score = None
+        questions_left = True
     else:
         user_answer = form.user_answer.data
         quiz_game = QuizGame.from_dict(quiz_questions, session["quiz_game"])
@@ -41,12 +42,21 @@ def single():
         session["quiz_game"] = quiz_game.to_dict()
         # Fetch the updated values from the session
         question_number = session["quiz_game"]["question_number"]
-        current_question = session["quiz_game"]["question_list"][question_number]["question"]
-        current_answers = session["quiz_game"]["question_list"][question_number]["answers"]
-        current_user_answers = session["quiz_game"]["user_answers"]
-        current_user_score = session["quiz_game"]["score"]
+        if quiz_game.questions_left():
+            current_question = session["quiz_game"]["question_list"][question_number]["question"]
+            current_answers = session["quiz_game"]["question_list"][question_number]["answers"]
+            current_user_answers = session["quiz_game"]["user_answers"]
+            current_user_score = session["quiz_game"]["score"]
+            questions_left = True
+        else:
+            # Handle the case when there are no more questions left
+            current_question = "Quiz Finished"
+            current_answers = []
+            current_user_answers = session["quiz_game"]["user_answers"]
+            current_user_score = session["quiz_game"]["score"]
+            questions_left = False
 
-    if question_number == 2:
+    if not questions_left:
         session["user_score"] = current_user_score
         return redirect(url_for("score.score"))
 
@@ -57,7 +67,8 @@ def single():
                            question_number=question_number,
                            current_answers=current_answers,
                            current_user_answers=current_user_answers,
-                           current_user_score = current_user_score)
+                           current_user_score=current_user_score,
+                           questions_left=questions_left)
 
 
 @main_bp.route("/how_to_play")
