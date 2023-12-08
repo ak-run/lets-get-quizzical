@@ -24,7 +24,7 @@ def score():
 
     if request.method == "POST" and form.validate_on_submit():
         nickname = form.nickname.data
-        score = 10
+        score = session["user_score"]
 
         leaderboard_instance = Leaderboard(conn)
         # Execute the query to add the user score to the database
