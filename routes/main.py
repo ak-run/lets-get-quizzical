@@ -1,7 +1,6 @@
-from flask import Blueprint, render_template, session, request, redirect, url_for
+from flask import Blueprint, render_template, session
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, RadioField
-
+from wtforms import SubmitField, RadioField
 from models.question_model import QuizQuestions
 from models.quizgame_model import QuizGame
 
@@ -38,20 +37,10 @@ def single():
         quiz_game = QuizGame.from_dict(quiz_questions, session["quiz_game"])
         quiz_game.ask_question(user_answer)
         session["quiz_game"] = quiz_game.to_dict()
-        # Now fetch the updated values from the session
+        # Fetch the updated values from the session
         question_number = session["quiz_game"]["question_number"]
         current_question = session["quiz_game"]["question_list"][question_number]["question"]
         current_answers = session["quiz_game"]["question_list"][question_number]["answers"]
-
-    # if form.validate_on_submit():
-    #     user_answer = form.user_answer.data
-    #     quiz_game = QuizGame.from_dict(quiz_questions, session["quiz_game"])
-    #     quiz_game.ask_question(user_answer)
-    #     session["quiz_game"] = quiz_game.to_dict()
-    #     # Now fetch the updated values from the session
-    #     question_number = session["quiz_game"]["question_number"]
-    #     current_question = session["quiz_game"]["question_list"][question_number]["question"]
-    #     current_answers = session["quiz_game"]["question_list"][question_number]["answers"]
 
     return render_template("single.html",
                            form=form,
