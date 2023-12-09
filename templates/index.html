@@ -3,17 +3,67 @@
 Quiz
 {% endblock %}
 
-{% block content%}
+{% block content %}
+<div class="intro">
+    <h1>PUB QUIZ</h1>
+    <h2>Create your player profile:</h2>
 
+<div class="profile-setup">
+    <form id="profileForm" class="profile-form">
+        <!-- Nickname Group -->
+        <div class="form-group nickname-group">
+            <label for="nickname" class="form-label">NICKNAME</label>
+            <input type="text" id="nickname" name="nickname" required placeholder="NAME" class="form-input">
+        </div>
 
-	<div class="intro">
-                <h3>Pub quiz</h3>
-                <a href="{{ url_for('/.single')}}" class="main-button link">Single player</a>
-                <a href="" class="main-button link">Multi player</a>
-                <a href="{{ url_for('/.how_to_play')}}" class="main-button link">How to play?</a>
-                <a href="{{ url_for('/.leaderboard')}}" class="main-button link">Leader board</a>
+        <!-- Avatar Group -->
+        <div class="form-group avatar-group">
+              <label class="form-label">AVATAR</label>
+    <div class="avatar-setup">
+        <img id="avatarPreview" src="{{ url_for('static', filename='img/avatars/avatar-1.png') }}" alt="Avatar" class="avatar-image">
+        <button type="button" id="avatarModalBtn" class="avatar-btn">&#9662;</button>
+    </div>
+</div>
+            </div>
+            <input type="hidden" id="selectedAvatar" name="selectedAvatar">
+            <button type="submit" id="startGame" class="start-quiz-btn" disabled>START QUIZ</button>
+        </form>
+    </div>
 
+    <div class="buttons-container">
+        <a href="{{ url_for('/.leaderboard') }}" class="main-button link">LEADERBOARD</a>
+        <a href="{{ url_for('/.how_to_play') }}" class="main-button link">HOW TO PLAY</a>
     </div>
 
 
+
+           <!-- Modal -->
+    <div id="avatarModal" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div id="avatarChoices">
+                    {% for avatar_filename in avatar_filenames %}
+                        <img src="{{ url_for('static', filename='img/avatars/avatar-' + avatar_filename) }}" alt="Avatar">
+                    {% endfor %}
+                </div>
+            </div>
+    </div>
+
+<script src="{{ url_for('static', filename='js/profile.js') }}"></script>
+
+
+</div>
 {% endblock %}
+
+
+<!--	<div class="intro">-->
+<!--                <h3>Pub quiz</h3>-->
+<!--                <a href="{{ url_for('/.single')}}" class="main-button link">Single player</a>-->
+<!--                <a href="" class="main-button link">Multi player</a>-->
+<!--                <a href="{{ url_for('/.how_to_play')}}" class="main-button link">How to play?</a>-->
+<!--                <a href="{{ url_for('/.leaderboard')}}" class="main-button link">Leader board</a>-->
+
+<!--    </div>-->
+
+

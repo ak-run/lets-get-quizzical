@@ -10,7 +10,6 @@ from models.quizgame_model import QuizGame
 # blueprint for main page
 main_bp = Blueprint("/", __name__, static_folder="static", template_folder="templates")
 
-
 # Flask forms
 class QuestionForm(FlaskForm):
     user_answer = RadioField('Answer', choices=[], coerce=int)
@@ -24,7 +23,6 @@ class LeaderboardForm(FlaskForm):
 
 conn = DatabaseConnection(config)
 conn.get_connection_to_db()
-
 
 @main_bp.route("/")
 def main():
