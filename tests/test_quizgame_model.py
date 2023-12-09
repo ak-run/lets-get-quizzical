@@ -33,17 +33,39 @@ class TestQuizGame(unittest.TestCase):
     def test_next_question(self):
         self.game.next_question()
         self.assertEqual(self.game.question_number, 1)
-        self.assertEqual(self.game.current_question, "Which planet is known as the Red Planet?")
-        self.assertEqual(self.game.current_answers, ["Mars", "Venus", "Jupiter", "Saturn"])
+        self.assertEqual(self.game.current_question,
+                         "Which planet is known as the Red Planet?")
+        self.assertEqual(self.game.current_answers, [
+                         "Mars", "Venus", "Jupiter", "Saturn"])
         self.assertEqual(self.game.current_correct_answer, 0)
 
-    def test_ask_question(self):
-        """TBA"""
-        pass
+    def test_ask_question_successful(self):
+        # Test case for successful question asking
+        question, answers = self.quiz_game.ask_question(user_answer=0)
+        # Assumes next_question has been called once
+        self.assertEqual(question, "Which planet is known as the Red Planet?")
+        self.assertEqual(answers, ["Mars", "Venus", "Jupiter", "Saturn"])
+
+    def test_ask_question_error(self):
+        # Test case for an error during question asking
+        # In this example, we'll simulate an error by passing an invalid user_answer
+        with self.assertRaises(Exception) as context:
+            self.quiz_game.ask_question(user_answer="Invalid Answer")
+
+        # Check if the exception message contains the expected error message
+        self.assertIn("Error asking question", str(context.exception))
 
     def test_retrieve_user_answer(self):
         """TBA"""
         pass
+
+    #     def test_ask_question(self):
+    #     """TBA"""
+    #     pass
+
+    # def test_retrieve_user_answer(self):
+    #     """TBA"""
+    #     pass
 
     def test_check_answer_correct(self):
         self.game.check_answer(1)
@@ -55,7 +77,8 @@ class TestQuizGame(unittest.TestCase):
 
     def test_save_user_answer_correct(self):
         self.game.save_user_answer(1)
-        self.assertEqual(self.game.user_answers, {"What is the capital of France?": "Your answer, Paris, was correct"})
+        self.assertEqual(self.game.user_answers, {
+                         "What is the capital of France?": "Your answer, Paris, was correct"})
 
     def test_save_user_answer_incorrect(self):
         self.game.save_user_answer(2)
