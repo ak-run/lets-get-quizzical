@@ -2,7 +2,7 @@
 
 <div class="intro">
 
-    <form action="/single" method='POST'>
+    <form action="/play_quiz" method='POST'>
         {{ form.hidden_tag() }}
         {{ form.csrf_token }}
         <div id="quest-{{question_number}}" class="quest">
