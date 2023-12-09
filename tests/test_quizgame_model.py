@@ -55,9 +55,13 @@ class TestQuizGame(unittest.TestCase):
         # Check if the exception message contains the expected error message
         self.assertIn("Error asking question", str(context.exception))
 
-    def test_retrieve_user_answer(self):
-        """TBA"""
-        pass
+def test_ask_question_retrieve_user_answer(self):
+        # Test case for retrieving and saving a user answer
+        question, answers = self.quiz_game.ask_question(user_answer=2)
+
+        # Check if the user answer has been saved correctly
+        saved_user_answer = self.quiz_game.user_answers.get("Question 1")
+        self.assertEqual(saved_user_answer, "Your answer: C, correct answer: A")
 
     #     def test_ask_question(self):
     #     """TBA"""
