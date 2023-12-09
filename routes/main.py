@@ -79,6 +79,7 @@ def play_quiz():
         session["user_answers"] = current_user_answers
         return redirect(url_for("score.score"))
 
+
     return render_template("play_quiz.html",
                            form=form,
                            questions=quiz_questions,
