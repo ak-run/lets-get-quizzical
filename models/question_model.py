@@ -34,7 +34,7 @@ class QuizQuestions:
             return questions
 
     def create_quiz_question_dict(self):
-        # creates a dict with q's and a's. 4 possible answers but correct answer is given an index 0-3
+        """creates a dict with q's and a's. 4 possible answers but correct answer is given an index 0-3"""
         quiz_questions = []
         for raw_question in self.get_ten_rand_questions():
             correct_ans_index = random.randint(0, 3)
