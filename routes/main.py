@@ -26,9 +26,15 @@ conn.get_connection_to_db()
 
 @main_bp.route("/")
 def main():
-    quiz = QuizQuestions()
     """Route for main page"""
-    return render_template("quiz_setup.html", categories=quiz.question_categories)
+    avatar_filenames = [f"{i}.png" for i in range(1, 13)]
+    return render_template("index.html", avatar_filenames=avatar_filenames)
+
+# @main_bp.route("/")
+# def main():
+#     quiz = QuizQuestions()
+#     """Route for main page"""
+#     return render_template("quiz_setup.html", categories=quiz.question_categories)
 
 
 @main_bp.route("/single", methods=["POST", "GET"])
