@@ -4,6 +4,7 @@ import requests
 
 class QuizQuestions:
     """Class to make API call and receive 10 random questions in a given category"""
+
     def __init__(self):
         self.question_categories = ["music", "sport_and_leisure", "film_and_tv", "arts_and_literature", "history",
                                     "society_and_culture", "science", "geography", "food_and_drink",
@@ -48,11 +49,8 @@ class QuizQuestions:
             }
             quiz_questions.append(quiz_dict)
         return quiz_questions
-        
 
     # def get_questions(self):
     #     # Get questions from a specific category
     #     raw_questions = self.get_ten_rand_questions(self.questions_category)
     #     return raw_questions
-    
-
