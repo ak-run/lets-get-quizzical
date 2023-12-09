@@ -8,16 +8,15 @@ from models.question_model import QuizQuestions
 from models.quizgame_model import QuizGame
 
 # blueprint for main page
-main_bp = Blueprint("/", __name__, static_folder="static", template_folder="templates")
+main_bp = Blueprint("/", __name__, static_folder="static",
+                    template_folder="templates")
 
 # Flask forms
+
+
 class QuestionForm(FlaskForm):
     user_answer = RadioField('Answer', choices=[], coerce=int)
     submit = SubmitField("Submit")
-
-class ProfileForm(FlaskForm):
-    nickname = StringField('Nickname')
-    submit = SubmitField('Start Quiz')
 
 
 class LeaderboardForm(FlaskForm):
@@ -28,21 +27,16 @@ class LeaderboardForm(FlaskForm):
 conn = DatabaseConnection(config)
 conn.get_connection_to_db()
 
+
 @main_bp.route("/", methods=["GET", "POST"])
 def main():
-    form = ProfileForm()
-    avatar_filenames = [f"{i}.png" for i in range(1, 13)]
-    return render_template("index.html", form=form, avatar_filenames=avatar_filenames)
+    quiz = QuizQuestions()
+    """Route for main page"""
+    return render_template("quiz_setup.html", categories=quiz.question_categories)
 
-@main_bp.route("/start_quiz", methods=["POST"])
-def start_quiz():
-    form = ProfileForm()
-    if form.validate_on_submit():
-        quiz = QuizQuestions()
-        return render_template("quiz_setup.html", categories=quiz.question_categories)
 
-@main_bp.route("/play_quiz", methods=["POST", "GET"])
-def play_quiz():
+@main_bp.route("/single", methods=["POST", "GET"])
+def single():
     """Route for quiz"""
     form = QuestionForm()
 
@@ -87,8 +81,7 @@ def play_quiz():
         session["user_answers"] = current_user_answers
         return redirect(url_for("score.score"))
 
-
-    return render_template("play_quiz.html",
+    return render_template("single.html",
                            form=form,
                            questions=quiz_questions,
                            current_question=current_question,
@@ -114,7 +107,7 @@ def leaderboard():
     return render_template("leaderboard.html", form=form, scores=scores)
 
 
-# @main_bp.route("/setup")
-# def setup():
-#     """Route for the quiz setup"""
-#     return render_template("quiz_setup.html")
+@main_bp.route("/setup")
+def setup():
+    """Route for the quiz setup"""
+    return render_template("quiz_setup.html")
