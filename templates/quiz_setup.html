@@ -10,7 +10,7 @@ Quiz
 	<div class="intro">
                 <h3>Select category</h3>
           {% for category in categories %}
-                <a href="{{ url_for('/.single', category=category)}}" class="main-button link">{{category}}</a>
+                <a href="{{ url_for('/.play_quiz', category=category)}}" class="main-button link">{{category}}</a>
           {% endfor %}
     </div>
 

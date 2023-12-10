@@ -1,8 +1,7 @@
 {% extends "base.html"%} {%block title%} Quiz {% endblock %} {% block content%}
 
 <div class="intro">
-
-    <form action="/single" method='POST'>
+    <form action="/play_quiz" id="question_form" method='POST'>
         {{ form.hidden_tag() }}
         {{ form.csrf_token }}
         <div id="quest-{{question_number}}" class="quest">
@@ -24,7 +23,7 @@
 							<div class="stop-btn"></div>
 							<div class="stop-btn"></div>
 							<div class="stop-btn"></div>
-							<button type="submit" class="next-button">NEXT</button>
+							<button type="submit" class="next-button" disabled>NEXT</button>
 				</div>
 			</div>
 		</div>

@@ -50,6 +50,7 @@ def score():
                            user_answers=user_answers)
 
 
+
 @score_bp.route('/submit_score', methods=['POST'])
 def submit_score():
     if 'nickname' in session and 'user_score' in session:
@@ -60,5 +61,14 @@ def submit_score():
         return redirect(url_for('score.display_leaderboard'))
     else:
         return "Nickname or score not found in session", 400
-
+        leaderboard_instance = Leaderboard(conn)
+        # Execute the query to add the user score to the database
+        leaderboard_instance.add_user_score(nickname, score)
+        session.clear()
+        if not session:
+            print("session is clear")
+    return render_template("score.html",
+                           form=form,
+                           user_score=session.get("user_score", None),
+                           user_answers=session.get("user_answers"))
 

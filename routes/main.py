@@ -43,8 +43,8 @@ def start_quiz():
         quiz = QuizQuestions()
         return render_template("quiz_setup.html", categories=quiz.question_categories)
 
-@main_bp.route("/single", methods=["POST", "GET"])
-def single():
+@main_bp.route("/play_quiz", methods=["POST", "GET"])
+def play_quiz():
     """Route for quiz"""
     form = QuestionForm()
 
@@ -89,7 +89,8 @@ def single():
         session["user_answers"] = current_user_answers
         return redirect(url_for("score.score"))
 
-    return render_template("single.html",
+
+    return render_template("play_quiz.html",
                            form=form,
                            questions=quiz_questions,
                            current_question=current_question,

@@ -96,7 +96,24 @@ h4 {
 	text-align: center;
 }
 
-.main-button, #score-submit-button {
+
+.no-answer-error {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin: 0px auto;
+	width: 20%;
+	height: 30px;
+	border: rgba(218, 88, 68, 0.7) solid 3px;
+	background-color: rgb(255, 250, 230);
+	text-align: center;
+}
+
+
+
+.main-button,
+#score-submit-button {
 	display: block;
 	padding: 10px 20px;
 	text-decoration: none;
@@ -136,9 +153,9 @@ h4 {
 	padding: 0 20px;
 	font-size: 1.2rem;
 	border-radius: 2px;
-	border: rgba(218,88,68,0.7) solid 3px;
+	border: rgba(218, 88, 68, 0.7) solid 3px;
 	background-color: white;
-	color: rgb(59,62,63);
+	color: rgb(59, 62, 63);
 	justify-content: center;
 	margin: 10px;
 	font-weight: bold;
@@ -220,6 +237,12 @@ p.question {
 	align-items: center;
 	justify-content: center;
 	box-shadow: 2px 2px 3px 2px rgba(0, 0, 0, 0.6);
+}
+
+
+.next-button:disabled {
+	background-color: grey;
+	cursor:not-allowed
 }
 
 .time {
