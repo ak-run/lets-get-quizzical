@@ -284,23 +284,23 @@ p.question {
 
 .modal-content {
     background-color: #fefefe;
-    margin: 50% auto; /* Centered vertically in the viewport */
+    margin: 50% auto;
     padding-top: 80px;
     padding: 30px;
     border: 1px solid #888;
-    width: 500px; /* Adjust width as necessary */
-    position: relative; /* Context for absolute positioning */
-    display: flex; /* Use flexbox for centering content */
-    flex-wrap: wrap; /* Allow items to wrap onto multiple lines */
-    justify-content: center; /* Center children horizontally */
-    align-items: center; /* Center children vertically */
-    align-content: center; /* Center wrapped lines vertically */
+    width: 500px;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
 }
 
 /* .close element for modal */
 .close {
-    position: absolute; /* Absolutely position the close button */
-    top: 0px; /* Adjust as needed - negative value moves it above the modal-content */
+    position: absolute;
+    top: 0px; /* negative value moves it above the modal-content */
     left: 95%; /* Start from the center */
     transform: translateX(-50%); /* Offset by half the width of the .close element */
     color: #aaa;
@@ -389,10 +389,10 @@ p.question {
 }
 
 .header-image {
-    display: block; /* Ensures the image is a block-level element */
-    margin: 0 auto; /* Centers the image in its container */
-    max-width: 60%; /* Optional: Makes the image responsive */
-    height: auto; /* Maintains the aspect ratio of the image */
+    display: block;
+    margin: 0 auto;
+    max-width: 60%;
+    height: auto;
 }
 
 /* Styles for smaller screens */
