@@ -18,6 +18,14 @@ body {
 	background-size: 100%;
 }
 
+h2 {
+	text-transform: uppercase;
+	font-size: 20px;
+	style: bold;
+	margin-bottom: 20px;
+	color: white;
+}
+
 h3 {
 	text-transform: uppercase;
 	font-size: 50px;
@@ -276,46 +284,43 @@ p.question {
 
 .modal-content {
     background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
+    margin: 50% auto; /* Centered vertically in the viewport */
+    padding-top: 80px;
+    padding: 30px;
     border: 1px solid #888;
-    width: 500px;
+    width: 500px; /* Adjust width as necessary */
+    position: relative; /* Context for absolute positioning */
+    display: flex; /* Use flexbox for centering content */
+    flex-wrap: wrap; /* Allow items to wrap onto multiple lines */
+    justify-content: center; /* Center children horizontally */
+    align-items: center; /* Center children vertically */
+    align-content: center; /* Center wrapped lines vertically */
 }
 
-/* Centers the modal */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.4);
-
-}
-
+/* .close element for modal */
 .close {
+    position: absolute; /* Absolutely position the close button */
+    top: 0px; /* Adjust as needed - negative value moves it above the modal-content */
+    left: 95%; /* Start from the center */
+    transform: translateX(-50%); /* Offset by half the width of the .close element */
     color: #aaa;
-    float: center;
     font-size: 28px;
     font-weight: bold;
+    cursor: pointer;
 }
 
 .close:hover,
 .close:focus {
     color: black;
     text-decoration: none;
-    cursor: pointer;
 }
+
 
 .profile-form {
     display: flex;
     align-items: center;
     gap: 30px;
-    margin-top: 40px;
-    margin-bottom: 20px;
+    margin-bottom: 100px;
 }
 
 .nickname-group,
@@ -382,6 +387,12 @@ p.question {
     color: white;
 }
 
+.header-image {
+    display: block; /* Ensures the image is a block-level element */
+    margin: 0 auto; /* Centers the image in its container */
+    max-width: 60%; /* Optional: Makes the image responsive */
+    height: auto; /* Maintains the aspect ratio of the image */
+}
 
 /* Styles for smaller screens */
 @media (max-width: 768px) {
