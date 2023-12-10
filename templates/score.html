@@ -10,8 +10,7 @@ Score
     <form id="ScoreForm" method="POST" action="{{ url_for('score.score') }}">
       {{ form.hidden_tag() }}
       <div class="form-group">
-        {{ form.nickname.label (id="nickname-label") }}
-        {{ form.nickname(id="nickname-input") }}
+        {{ nickname }}
       </div>
       <div class="form-group">
         {{ user_score }}

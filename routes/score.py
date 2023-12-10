@@ -13,7 +13,7 @@ conn.get_connection_to_db()
 
 
 class ScoreForm(FlaskForm):
-    nickname = StringField('Nickname', validators=[DataRequired(), Length(min=3, max=25)])
+    # nickname = StringField('Nickname', validators=[DataRequired(), Length(min=3, max=25)])
     submit = SubmitField('Add Score')
 
 
@@ -23,7 +23,7 @@ def score():
     form = ScoreForm()
 
     if request.method == "POST" and form.validate_on_submit():
-        nickname = form.nickname.data
+        nickname = session["nickname"]
         score = session["user_score"]
 
         leaderboard_instance = Leaderboard(conn)
@@ -40,5 +40,6 @@ def score():
     return render_template("score.html",
                            form=form,
                            user_score=session.get("user_score", None),
+                           nickname=session.get("nickname", None),
                            user_answers=session.get("user_answers"))
 

@@ -38,6 +38,7 @@ def main():
 def start_quiz():
     form = ProfileForm()
     if form.validate_on_submit():
+        session['nickname'] = form.nickname.data
         quiz = QuizQuestions()
         return render_template("quiz_setup.html", categories=quiz.question_categories)
 
