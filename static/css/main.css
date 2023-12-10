@@ -336,6 +336,7 @@ p.question {
     border: 0.2em solid #ccc;
     border-radius: 0.3em;
     font-size: 1.2em;
+    text-transform: uppercase;
 }
 
 
