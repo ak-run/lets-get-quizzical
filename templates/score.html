@@ -11,23 +11,28 @@ Score
         <img src="{{ url_for('static', filename='img/avatars/' + session.get('avatar', 'default.png')) }}" alt="User Avatar">
     </div>
 
-    <h1>Your Quiz Results</h1>
-    <p>Score: {{ session.get('user_score', 0) }}</p>
 
-    <!-- Display user's answers -->
-    <h2>User Answers</h2>
-    <ul>
-        {% for question, answer in session.get('user_answers', {}).items() %}
-        <li>
-            <strong>{{ question }}</strong>: {{ answer }}
-        </li>
-        {% endfor %}
-    </ul>
+<div class = "score">
+    <form id="ScoreForm" method="POST" action="{{ url_for('score.score') }}">
+      {{ form.hidden_tag() }}
+      <div class="form-group">
+        {{ user_score }}
+      </div>
+      <div class="form-group">
+        {{ form.submit (id="score-submit-button")}}
+      </div>
+      <h1>User Answers</h1>
 
-    <!-- Form to save score -->
-    <a href="{{ url_for('score.submit_score') }}" class="save-score-btn">Save My Score to Leaderboard</a>
+        <ul>
+            {% for question, answer in user_answers.items() %}
+            <li>
+                <strong>{{ question }}</strong><br>
+                {{ answer }}
+            </li>
+            {% endfor %}
+        </ul>
+
+    </form>
 </div>
+
 {% endblock %}
-
-
-
