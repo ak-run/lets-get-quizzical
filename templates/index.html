@@ -23,6 +23,8 @@ Quiz
         <div class="form-group avatar-group">
               <label class="form-label">AVATAR</label>
     <div class="avatar-setup">
+        <input type="hidden" name="avatar" id="selectedAvatar" value="avatar-1.png">
+
         <img id="avatarPreview" src="{{ url_for('static', filename='img/avatars/avatar-1.png') }}" alt="Avatar" class="avatar-image">
         <button type="button" id="avatarModalBtn" class="avatar-btn">&#9662;</button>
     </div>
