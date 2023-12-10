@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, session, redirect, url_for, request
 from flask_wtf import FlaskForm
-from wtforms import SubmitField, RadioField
+from wtforms import SubmitField, RadioField, StringField
 
 from models.db_connection_model import DatabaseConnection, config
 from models.leaderboard_model import Leaderboard
@@ -10,11 +10,14 @@ from models.quizgame_model import QuizGame
 # blueprint for main page
 main_bp = Blueprint("/", __name__, static_folder="static", template_folder="templates")
 
-
 # Flask forms
 class QuestionForm(FlaskForm):
     user_answer = RadioField('Answer', choices=[], coerce=int)
     submit = SubmitField("Submit")
+
+class ProfileForm(FlaskForm):
+    nickname = StringField('Nickname')
+    submit = SubmitField('Start Quiz')
 
 
 class LeaderboardForm(FlaskForm):
@@ -25,13 +28,18 @@ class LeaderboardForm(FlaskForm):
 conn = DatabaseConnection(config)
 conn.get_connection_to_db()
 
-
-@main_bp.route("/")
+@main_bp.route("/", methods=["GET", "POST"])
 def main():
-    quiz = QuizQuestions()
-    """Route for main page"""
-    return render_template("quiz_setup.html", categories=quiz.question_categories)
+    form = ProfileForm()
+    avatar_filenames = [f"{i}.png" for i in range(1, 13)]
+    return render_template("index.html", form=form, avatar_filenames=avatar_filenames)
 
+@main_bp.route("/start_quiz", methods=["POST"])
+def start_quiz():
+    form = ProfileForm()
+    if form.validate_on_submit():
+        quiz = QuizQuestions()
+        return render_template("quiz_setup.html", categories=quiz.question_categories)
 
 @main_bp.route("/play_quiz", methods=["POST", "GET"])
 def play_quiz():
@@ -106,7 +114,7 @@ def leaderboard():
     return render_template("leaderboard.html", form=form, scores=scores)
 
 
-@main_bp.route("/setup")
-def setup():
-    """Route for the quiz setup"""
-    return render_template("quiz_setup.html")
+# @main_bp.route("/setup")
+# def setup():
+#     """Route for the quiz setup"""
+#     return render_template("quiz_setup.html")
