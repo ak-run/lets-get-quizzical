@@ -23,11 +23,22 @@
 							<div class="stop-btn"></div>
 							<div class="stop-btn"></div>
 							<div class="stop-btn"></div>
-							<button type="submit" class="next-button" disabled>NEXT</button>
+							<button type="submit" class="next-button" id="submit-btn" disabled>NEXT</button>
 				</div>
 			</div>
 		</div>
 	</form>
-</div>
 
+        <script>
+            var timerDuration = 20000;
+
+            // Start the timer
+            var timer = setTimeout(function () {
+                // Enable the submit button and trigger form submission
+                document.getElementById("submit-btn").removeAttribute("disabled");
+                document.getElementById("question_form").submit();
+            }, timerDuration);
+        </script>
+
+</div>
 {% endblock %}
