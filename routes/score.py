@@ -29,6 +29,10 @@ def score():
         leaderboard_instance = Leaderboard(conn)
         # Execute the query to add the user score to the database
         leaderboard_instance.add_user_score(nickname, score)
+        session.clear()
+        if not session:
+            print("session is clear")
+
 
         # Redirect back to the leaderboard after adding the score
         return redirect(url_for("/.leaderboard"))
@@ -37,3 +41,4 @@ def score():
                            form=form,
                            user_score=session.get("user_score", None),
                            user_answers=session.get("user_answers"))
+
