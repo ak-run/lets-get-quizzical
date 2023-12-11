@@ -10,9 +10,11 @@ from models.quizgame_model import QuizGame
 # blueprint for main page
 main_bp = Blueprint("/", __name__, static_folder="static", template_folder="templates")
 
+
 # Flask forms
 class QuestionForm(FlaskForm):
     user_answer = RadioField('Answer', choices=[], coerce=int)
+
     submit = SubmitField("Submit")
 
 class ProfileForm(FlaskForm):
@@ -28,11 +30,14 @@ class LeaderboardForm(FlaskForm):
 conn = DatabaseConnection(config)
 conn.get_connection_to_db()
 
+
 @main_bp.route("/", methods=["GET", "POST"])
 def main():
+    session.clear()
     form = ProfileForm()
     avatar_filenames = [f"{i}.png" for i in range(1, 13)]
     return render_template("index.html", form=form, avatar_filenames=avatar_filenames)
+
 
 @main_bp.route("/start_quiz", methods=["POST"])
 def start_quiz():
@@ -40,6 +45,7 @@ def start_quiz():
     if form.validate_on_submit():
         quiz = QuizQuestions()
         return render_template("quiz_setup.html", categories=quiz.question_categories)
+
 
 @main_bp.route("/play_quiz", methods=["POST", "GET"])
 def play_quiz():
@@ -86,7 +92,6 @@ def play_quiz():
         session["user_score"] = current_user_score
         session["user_answers"] = current_user_answers
         return redirect(url_for("score.score"))
-
 
     return render_template("play_quiz.html",
                            form=form,
