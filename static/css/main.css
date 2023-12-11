@@ -502,6 +502,13 @@ ul li {
     border-radius: 10px; /* Optional: Rounded corners */
 }
 
+.header-image-container img {
+    width: 100%;
+    height: auto;
+    min-width: 300px;
+    max-width: 500px;
+    padding-top: 10px;
+}
 
 
 
@@ -525,8 +532,14 @@ ul li {
 	.form-input {
          width: auto;
    }
-       .user-info img {
+
+   .user-info img {
         width: 100px;
         height: 100px;
-    }
+   }
+   .header-image-container img {
+        max-width: 60%;
+        height: auto;
+   }
+
 }
