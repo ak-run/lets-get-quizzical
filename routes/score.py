@@ -13,8 +13,7 @@ conn.get_connection_to_db()
 
 
 class ScoreForm(FlaskForm):
-    nickname = StringField('Nickname', validators=[DataRequired(), Length(min=3, max=25)])
-    submit = SubmitField('Add Score')
+    submit = SubmitField('SUBMIT SCORE TO LEADERBOARD')
 
 
 @score_bp.route("/", methods=["GET", "POST"])
@@ -23,7 +22,7 @@ def score():
     form = ScoreForm()
 
     if request.method == "POST" and form.validate_on_submit():
-        nickname = form.nickname.data
+        nickname = session['nickname']
         score = session["user_score"]
 
         leaderboard_instance = Leaderboard(conn)
@@ -33,7 +32,6 @@ def score():
         if not session:
             print("session is clear")
 
-
         # Redirect back to the leaderboard after adding the score
         return redirect(url_for("/.leaderboard"))
 
@@ -41,4 +39,3 @@ def score():
                            form=form,
                            user_score=session.get("user_score", None),
                            user_answers=session.get("user_answers"))
-
