@@ -39,6 +39,3 @@ def score():
                            form=form,
                            user_score=session.get("user_score", None),
                            user_answers=session.get("user_answers"))
-
-
-

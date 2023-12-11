@@ -42,8 +42,3 @@ function stopWatch() {
      });
  });
 
-
-
-
-
-
