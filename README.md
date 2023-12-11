@@ -91,10 +91,8 @@ print(quiz_game.user_answers)
 print(f"Your score is: {quiz_game.score}")
 ```
 
-## Testing
-We used Python built in testing framework unittest to test individual functions and method. You can find all tests in tests directory. You can run each directory or test separately, or you can 
-
+## Unit Testing
+We used Python built in testing framework unittest to test individual functions and method. You can find all the tests in tests directory.
 
 ## Acknowledgments
-[The Trivia API](https://the-trivia-api.com/)
-Give credit to any external resources, libraries, or individuals that you found helpful or inspiring during the development of your project.
+The questions for the quiz come from [The Trivia API](https://the-trivia-api.com/), a great free resource of questions in various categories. 
