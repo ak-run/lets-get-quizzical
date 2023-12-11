@@ -7,8 +7,9 @@ Short description or tagline of your project.
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
+  - [Run the App](#run-the-app)
 - [Usage](#usage)
-- [Contributing](#contributing)
+- [Testing](#testing)
 - [Acknowledgments](#acknowledgments)
 
 ## Getting Started
@@ -62,15 +63,38 @@ Once you do that the app will be able to connect to your database.
 To run the app go to app.py file in the root of the project. Run it from your machine. Open http://127.0.0.1:5000/ in a browser to view and navigate the app. It also works on mobile screens. 
 
 ## Usage
-Classes
-Provide examples and instructions on how to use your project. Include code snippets if necessary.
+This app can be used in its whole to create a Flaks app for a quiz game with timer for each question and functionality to save user scores. Note the database does not store any sensitive user information.
+What is more the QuizQuestions and QuizGame classes can be used as objects at another quiz app. 
+1. QuizQuestion is a class that generates ten random questions of selected category from [The Trivia API](https://the-trivia-api.com/). 
+- it has url setter method that takes category as argument. This is optional. Without it the object will connect to API to generate ten random questions from all categories
+- using get_ten_rand_questions will generate questions in that category
+- create_quiz_questions_dict turns questions into a dictionary. That dictionary can be then used by QuizGame class.
+2. QuizGame is a class that contains quiz game mechanics. It takes a dictionary of quiz questions as argument. 
+- it contains methods to check if there are questions left
+- it updates question number
+- it checks user answer
+- it logs user answers against correct answers
+Example usage of the two classes in a Python console, this is a simple run through the code and would need adjusting to your needs:
+```
+quiz_questions = QuizQuestions()
+quiz_questions.url = "music"
+questions_dict = quiz_questions.create_quiz_question_dict()
+quiz_game = QuizGame(questions_dict)
+
+while quiz_game.questions_left():
+    print(quiz_game.current_question)
+    print(quiz_game.current_answers)
+    quiz_game.ask_question(int(input("Give index of the correct answer ")))
+
+print("Quiz Finished")
+print(quiz_game.user_answers)
+print(f"Your score is: {quiz_game.score}")
+```
 
 ## Testing
+We used Python built in testing framework unittest to test individual functions and method. You can find all tests in tests directory. You can run each directory or test separately, or you can 
 
-## Contributing
-
-Explain how others can contribute to your project. Include guidelines for submitting bug reports, feature requests, or code contributions.
 
 ## Acknowledgments
-
+[The Trivia API](https://the-trivia-api.com/)
 Give credit to any external resources, libraries, or individuals that you found helpful or inspiring during the development of your project.
