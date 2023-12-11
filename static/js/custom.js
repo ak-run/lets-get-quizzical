@@ -11,6 +11,10 @@ let radioButtons = document.querySelectorAll('input[name="user_answer"]');
 
 let currentQuestionIndex = 0;
 
+if (timeDisplay) {
+    // Only run the stopwatch if timeDisplay exists
+    stopWatch();
+}
 function stopWatch() {
 	let number = 21;
 	intervalId = setInterval(function () {
@@ -39,15 +43,9 @@ function stopWatch() {
  });
 
 
-
-
-
-
-stopWatch()
-
+ stopWatch()
  // script to auto submit the question once the timer is up (after 20 seconds)
             var timerDuration = 20000;
-
             // Start the timer
             var timer = setTimeout(function () {
                 // Enable the submit button and trigger form submission

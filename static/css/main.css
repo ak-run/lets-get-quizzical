@@ -416,6 +416,59 @@ p.question {
     height: auto;
 }
 
+/* Score Page */
+
+.user-info {
+    text-align: center;
+    margin-bottom: 30px;
+    color: white; /
+}
+
+.user-info h2 {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+}
+
+.user-info img {
+    width: 120px; /* Adjust avatar size */
+    height: 120px;
+    margin-bottom: 15px;
+}
+
+/* Style User Answers List */
+ul {
+    list-style-type: none; /* Remove default list bullets */
+    padding: 0;
+    color: white; /* Ensure text is white */
+}
+
+ul li {
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+/* Button Styling */
+.save-score-btn {
+    background-color: #28a745; /* Green background */
+    color: white;
+    padding: 10px 20px;
+    font-size: 1em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.save-score-btn:hover {
+    background-color: #218838; /* Darker green on hover */
+}
+
+
+
+
+
+
+
 /* Styles for smaller screens */
 @media (max-width: 768px) {
 	.navbar-collapse {
@@ -435,4 +488,8 @@ p.question {
 	.form-input {
          width: auto;
    }
+       .user-info img {
+        width: 100px;
+        height: 100px;
+    }
 }
