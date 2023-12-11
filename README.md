@@ -106,7 +106,6 @@ Key features of the app:
 - User-Friendly Interface: Intuitive design for seamless navigation and an enjoyable user experience.
 - API Integration: Fetching quiz questions from an API ensures that there are new, interesting questions to give answers to.
 
-
 ## Unit Testing
 We used Python built in testing framework unittest to test individual functions and method. You can find all the tests in tests directory.
 
