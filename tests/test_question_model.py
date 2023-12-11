@@ -28,8 +28,14 @@ class TestQuestionModel(unittest.TestCase):
 
     def test_valid_get_ten_rand_questions(self):
         """Test that 10 dictionaries are retrieved from API, 1 for each question"""
-        player_one_q = self.questions.get_ten_rand_questions()
+        player_one_q = self.questions.get_ten_rand_questions(self._url)
         self.assertEqual(len(player_one_q), 10)
+
+    def test_invalid_get_ten_rand_questions(self):
+        """""Testing an exception is raised when cannot connect to the API"""
+        self._url = "invalid url"
+        with self.assertRaises(requests.exceptions.RequestException):
+            self.questions.get_ten_rand_questions(self._url)
 
     def test_valid_create_quiz_question_dict(self):
         """Test that 10 finalised dictionaries are created, 1 for each question"""

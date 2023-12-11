@@ -21,22 +21,23 @@ class QuizQuestions:
         else:
             raise ValueError(f"Invalid category: {category}")
 
-    def get_ten_rand_questions(self):
+    @staticmethod
+    def get_ten_rand_questions(url):
         try:
-            response = requests.get(self._url)
+            response = requests.get(url)
             questions = response.json()
             if response.status_code != 200:
                 raise ConnectionError
         except requests.exceptions.RequestException as ce:
-            print('''An error has occurred when trying to
-                  connect to the API: {} '''.format(ce))
+            raise requests.exceptions.RequestException('''An error has occurred when trying to 
+            connect to the API: {} '''.format(ce))
         else:
             return questions
 
-    def create_quiz_question_dict(self):
+    def create_quiz_question_dict(self, url):
         """creates a dict with q's and a's. 4 possible answers but correct answer is given an index 0-3"""
         quiz_questions = []
-        for raw_question in self.get_ten_rand_questions():
+        for raw_question in self.get_ten_rand_questions(url):
             correct_ans_index = random.randint(0, 3)
             ans = raw_question['incorrectAnswers']
             ans.insert(correct_ans_index, raw_question['correctAnswer'])
