@@ -32,14 +32,6 @@ def score():
         if not session:
             print("session is clear")
 
-            # Redirect back to the leaderboard after adding the score
-            return redirect(url_for("/.leaderboard"))
-
-        return render_template("score.html",
-                               form=form,
-                               user_score=session.get("user_score", None),
-                               user_answers=session.get("user_answers"))
-
         # Redirect back to the leaderboard after adding the score
         return redirect(url_for("/.leaderboard"))
 
