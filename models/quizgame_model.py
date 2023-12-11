@@ -54,9 +54,12 @@ class QuizGame:
     def ask_question(self, user_answer):
         """Ask current question and use class methods to check answer, save user answer and go to next question"""
         try:
-            self.check_answer(user_answer)
-            self.save_user_answer(user_answer)
-            self.next_question()
+            if not user_answer:
+                self.next_question()
+            else:
+                self.check_answer(user_answer)
+                self.save_user_answer(user_answer)
+                self.next_question()
             return self.current_question, self.current_answers
 
         except Exception as e:
@@ -90,7 +93,7 @@ class QuizGame:
 # quiz = QuizGame(questions_dict)
 #
 # while quiz.questions_left():
-#     quiz.ask_question()
+#     quiz.ask_question(1)
 #
 # print("Quiz Finished")
 # print(quiz.user_answers)
