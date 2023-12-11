@@ -43,3 +43,12 @@ function stopWatch() {
  });
 
 
+ stopWatch()
+ // script to auto submit the question once the timer is up (after 20 seconds)
+            var timerDuration = 20000;
+            // Start the timer
+            var timer = setTimeout(function () {
+                // Enable the submit button and trigger form submission
+                document.getElementById("submit-btn").removeAttribute("disabled");
+                document.getElementById("question_form").submit();
+            }, timerDuration);
