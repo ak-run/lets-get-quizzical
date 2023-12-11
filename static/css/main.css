@@ -18,10 +18,19 @@ body {
 	background-size: 100%;
 }
 
+h1 {
+    text-transform: uppercase;
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom:10px;
+    color: white;
+}
+
+
 h2 {
 	text-transform: uppercase;
 	font-size: 20px;
-	style: bold;
+	font-weight: bold;
 	margin-bottom: 20px;
 	color: white;
 }
@@ -84,8 +93,7 @@ h4 {
 }
 
 .intro,
-.leaderboard,
-.score {
+.leaderboard {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -95,6 +103,20 @@ h4 {
 	background: transparent;
 	text-align: center;
 }
+
+
+.score {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin-top: 20px auto;
+	width: 80%;
+	background: transparent;
+	text-align: center;
+}
+
+
 
 .no-answer-error {
 	display: flex;
@@ -109,8 +131,7 @@ h4 {
 	text-align: center;
 }
 
-.main-button,
-#score-submit-button {
+.main-button {
 	display: block;
 	padding: 10px 20px;
 	text-decoration: none;
@@ -288,10 +309,23 @@ p.question {
 	font-size: 1.2em;
 }
 
-#score-submit-button {
-	margin: 1em 0em 1em 2em;
-	background: none;
+.form-group {
+    text-align: center;
 }
+
+#score-submit-button {
+    background: none;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #fff;
+    margin: 10px;
+    border-radius: 20px;
+    border: 5px solid white;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+}
+
 
 /* Styles for profile section */
 #avatarChoices img {
@@ -464,6 +498,12 @@ ul li {
 }
 
 
+.results-box {
+    border: 2px solid #fff; /* Example: solid black border */
+    padding: 15px; /* Adds some space inside the box */
+    margin-top: 20px; /* Optional: Adds some space above the box */
+    border-radius: 10px; /* Optional: Rounded corners */
+}
 
 
 
