@@ -31,15 +31,12 @@ class TestQuizGame(unittest.TestCase):
         self.assertFalse(self.game.questions_left())
 
     def test_next_question(self):
+        """Testing the next question is asked"""
         self.game.next_question()
         self.assertEqual(self.game.question_number, 1)
         self.assertEqual(self.game.current_question, "Which planet is known as the Red Planet?")
         self.assertEqual(self.game.current_answers, ["Mars", "Venus", "Jupiter", "Saturn"])
         self.assertEqual(self.game.current_correct_answer, 0)
-
-    def test_ask_question(self):
-        """TBA"""
-        pass
 
     def test_retrieve_user_answer(self):
         """TBA"""
