@@ -1,6 +1,14 @@
-# Project Name
+# Let's Get Quizzical
 
-Short description or tagline of your project.
+A quiz application that dynamically generates quiz questions by fetching data from the API. The app will have a user-friendly interface, allowing users to participate in quizzes, view their scores, and track their progress.
+
+#### Developed by:
+- [Agata](https://github.com/ak-run)
+- [Charlotte](https://github.com/charlotteshorey)
+- [Kamila](https://github.com/pruskikam)
+- [Kirsty](https://github.com/kirstyhenderson)
+- [Ruth](https://github.com/ruthh88)
+- [Sarah](https://github.com/0oSaraho0)
 
 ## Table of Contents
 
@@ -90,6 +98,14 @@ print("Quiz Finished")
 print(quiz_game.user_answers)
 print(f"Your score is: {quiz_game.score}")
 ```
+### Key features
+Key features of the app:
+- Quiz Generation: Dynamic creation of quizzes based on category selected by the user.
+- Leaderboard feature: Storing user scores in a SQL database for the future reference
+- Stopwatch feature: Added to create a fair and competitive environment and enhance the gaming experience.
+- User-Friendly Interface: Intuitive design for seamless navigation and an enjoyable user experience.
+- API Integration: Fetching quiz questions from an API ensures that there are new, interesting questions to give answers to.
+
 
 ## Unit Testing
 We used Python built in testing framework unittest to test individual functions and method. You can find all the tests in tests directory.
