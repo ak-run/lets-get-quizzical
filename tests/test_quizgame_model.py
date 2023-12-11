@@ -62,7 +62,9 @@ class TestQuizGame(unittest.TestCase):
         # Check if the user answer has been saved correctly
         saved_user_answer = self.game.user_answers.get("Question 1")
         self.assertEqual(saved_user_answer,
-                         "Your answer: C, correct answer: A")
+saved_user_answer = self.game.user_answers.get("What is the capital of France?")
+expected_answer = "Your answer: Rome, correct answer: Paris"
+self.assertEqual(saved_user_answer, expected_answer)
 
     def test_check_answer_correct(self):
         self.game.check_answer(1)
