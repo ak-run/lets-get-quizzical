@@ -32,8 +32,9 @@ class TestMainBlueprint(unittest.TestCase):
 
     def test_valid_how_to_play_route_content(self):
         # Test the key elements of the content of the how to play route response
+        response = self.client.get('/how_to_play')
         self.assertIn(b"<!DOCTYPE html>", response.data)
-        self.assertIn(b"<h2>How to Play></h2>", response.data)
+        self.assertIn(b"<h2>How to Play</h2>", response.data)
 
     def test_valid_leaderboard_route(self):
         # Test that Leaderboard route returns a 200 status code
@@ -42,8 +43,10 @@ class TestMainBlueprint(unittest.TestCase):
 
     def test_valid_leaderboard_route_content(self):
         # Test the key elements of the content of the leaderboard route response
+        response = self.client.get('/leaderboard_main')
         self.assertIn(b"<!DOCTYPE html>", response.data)
-        self.assertIn(b"<h3>Leaderboard</h3>", response.data)
+        self.assertIn(b'<form id="LeaderboardForm" method="GET">', response.data)
+
 
     def test_valid_setup_route(self):
         # Test that setup route returns a 200 status code
@@ -52,8 +55,21 @@ class TestMainBlueprint(unittest.TestCase):
 
     def test_valid_setup_route_content(self):
         # Test the key elements of the content of the setup route response
+        response = self.client.get('/setup')
         self.assertIn(b"<!DOCTYPE html>", response.data)
         self.assertIn(b"<h3>Select category</h3>", response.data)
+
+    def test_valid_play_quiz_route(self):
+        # Test that play_quiz route returns a 200 status code
+        response = self.client.get('/play_quiz')
+        self.assertEqual(response.status_code, 200)
+
+    def test_valid_play_quiz_route_content(self):
+        # Test the key elements of the content of the setup route response
+        response = self.client.get('/play_quiz')
+        self.assertIn(b"<!DOCTYPE html>", response.data)
+        self.assertIn(b'<form action="/play_quiz" id="question_form" method="POST">', response.data)
+        
 
         
 
