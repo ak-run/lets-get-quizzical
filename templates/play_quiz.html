@@ -1,12 +1,4 @@
-{% extends "base.html"%} {%block title%} Quiz {% endblock %}
-
-{% block header_image %}
-<div class="header-image-container">
-    <img src="{{ url_for('static', filename='img/navbar-image.png') }}" alt="Header Image" class="header-image">
-</div>
-{% endblock %}
-
-{% block content%}
+{% extends "base.html"%} {%block title%} Quiz {% endblock %} {% block content%}
 
 <div class="intro">
     <form action="/play_quiz" id="question_form" method='POST'>
