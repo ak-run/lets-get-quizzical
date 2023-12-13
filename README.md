@@ -37,10 +37,16 @@ The app is divided into following directories:
 #### Python packages
 The app includes a number of standard python libraries that do not need installation. Those are imported in the files that use them.
 The packages that need installation are in requirements.txt file:
-- flask~=3.0.0 to run the app
-- requests to make requests to external API with quiz questions
-- mysql-connector-python for connection to the database
-- Flask-WTF and wtforms for managing and validating data submitted through web forms
+- Flask (v3.0.0):  Web Framework for Python.
+- Requests (v2.31.0): HTTP Request Library for Python.
+- MySQL Connector for Python (v8.1.0): MySQL Driver for Python.
+- Flask-WTF (v1.2.1): Flask Extension integrating Flask with WTForms.
+- WTForms (v3.1.1): Forms Validation and Rendering Library, enhancing input handling.
+Other packages that are included in Python standard Library
+- Json: JSON Encoding/Decoding Library.
+- os:  Module (Part of Python Standard Library) used to get to local path of a file
+- random: Module (Part of Python Standard Library).
+- secrets: Module (Part of Python Standard Library). Used to create flask secret key
 
 ### Installation
 To install the required packages for this project, follow these steps:
