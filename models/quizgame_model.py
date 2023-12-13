@@ -55,6 +55,7 @@ class QuizGame:
         """Ask current question and use class methods to check answer, save user answer and go to next question"""
         try:
             if user_answer is None:
+                self.save_user_answer(user_answer)
                 self.next_question()
             else:
                 self.check_answer(user_answer)
@@ -76,10 +77,13 @@ class QuizGame:
         Saves user questions and answers in a dictionary so they can be displayed at the end of the quiz
         A question is saved as a key and a string with correct answer and user answer is added as value
         """
-        user_answer_text = self.question_list[self.question_number]["answers"][user_answer]
-        correct_answer_text = self.question_list[self.question_number]["answers"][self.current_correct_answer]
-        if user_answer == self.current_correct_answer:
-            self.user_answers[self.current_question] = f"Your answer, {user_answer_text}, was correct"
+        if user_answer is None:
+            self.user_answers[self.current_question] = "The time run out and you didn't answer this question"
         else:
-            self.user_answers[self.current_question] = f"Your answer: {user_answer_text}, " \
+            user_answer_text = self.question_list[self.question_number]["answers"][user_answer]
+            correct_answer_text = self.question_list[self.question_number]["answers"][self.current_correct_answer]
+            if user_answer == self.current_correct_answer:
+                self.user_answers[self.current_question] = f"Your answer, {user_answer_text}, was correct"
+            else:
+                self.user_answers[self.current_question] = f"Your answer: {user_answer_text}, " \
                                                        f"correct answer: {correct_answer_text}"
