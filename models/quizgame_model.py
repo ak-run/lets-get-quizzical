@@ -1,6 +1,3 @@
-import collections
-
-
 class QuizGame:
     def __init__(self, question_list):
         self.question_number = 0
@@ -72,13 +69,16 @@ class QuizGame:
         Saves user questions and answers in a dictionary so they can be displayed at the end of the quiz
         A question is saved as a key and a string with correct answer and user answer is added as value
         """
+        question_number_display = self.question_number + 1
+        formatted_question_number = f"{question_number_display:02d}"
+        question_key = f"{formatted_question_number}. {self.current_question}"
         if user_answer is None:
-            self.user_answers[self.current_question] = "The time run out and you didn't answer this question"
+            self.user_answers[question_key] = "The time run out and you didn't answer this question"
         else:
             user_answer_text = self.question_list[self.question_number]["answers"][user_answer]
             correct_answer_text = self.question_list[self.question_number]["answers"][self.current_correct_answer]
             if user_answer == self.current_correct_answer:
-                self.user_answers[self.current_question] = f"Your answer, {user_answer_text}, was correct"
+                self.user_answers[question_key] = f"Your answer, {user_answer_text}, was correct"
             else:
-                self.user_answers[self.current_question] = f"Your answer: {user_answer_text}, " \
+                self.user_answers[question_key] = f"Your answer: {user_answer_text}, " \
                                                        f"correct answer: {correct_answer_text}"
