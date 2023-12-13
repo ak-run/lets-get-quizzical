@@ -55,7 +55,6 @@ class QuizGame:
         """Ask current question and use class methods to check answer, save user answer and go to next question"""
         try:
             if user_answer is None:
-                self.save_user_answer("You didn't answer this question")
                 self.next_question()
             else:
                 self.check_answer(user_answer)
