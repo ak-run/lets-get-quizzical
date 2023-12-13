@@ -18,7 +18,7 @@
             <div id="answers-container">
                 {% for answer in current_answers %}
                 <div class="answer">
-                    <input type="radio" name="user_answer" value="{{ loop.index0 }}" class="main-button" />
+                    <input type="radio" name="user_answer" value="{{ loop.index0 }}" class="radio-button" />
                     <span>{{answer}}</span>
                 </div>
                 {% endfor %}
