@@ -131,7 +131,11 @@ h4 {
 	border-radius: 20px;
 	border: 5px solid white;
 	text-transform: uppercase;
+	margin-bottom: 10px;
+    width: 20rem;
+	
 }
+
 
 #answers-container {
     display: flex;
@@ -411,31 +415,41 @@ margin: 20px auto;
 }
 
 .start-quiz-btn {
-    font-weight: bold;
+    /* font-weight: bold; */
 	display: block;
-	padding: 10px 100px;
+	height:3.5rem;
 	text-decoration: none;
-
 	color: #fff;
 	margin: 10px;
-	border-radius: 5px;
 	transition: background-color 0.3s ease;
 	border-radius: 20px;
 	border: 5px solid white;
 	text-transform: uppercase;
+	width: 20rem;
+}
+
+.start-quiz-btn:hover {
+    font-weight: bold;
+	display: block;
+	height:3.6rem;
+	text-decoration: none;
+	color: #fff;
+	margin: 10px;
+	transition: background-color 0.3s ease;
+	border-radius: 20px;
+	border: 6px solid white;
+	text-transform: uppercase;
+	width: 20rem;
+	font-size: 20px;
 }
 
 .buttons-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 20px;
 }
 
-.main-button {
-    margin-bottom: 10px;
-    padding: 10px 100px;
-}
+
 
 .form-input {
    min-width: 250px;
@@ -521,7 +535,10 @@ ul li {
     padding-top: 10px;
 }
 
-
+.navbar-toggler {
+	background-color: rgba(255, 255, 255, 1) !important;
+	margin-right: 1rem;
+}
 
 
 /* Styles for smaller screens */
