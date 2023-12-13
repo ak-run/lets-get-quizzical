@@ -554,3 +554,15 @@ ul li {
    }
 
 }
+
+/* How to play page */
+
+.how-to-play {
+	color: white;
+	font-size: 20px;
+}
+
+.play-list {
+	padding-left: 20px;
+	padding-bottom: 5px;
+}
