@@ -18,10 +18,19 @@ body {
 	background-size: 100%;
 }
 
+h1 {
+    text-transform: uppercase;
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom:10px;
+    color: white;
+}
+
+
 h2 {
 	text-transform: uppercase;
 	font-size: 20px;
-	style: bold;
+	font-weight: bold;
 	margin-bottom: 20px;
 	color: white;
 }
@@ -83,9 +92,7 @@ h4 {
 	color: white !important;
 }
 
-.intro,
-.leaderboard,
-.score {
+.intro, .leaderboard {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -94,6 +101,10 @@ h4 {
 	width: 80%;
 	background: transparent;
 	text-align: center;
+}
+
+.home-page .intro {
+	margin: 60px auto;
 }
 
 .no-answer-error {
@@ -109,8 +120,7 @@ h4 {
 	text-align: center;
 }
 
-.main-button,
-#score-submit-button {
+.main-button {
 	display: block;
 	padding: 10px 20px;
 	text-decoration: none;
@@ -123,10 +133,16 @@ h4 {
 	text-transform: uppercase;
 }
 
+#answers-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 
 .answer {
 	width: 400px;
-	height: 60px;
+	height: 90px;
 	margin: 10px;
 	display: flex;
 	align-items: center;
@@ -182,16 +198,17 @@ p.question {
 }
 
 .stopwatch {
-	margin-top: 10px;
-	width: 300px;
-	background-color: rgb(255, 250, 230);
-	height: 200px;
-	border-radius: 20px;
-	position: relative;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	box-shadow: 5px 5px 10px 2px rgba(0, 0, 0, 0.8);
+margin: 20px auto;
+    width: 300px;
+    background-color: rgb(255, 250, 230);
+    height: 200px;
+    border-radius: 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 5px 5px 10px 2px rgba(0, 0, 0, 0.8);
 }
 
 .stopwatch-display {
@@ -288,10 +305,23 @@ p.question {
 	font-size: 1.2em;
 }
 
-#score-submit-button {
-	margin: 1em 0em 1em 2em;
-	background: none;
+.form-group {
+    text-align: center;
 }
+
+#score-submit-button {
+    background: none;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #fff;
+    margin: 10px;
+    border-radius: 20px;
+    border: 5px solid white;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+}
+
 
 /* Styles for profile section */
 #avatarChoices img {
@@ -305,12 +335,13 @@ p.question {
 
 .modal-content {
     background-color: #fefefe;
-    margin: 50% auto;
-    padding-top: 80px;
     padding: 30px;
     border: 1px solid #888;
     width: 500px;
-    position: relative;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -412,15 +443,16 @@ p.question {
 .header-image {
     display: block;
     margin: 0 auto;
-    max-width: 60%;
+    max-width: 30%;
     height: auto;
+    min-width: 300px;
+    padding-bottom: 20px;
 }
 
 /* Score Page */
 
 .user-info {
     text-align: center;
-    margin-bottom: 30px;
     color: white; /
 }
 
@@ -464,7 +496,20 @@ ul li {
 }
 
 
+.results-box {
+    border: 2px solid #fff; /* Example: solid black border */
+    padding: 15px; /* Adds some space inside the box */
+    margin-top: 20px; /* Optional: Adds some space above the box */
+    border-radius: 10px; /* Optional: Rounded corners */
+}
 
+.header-image-container img {
+    width: 100%;
+    height: auto;
+    min-width: 300px;
+    max-width: 500px;
+    padding-top: 10px;
+}
 
 
 
@@ -488,8 +533,14 @@ ul li {
 	.form-input {
          width: auto;
    }
-       .user-info img {
+
+   .user-info img {
         width: 100px;
         height: 100px;
-    }
+   }
+   .header-image-container img {
+        max-width: 60%;
+        height: auto;
+   }
+
 }

@@ -83,18 +83,3 @@ class QuizGame:
         else:
             self.user_answers[self.current_question] = f"Your answer: {user_answer_text}, " \
                                                        f"correct answer: {correct_answer_text}"
-
-# ----------------------------------------
-# TO SEE IT's WORKING UNCOMMENT TEXT BELOW
-# ----------------------------------------
-# quiz = QuizQuestions()
-# quiz.url = "music"
-# questions_dict = quiz.create_quiz_question_dict()
-# quiz = QuizGame(questions_dict)
-#
-# while quiz.questions_left():
-#     quiz.ask_question(1)
-#
-# print("Quiz Finished")
-# print(quiz.user_answers)
-# print(quiz.score)
