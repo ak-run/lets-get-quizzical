@@ -150,7 +150,6 @@ h4 {
 	text-transform: uppercase;
 	margin-bottom: 10px;
     width: 20rem;
-	
 }
 
 
@@ -174,6 +173,7 @@ h4 {
 	border: rgba(218, 88, 68, 0.7) solid 8px;
 	background-color: rgb(255, 250, 230);
 	color: white;
+	white-space: normal;
 }
 
 .category {
