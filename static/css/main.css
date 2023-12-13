@@ -373,7 +373,7 @@ margin: 20px auto;
     display: flex;
     align-items: center;
     gap: 30px;
-    margin-bottom: 100px;
+    margin-bottom: 30px;
 }
 
 .nickname-group,
@@ -401,12 +401,21 @@ margin: 20px auto;
 .avatar-image,
 .avatar-btn {
     margin-right: 5px;
+    margin-right: 5px;
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    display: inline-block;
 }
 
 .start-quiz-btn {
+    font-weight: bold;
 	display: block;
 	padding: 10px 100px;
 	text-decoration: none;
+
 	color: #fff;
 	margin: 10px;
 	border-radius: 5px;
@@ -437,7 +446,7 @@ margin: 20px auto;
   }
 
 .button-active {
-    background-color: #B4DB96;
+    background-color: #7BAD4B;
     color: white;
 }
 
@@ -447,7 +456,7 @@ margin: 20px auto;
     max-width: 30%;
     height: auto;
     min-width: 300px;
-    padding-bottom: 20px;
+    padding-bottom: 50px;
 }
 
 /* Score Page */
