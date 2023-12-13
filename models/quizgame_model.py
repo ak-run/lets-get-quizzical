@@ -54,7 +54,7 @@ class QuizGame:
     def ask_question(self, user_answer):
         """Ask current question and use class methods to check answer, save user answer and go to next question"""
         try:
-            if not user_answer:
+            if user_answer is None:
                 self.next_question()
             else:
                 self.check_answer(user_answer)
