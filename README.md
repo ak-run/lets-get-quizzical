@@ -47,6 +47,7 @@ Other packages that are included in Python standard Library
 - os:  Module (Part of Python Standard Library) used to get to local path of a file
 - random: Module (Part of Python Standard Library).
 - secrets: Module (Part of Python Standard Library). Used to create flask secret key
+We also used Bootstrap 5.3.2: Front-end framework.
 
 ### Installation
 To install the required packages for this project, follow these steps:
