@@ -1,7 +1,5 @@
 from flask import Blueprint, render_template, session, redirect, url_for, request
-from flask_wtf import FlaskForm
-from wtforms import SubmitField, RadioField, StringField
-
+from flask_forms import ProfileForm, QuestionForm, LeaderboardForm
 from models.db_connection_model import DatabaseConnection, config
 from models.leaderboard_model import Leaderboard
 from models.question_model import QuizQuestions
@@ -9,23 +7,6 @@ from models.quizgame_model import QuizGame
 
 # blueprint for main page
 main_bp = Blueprint("/", __name__, static_folder="static", template_folder="templates")
-
-
-# Flask forms
-class QuestionForm(FlaskForm):
-    user_answer = RadioField('Answer', choices=[], coerce=int)
-
-    submit = SubmitField("Submit")
-
-class ProfileForm(FlaskForm):
-    nickname = StringField('Nickname')
-    submit = SubmitField('Start Quiz')
-
-
-class LeaderboardForm(FlaskForm):
-    """pass because there are no special fields in the Flask Form needed"""
-    pass
-
 
 conn = DatabaseConnection(config)
 conn.get_connection_to_db()
@@ -119,9 +100,3 @@ def leaderboard():
     scores = leaderboard_instance.display_top_scores()
     form = LeaderboardForm
     return render_template("leaderboard.html", form=form, scores=scores)
-
-
-# @main_bp.route("/setup")
-# def setup():
-#     """Route for the quiz setup"""
-#     return render_template("quiz_setup.html")
