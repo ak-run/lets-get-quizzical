@@ -1,13 +1,29 @@
-from flask import Flask
-# from flask_socketio import SocketIO, emit
-from models.question_model import QuizQuestions
-
-app = Flask(__name__)
-# socketio = SocketIO(app)
-
-
 class QuizGame:
+    """
+    A class representing a quiz game.
+
+    Attributes:
+    - question_number: Current question index.
+    - score: Integer with current score.
+    - question_list: List of quiz questions and answers.
+    - current_question: Text of the current question.
+    - current_answers: List of possible answers for the current question.
+    - current_correct_answer: Index of the correct answer for the current question.
+    - user_answers: Dictionary to store user's answers.
+
+    Methods:
+    - to_dict(): Convert the QuizGame instance to a dictionary.
+    - from_dict(cls, question_list, data): Create a QuizGame instance from a dictionary.
+    - questions_left(): Check if there are more questions left.
+    - next_question(): Move to the next question.
+    - ask_question(user_answer): Ask the current question, check the answer, save user answer, and move to the next question.
+    - check_answer(user_answer): Check if the user's answer is correct, update the score.
+    - save_user_answer(user_answer): Save the user's answer for display at the end of the quiz.
+    """
     def __init__(self, question_list):
+        """
+        Initialize a QuizGame instance with question_list as parameter, it contains quiz questions and answers.
+        """
         self.question_number = 0
         self.score = 0
         self.question_list = question_list
@@ -17,6 +33,9 @@ class QuizGame:
         self.user_answers = {}
 
     def to_dict(self):
+        """
+        Convert the QuizGame instance to a dictionary.
+        """
         return {
             "question_number": self.question_number,
             "score": self.score,
@@ -29,6 +48,13 @@ class QuizGame:
 
     @classmethod
     def from_dict(cls, question_list, data):
+        """
+        Create a QuizGame instance from a dictionary.
+        Parameters:
+        - question_list: List of quiz questions and answers.
+        - data: Dictionary containing QuizGame data.
+        Returns: An instance of the QuizGame class.
+        """
         quiz_game = cls(question_list)
         quiz_game.question_number = data["question_number"]
         quiz_game.score = data["score"]
@@ -40,11 +66,14 @@ class QuizGame:
         return quiz_game
 
     def questions_left(self):
-        """Check if questions are left in the set"""
+        """Check if questions are left in the set, returns True or False"""
         return self.question_number < len(self.question_list)
 
     def next_question(self):
-        """Update class attributes: question number, current question, current answers and current correct answer"""
+        """
+        Moves to the next question.
+        Updates class attributes: question number, current question, current answers and current correct answer
+        """
         self.question_number += 1
         if self.questions_left():
             self.current_question = self.question_list[self.question_number]["question"]
@@ -52,21 +81,27 @@ class QuizGame:
             self.current_correct_answer = self.question_list[self.question_number]["correct_answer"]
 
     def ask_question(self, user_answer):
-        """Ask current question and use class methods to check answer, save user answer and go to next question"""
+        """
+        Ask the current question, check the answer, save user answer, and move to the next question.
+        Parameters: user_answer: The user's answer to the current question.
+        """
         try:
-            if not user_answer:
+            if user_answer is None:
+                self.save_user_answer(user_answer)
                 self.next_question()
             else:
                 self.check_answer(user_answer)
                 self.save_user_answer(user_answer)
                 self.next_question()
-            return self.current_question, self.current_answers
 
         except Exception as e:
             raise Exception(f'Error asking question: {e}')
 
     def check_answer(self, user_answer):
-        """Check if the user's answer is correct, update the score and save the answer"""
+        """
+        Check if the user's answer is correct, update the score and save the answer
+        Parameters: user_answer: The user's answer to the current question.
+        """
         if user_answer == self.current_correct_answer:
             self.score += 1
         self.save_user_answer(user_answer)
@@ -75,26 +110,18 @@ class QuizGame:
         """
         Saves user questions and answers in a dictionary so they can be displayed at the end of the quiz
         A question is saved as a key and a string with correct answer and user answer is added as value
+        Parameters: user_answer: The user's answer to the current question.
         """
-        user_answer_text = self.question_list[self.question_number]["answers"][user_answer]
-        correct_answer_text = self.question_list[self.question_number]["answers"][self.current_correct_answer]
-        if user_answer == self.current_correct_answer:
-            self.user_answers[self.current_question] = f"Your answer, {user_answer_text}, was correct"
+        question_number_display = self.question_number + 1
+        formatted_question_number = f"{question_number_display:02d}"
+        question_key = f"{formatted_question_number}. {self.current_question}"
+        if user_answer is None:
+            self.user_answers[question_key] = "The time run out and you didn't answer this question"
         else:
-            self.user_answers[self.current_question] = f"Your answer: {user_answer_text}, " \
+            user_answer_text = self.question_list[self.question_number]["answers"][user_answer]
+            correct_answer_text = self.question_list[self.question_number]["answers"][self.current_correct_answer]
+            if user_answer == self.current_correct_answer:
+                self.user_answers[question_key] = f"Your answer, {user_answer_text}, was correct"
+            else:
+                self.user_answers[question_key] = f"Your answer: {user_answer_text}, " \
                                                        f"correct answer: {correct_answer_text}"
-
-# ----------------------------------------
-# TO SEE IT's WORKING UNCOMMENT TEXT BELOW
-# ----------------------------------------
-# quiz = QuizQuestions()
-# quiz.url = "music"
-# questions_dict = quiz.create_quiz_question_dict()
-# quiz = QuizGame(questions_dict)
-#
-# while quiz.questions_left():
-#     quiz.ask_question(1)
-#
-# print("Quiz Finished")
-# print(quiz.user_answers)
-# print(quiz.score)
