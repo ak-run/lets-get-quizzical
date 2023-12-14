@@ -1,4 +1,5 @@
 import unittest
+from collections import OrderedDict
 
 from models.quizgame_model import QuizGame
 
@@ -18,6 +19,16 @@ class TestQuizGame(unittest.TestCase):
                 "answers": ["Mars", "Venus", "Jupiter", "Saturn"],
                 "correct_answer": 0,
             },
+            {
+                "question": "Which famous scientist developed the theory of relativity?",
+                "answers": ["Isaac Newton", "Galileo Galilei", "Albert Einstein", "Niels Bohr"],
+                "correct_answer": 2,
+            },
+            {
+                "question": "What is the largest mammal on Earth?",
+                "answers": ["Elephant", "Blue Whale", "Giraffe", "Hippopotamus"],
+                "correct_answer": 1,
+            }
         ]
         self.game = QuizGame(self.sample_questions)
 
@@ -27,7 +38,7 @@ class TestQuizGame(unittest.TestCase):
 
     def test_questions_left_false(self):
         """testing when there are no questions left"""
-        self.game.question_number = 2
+        self.game.question_number = 5
         self.assertFalse(self.game.questions_left())
 
     def test_next_question(self):
@@ -76,6 +87,22 @@ class TestQuizGame(unittest.TestCase):
         self.game.save_user_answer(1)
         self.assertEqual(self.game.user_answers, {
                          "01. What is the capital of France?": "Your answer, Paris, was correct"})
+
+    def test_save_user_answer_correct_order(self):
+        self.game.ask_question(2)
+        self.game.ask_question(1)
+        self.game.ask_question(2)
+        self.game.ask_question(3)
+
+        expected_result = {
+            '01. What is the capital of France?': 'Your answer: Rome, correct answer: Paris',
+            '02. Which planet is known as the Red Planet?': 'Your answer: Venus, correct answer: Mars',
+            '03. Which famous scientist developed the theory of relativity?': 'Your answer, Albert Einstein, '
+                                                                              'was correct',
+            '04. What is the largest mammal on Earth?': 'Your answer: Hippopotamus, correct answer: Blue Whale'}
+
+        # Converting results into OrderedDict to check if the questions are saved in the correct order
+        self.assertEqual(OrderedDict(self.game.user_answers), OrderedDict(expected_result))
 
     def test_save_user_answer_incorrect(self):
         self.game.save_user_answer(2)
