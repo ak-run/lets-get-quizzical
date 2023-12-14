@@ -41,10 +41,10 @@ class TestQuizGame(unittest.TestCase):
 
     def test_ask_question_successful(self):
         # Test case for successful question asking
-        question, answers = self.game.ask_question(user_answer=0)
+        self.game.ask_question(user_answer=0)
         # Assumes next_question has been called once
-        self.assertEqual(question, "Which planet is known as the Red Planet?")
-        self.assertEqual(answers, ["Mars", "Venus", "Jupiter", "Saturn"])
+        self.assertEqual(self.game.current_question, "Which planet is known as the Red Planet?")
+        self.assertEqual(self.game.current_answers, ["Mars", "Venus", "Jupiter", "Saturn"])
 
     def test_ask_question_error(self):
         # Test case for an error during question asking
@@ -57,10 +57,10 @@ class TestQuizGame(unittest.TestCase):
 
     def test_ask_question_retrieve_user_answer(self):
         # Test case for retrieving and saving a user answer
-        question, answers = self.game.ask_question(user_answer=2)
+        self.game.ask_question(user_answer=2)
 
         # Check if the user answer has been saved correctly
-        saved_user_answer = self.game.user_answers.get("What is the capital of France?")
+        saved_user_answer = self.game.user_answers.get("01. What is the capital of France?")
         expected_answer = "Your answer: Rome, correct answer: Paris"
         self.assertEqual(saved_user_answer, expected_answer)
 
@@ -75,13 +75,13 @@ class TestQuizGame(unittest.TestCase):
     def test_save_user_answer_correct(self):
         self.game.save_user_answer(1)
         self.assertEqual(self.game.user_answers, {
-                         "What is the capital of France?": "Your answer, Paris, was correct"})
+                         "01. What is the capital of France?": "Your answer, Paris, was correct"})
 
     def test_save_user_answer_incorrect(self):
         self.game.save_user_answer(2)
         self.assertEqual(
             self.game.user_answers,
-            {"What is the capital of France?": "Your answer: Rome, correct answer: Paris"}
+            {"01. What is the capital of France?": "Your answer: Rome, correct answer: Paris"}
         )
 
 
