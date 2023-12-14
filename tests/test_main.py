@@ -35,7 +35,7 @@ class TestMainBlueprint(unittest.TestCase):
         # Test the key elements of the content of the how to play route response
         response = self.client.get('/how_to_play')
         self.assertIn(b"<!DOCTYPE html>", response.data)
-        self.assertIn(b"<h2>How to Play</h2>", response.data)
+        self.assertIn(b"When you are ready click Start Quiz", response.data)
 
     def test_valid_leaderboard_route(self):
         # Test that Leaderboard route returns a 200 status code
