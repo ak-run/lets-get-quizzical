@@ -3,6 +3,6 @@
         "host": "localhost",
         "user": "username",
         "password": "your password",
-        "database_name": "tba"
+        "database_name": "user_scores"
     }
 }
