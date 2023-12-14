@@ -2,6 +2,7 @@
 
 A quiz application that dynamically generates quiz questions by fetching data from the API. The app will have a user-friendly interface, allowing users to participate in quizzes, view their scores, and track their progress.
 
+This is a final Project for the Software Path of CFGdegree 
 #### Developed by:
 - [Agata](https://github.com/ak-run)
 - [Charlotte](https://github.com/charlotteshorey)
@@ -120,3 +121,5 @@ We used Python built in testing framework unittest to test individual functions 
 
 ## Acknowledgments
 The questions for the quiz come from [The Trivia API](https://the-trivia-api.com/), a great free resource of questions in various categories. 
+
+Thank you to [Code First Girls](https://codefirstgirls.com/) and all our instructors
