@@ -19,12 +19,14 @@ Leaderboard
         <table class="leaderboard-table">
             <tr>
                 <th>#</th>
+                <th>Avatar</th>
                 <th>Nickname</th>
                 <th>Score</th>
             </tr>
-          {% for position, nickname, score in scores %}
+          {% for position, avatar, nickname, score in scores %}
             <tr>
                 <td>{{ position }}</td>
+                <td><img src="{{ url_for('static', filename='img/avatars/' + avatar) }}" alt="Avatar" class="avatar-image"></td>
                 <td>{{ nickname }}</td>
                 <td>{{ score }}</td>
             </tr>
