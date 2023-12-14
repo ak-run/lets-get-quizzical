@@ -22,12 +22,13 @@ def score():
     form = ScoreForm()
 
     if request.method == "POST" and form.validate_on_submit():
+        avatar = session["avatar"]
         nickname = session['nickname']
         score = session["user_score"]
 
         leaderboard_instance = Leaderboard(conn)
         # Execute the query to add the user score to the database
-        leaderboard_instance.add_user_score(nickname, score)
+        leaderboard_instance.add_user_score(avatar, nickname, score)
         session.clear()
         if not session:
             print("session is clear")
