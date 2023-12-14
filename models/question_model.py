@@ -16,12 +16,14 @@ class QuizQuestions:
 
     @url.setter
     def url(self, category):
+        """Adding the chosen question category to the API url"""
         if category in self.question_categories:
             self._url = f"{self._url}?categories={category}"
         else:
             raise ValueError(f"Invalid category: {category}")
 
     def get_ten_rand_questions(self):
+        """For the API call to return 10 questions"""
         try:
             response = requests.get(self._url)
             questions = response.json()
@@ -34,7 +36,7 @@ class QuizQuestions:
             return questions
 
     def create_quiz_question_dict(self):
-        # creates a dict with q's and a's. 4 possible answers but correct answer is given an index 0-3
+        """Creates a dict with q's and a's. 4 possible answers but correct answer is given an index 0-3"""
         quiz_questions = []
         for raw_question in self.get_ten_rand_questions():
             correct_ans_index = random.randint(0, 3)

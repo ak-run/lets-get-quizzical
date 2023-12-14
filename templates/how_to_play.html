@@ -3,8 +3,30 @@
 Homepage
 {% endblock %}
 
+{% block header_image %}
+<div class="header-image-container">
+    <img src="{{ url_for('static', filename='img/navbar-image.png') }}" alt="Header Image" class="header-image">
+</div>
+{% endblock %}
+
 {% block content%}
 
-  <p>Test</p>
+  <div class="row col-md-8 offset-md-2 delete-idea">
+    <div class="col-md-8 offset-md-2 p-3">
+        <!-- How to play heading -->
+        <h1 class="text-center">How to Play</h1>
+        <div class="d-flex justify-content-center pt-3">
+            <ol class="how-to-play">
+              <li class="play-list">First enter your nickname on the home page and pick your Avatar</li>
+              <li class="play-list">When you are ready click Start Quiz</li>
+              <li class="play-list">Next select a category from the list, Once you have done this you will be taken straight to the game so be ready!</li>
+              <li class="play-list">Answer each multiple choice question before the timer runs out, If it does you will not get a point</li>
+              <li class="play-list">Click the next button on the timer to go to the next question</li>
+              <li class="play-list">Go through all 10 questions and see your score, your answers and the correct answers at the end</li>
+              <li class="play-list">Next submit your score to the leaderboard. The top 10 scores will be displayed</li>
+            </ol>
+        </div>
+    </div>
+  </div>
 
 {% endblock %}
