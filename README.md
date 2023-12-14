@@ -47,6 +47,8 @@ Other packages that are included in Python standard Library
 - os:  Module (Part of Python Standard Library) used to get to local path of a file
 - random: Module (Part of Python Standard Library).
 - secrets: Module (Part of Python Standard Library). Used to create flask secret key
+- collections: Module (Part of Python Standard Library). OrderedDict used to test if user's answers save in a correct order  
+- unittest: Module (Part of Python Standard Library). Used for unit testing.
 We also used Bootstrap 5.3.2: Front-end framework.
 
 ### Installation
