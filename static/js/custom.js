@@ -36,7 +36,7 @@ function stopWatch() {
      });
  });
 
- // script to auto submit the question once the timer is up (after 20 seconds)
+ // script to auto submit the question once the timer is up (after 21 seconds to account for slight delay)
 var timerDuration = 21000;
 // Start the timer
 var timer = setTimeout(function () {
