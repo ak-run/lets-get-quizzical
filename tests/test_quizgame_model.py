@@ -1,6 +1,5 @@
 import unittest
 from collections import OrderedDict
-
 from models.quizgame_model import QuizGame
 
 

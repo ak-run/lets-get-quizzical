@@ -42,5 +42,6 @@ class TestQuestionModel(unittest.TestCase):
         quiz = self.questions.create_quiz_question_dict()
         self.assertEqual(len(quiz), 10)
 
+
 if __name__ == '__main__':
     unittest.main()
