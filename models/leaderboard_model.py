@@ -56,7 +56,7 @@ class Leaderboard:
         Returns: result and status_code
         """
         # validate input parameters
-        if not avatar or not nickname or not (3 <= len(nickname) <= 25) or not (0 <= score <= 10):
+        if not avatar or not nickname or not (1 <= len(nickname) <= 25) or not (0 <= score <= 10):
             raise ValueError("Invalid input parameters.")
         formatted_query = self._add_user_score_sql_query % (avatar, nickname, score)
         result = self.execute_sql_query(formatted_query)
