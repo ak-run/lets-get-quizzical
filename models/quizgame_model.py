@@ -49,7 +49,8 @@ class QuizGame:
     @classmethod
     def from_dict(cls, question_list, data):
         """
-        Create a QuizGame instance from a dictionary.
+        Create a QuizGame instance from a dictionary. It is used to recreate QuizGame instance  with specific state
+        from session data on the website
         Parameters:
         - question_list: List of quiz questions and answers.
         - data: Dictionary containing QuizGame data.
@@ -83,7 +84,7 @@ class QuizGame:
     def ask_question(self, user_answer):
         """
         Ask the current question, check the answer, save user answer, and move to the next question.
-        Parameters: user_answer: The user's answer to the current question.
+        Parameters: user_answer: the user's answer to the current question.
         """
         try:
             if user_answer is None:
@@ -108,7 +109,7 @@ class QuizGame:
 
     def save_user_answer(self, user_answer):
         """
-        Saves user questions and answers in a dictionary so they can be displayed at the end of the quiz
+        Saves user questions and answers in a dictionary, so they can be displayed at the end of the quiz
         A question is saved as a key and a string with correct answer and user answer is added as value
         Parameters: user_answer: The user's answer to the current question.
         """
