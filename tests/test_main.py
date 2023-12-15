@@ -4,6 +4,7 @@ from routes.main import main_bp
 
 
 class TestMainBlueprint(unittest.TestCase):
+    """Testing the blueprint of the quiz game"""
 
     def setUp(self):
         """Test Flask application, register the blueprint, set up templates folder and test client"""

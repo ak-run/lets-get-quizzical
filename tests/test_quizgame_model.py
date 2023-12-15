@@ -5,6 +5,11 @@ from models.quizgame_model import QuizGame
 
 
 class TestQuizGame(unittest.TestCase):
+    """
+    Testing the quizgame_model for the correct quiz flow:
+        - getting, checking, and saving users answers
+        - progressing to the next question if there are remaining questions
+    """
 
     def setUp(self):
         """Sample questions for testing"""

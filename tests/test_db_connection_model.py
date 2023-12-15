@@ -8,6 +8,8 @@ with open(config_file_path) as config_file:
 
 
 class TestDatabaseConnection(unittest.TestCase):
+    """Testing the db_connection_model to check for successful connection to SQL"""
+
     def setUp(self):
         """Get a new connection for each test"""
         self.connection = DatabaseConnection(config).get_connection_to_db()
