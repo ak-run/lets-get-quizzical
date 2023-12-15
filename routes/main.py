@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, session, redirect, url_for, request
-from flask_forms import ProfileForm, QuestionForm, LeaderboardForm
+from routes.flask_forms import ProfileForm, QuestionForm, LeaderboardForm
 from models.db_connection_model import DatabaseConnection, config
 from models.leaderboard_model import Leaderboard
 from models.question_model import QuizQuestions
