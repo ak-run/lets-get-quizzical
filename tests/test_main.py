@@ -16,34 +16,34 @@ class TestMainBlueprint(unittest.TestCase):
         self.client = self.app.test_client()
 
     def test_valid_main_route(self):
-        # Test that the main route returns a 200 status code
+        """Test that the main route returns a 200 status code"""
         response = self.client.get('/')
         self.assertEqual(response.status_code, 200)
 
     def test_valid_main_route_content(self):
-        # Test the key elements of the content of the main route response
+        """Test the key elements of the content of the main route response"""
         response = self.client.get('/')
         self.assertIn(b"<!DOCTYPE html>", response.data)
         self.assertIn(b"AVATAR", response.data)
 
     def test_valid_how_to_play_route(self):
-        # Test that how to play route returns a 200 status code
+        """Test that how to play route returns a 200 status code"""
         response = self.client.get('/how_to_play')
         self.assertEqual(response.status_code, 200)
 
     def test_valid_how_to_play_route_content(self):
-        # Test the key elements of the content of the how to play route response
+        """Test the key elements of the content of the how to play route response"""
         response = self.client.get('/how_to_play')
         self.assertIn(b"<!DOCTYPE html>", response.data)
         self.assertIn(b"When you are ready click Start Quiz", response.data)
 
     def test_valid_leaderboard_route(self):
-        # Test that Leaderboard route returns a 200 status code
+        """Test that Leaderboard route returns a 200 status code"""
         response = self.client.get('/leaderboard_main')
         self.assertEqual(response.status_code, 200)
 
     def test_valid_leaderboard_route_content(self):
-        # Test the key elements of the content of the leaderboard route response
+        """Test the key elements of the content of the leaderboard route response"""
         response = self.client.get('/leaderboard_main')
         self.assertIn(b"<!DOCTYPE html>", response.data)
         self.assertIn(b'<form id="LeaderboardForm" method="GET">', response.data)
