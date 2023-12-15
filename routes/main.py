@@ -14,6 +14,7 @@ conn.get_connection_to_db()
 
 @main_bp.route("/", methods=["GET", "POST"])
 def main():
+    """Main route for the application."""
     session.clear()
     form = ProfileForm()
     avatar_filenames = [f"{i}.png" for i in range(1, 13)]
@@ -22,6 +23,7 @@ def main():
 
 @main_bp.route("/start_quiz", methods=["POST"])
 def start_quiz():
+    """Route to start the quiz setup."""
     form = ProfileForm()
     if form.validate_on_submit():
         session['nickname'] = form.nickname.data
@@ -32,7 +34,7 @@ def start_quiz():
 
 @main_bp.route("/play_quiz", methods=["POST", "GET"])
 def play_quiz():
-    """Route for quiz"""
+    """Route for playing the quiz."""
     form = QuestionForm()
 
     # Check if the quiz_game is not already in the session
@@ -97,7 +99,7 @@ def how_to_play():
 
 @main_bp.route("/leaderboard_main")
 def leaderboard():
-    """Route for Leaderboard"""
+    """Route for displaying the leaderboard."""
     leaderboard_instance = Leaderboard(conn)
     scores = leaderboard_instance.display_top_scores()
     form = LeaderboardForm
