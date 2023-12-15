@@ -11,10 +11,12 @@ class TestQuestionModel(unittest.TestCase):
         self.questions = QuizQuestions()
 
     def test_valid_api_connection(self):
+        """Testing the status code of the API connection is 200"""
         response = requests.get(self.questions.url)
         self.assertEqual(response.status_code, 200)
 
     def test_invalid_api_connection(self):
+        """Testing a 404 status code is given with an url typo"""
         response = requests.get("https://the-trivia-api.com/v2/questions2")
         self.assertEqual(response.status_code, 404)
 
@@ -39,6 +41,7 @@ class TestQuestionModel(unittest.TestCase):
         """Test that 10 finalised dictionaries are created, 1 for each question"""
         quiz = self.questions.create_quiz_question_dict()
         self.assertEqual(len(quiz), 10)
+
 
 if __name__ == '__main__':
     unittest.main()
