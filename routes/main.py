@@ -26,8 +26,8 @@ def start_quiz():
     if form.validate_on_submit():
         session['nickname'] = form.nickname.data
         session['avatar'] = request.form['avatar']
-        quiz = QuizQuestions()
-        return render_template("quiz_setup.html", categories=quiz.question_categories)
+        # quiz = QuizQuestions()
+        return render_template("quiz_setup.html", categories=QuizQuestions.question_categories)
 
 
 @main_bp.route("/play_quiz", methods=["POST", "GET"])
