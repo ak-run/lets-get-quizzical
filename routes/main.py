@@ -4,7 +4,6 @@ from models.db_connection_model import DatabaseConnection, config
 from models.leaderboard_model import Leaderboard
 from models.question_model import QuizQuestions
 from models.quizgame_model import QuizGame
-from utils import set_up_quiz_game
 
 # blueprint for main page
 main_bp = Blueprint("/", __name__, static_folder="static", template_folder="templates")
@@ -36,42 +35,48 @@ def play_quiz():
     """Route for quiz"""
     form = QuestionForm()
 
+    # Check if the quiz_game is not already in the session
     if "quiz_game" not in session:
+        # If not, retrieve the category
         category = request.args.get("category")
-        quiz_game = set_up_quiz_game(category)
+        # Create a QuizQuestions object and set its URL to the category, generate questions dictionary
+        quiz_questions_obj = QuizQuestions()
+        quiz_questions_obj.url = category
+        quiz_questions = quiz_questions_obj.create_quiz_question_dict()
+        # Create a QuizGame instance using the generated questions
+        quiz_game = QuizGame(quiz_questions)
+        # Store the quiz_game in the session as a dictionary
         session["quiz_game"] = quiz_game.to_dict()
-        current_question = session["quiz_game"]["current_question"]
-        question_number = session["quiz_game"]["question_number"]
-        current_answers = session["quiz_game"]["current_answers"]
-        session["quiz_questions"] = session["quiz_game"]["question_list"]
-        current_user_answers = None
-        current_user_score = None
-        questions_left = True
     else:
+        # If quiz_game is already in the session, retrieve its information
         quiz_questions = session["quiz_game"]["question_list"]
-        user_answer = form.user_answer.data
         quiz_game = QuizGame.from_dict(quiz_questions, session["quiz_game"])
-        quiz_game.ask_question(user_answer)
+        # Ask the current question and update the session with the game state
+        quiz_game.ask_question(form.user_answer.data)
         session["quiz_game"] = quiz_game.to_dict()
-        # Fetch the updated values from the session
-        question_number = session["quiz_game"]["question_number"]
-        if quiz_game.questions_left():
-            current_question = session["quiz_game"]["question_list"][question_number]["question"]
-            current_answers = session["quiz_game"]["question_list"][question_number]["answers"]
-            current_user_answers = session["quiz_game"]["user_answers"]
-            current_user_score = session["quiz_game"]["score"]
-            questions_left = True
-        else:
-            # Case when there are no more questions left
-            current_question = "Quiz Finished"
-            current_answers = []
-            current_user_answers = session["quiz_game"]["user_answers"]
-            current_user_score = session["quiz_game"]["score"]
-            questions_left = False
 
-    if not questions_left:
-        session["user_score"] = current_user_score
-        session["user_answers"] = current_user_answers
+    # Retrieve the current question number and bool informing if there are questions left in the quiz
+    question_number = session["quiz_game"]["question_number"]
+    questions_left = quiz_game.questions_left()
+
+    #  Determine the details of the current question and user's progress
+    if questions_left:
+        current_question, current_answers, current_user_answers, current_user_score = (
+            quiz_questions[question_number]["question"],
+            quiz_questions[question_number]["answers"],
+            session["quiz_game"]["user_answers"],
+            session["quiz_game"]["score"]
+        )
+    else:
+        # once quiz is finished store the score and user answers in session ready to display on the score page
+        current_question, current_answers, current_user_answers, current_user_score = (
+            "Quiz Finished",
+            [],
+            session["quiz_game"]["user_answers"],
+            session["quiz_game"]["score"]
+        )
+        session["user_score"], session["user_answers"] = current_user_score, current_user_answers
+        # Go to score page
         return redirect(url_for("score.score"))
 
     return render_template("play_quiz.html",
