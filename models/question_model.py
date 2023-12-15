@@ -9,10 +9,12 @@ class QuizQuestions:
         question_categories: A list of available question categories.
         _url : The base URL for making API calls.
     """
+    # Question categories are a class variable because they are the same for all instances of the class
+    question_categories = ["music", "sport_and_leisure", "film_and_tv", "arts_and_literature", "history",
+                           "society_and_culture", "science", "geography", "food_and_drink",
+                           "general_knowledge"]
+
     def __init__(self):
-        self.question_categories = ["music", "sport_and_leisure", "film_and_tv", "arts_and_literature", "history",
-                                    "society_and_culture", "science", "geography", "food_and_drink",
-                                    "general_knowledge"]
         self._url = f"https://the-trivia-api.com/v2/questions"
 
     @property
