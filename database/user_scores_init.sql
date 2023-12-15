@@ -1,7 +1,9 @@
+-- Database to store user scores
 CREATE DATABASE user_scores;
 
 USE user_scores;
 
+-- Create a table to store quiz scores
 CREATE TABLE quiz_scores(
 	id INT AUTO_INCREMENT PRIMARY KEY,
 	avatar VARCHAR(100),
@@ -9,6 +11,7 @@ CREATE TABLE quiz_scores(
     SCORE INT NOT NULL CHECK (score BETWEEN 0 AND 10)
 );
 
+-- View to display top 10 scores
 CREATE VIEW top_scores_view AS
 SELECT
     ROW_NUMBER() OVER (ORDER BY score DESC, nickname) AS position,
@@ -35,10 +38,3 @@ DELIMITER ;
 CALL AddUserScore("avatar-2.png", "Frodo Baggins", 1);
 CALL AddUserScore("avatar-7.png", "Aragorn", 2);
 CALL AddUserScore("avatar-4.png", "Gollum", 3);
-
-
-SELECT *
-FROM quiz_scores;
-
-SELECT *
-FROM top_scores_view;
