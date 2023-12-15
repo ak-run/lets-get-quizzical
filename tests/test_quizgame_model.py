@@ -21,6 +21,64 @@ class TestQuizGame(unittest.TestCase):
         ]
         self.game = QuizGame(self.sample_questions)
 
+    def test_to_dict(self):
+        self.game.ask_question(2)
+        result = self.game.to_dict()
+        expected_result = {'current_answers': ['Mars', 'Venus', 'Jupiter', 'Saturn'],
+                           'current_correct_answer': 0,
+                           'current_question': 'Which planet is known as the Red Planet?',
+                           'question_list': [{'answers': ['Berlin', 'Paris', 'Rome', 'Madrid'],
+                                              'correct_answer': 1,
+                                              'question': 'What is the capital of France?'},
+                                             {'answers': ['Mars', 'Venus', 'Jupiter', 'Saturn'],
+                                              'correct_answer': 0,
+                                              'question': 'Which planet is known as the Red Planet?'}],
+                           'question_number': 1,
+                           'score': 0,
+                           'user_answers': {'01. What is the capital of France?': 'Your answer: Rome, '
+                                                                                  'correct answer: '
+                                                                                  'Paris'}}
+        self.assertEqual(result, expected_result)
+
+    def test_from_dict(self):
+        """
+
+        :return:
+        """
+        # Sample data for testing from_dict
+        sample_data = {
+            "question_number": 1,
+            "score": 10,
+            "current_question": "Which planet is known as the Red Planet?",
+            "current_answers": ["Mars", "Venus", "Jupiter", "Saturn"],
+            "current_correct_answer": 0,
+            "user_answers": {"01. What is the capital of France?": "Your answer: Rome, correct answer: Paris"},
+            "question_list": [
+                {
+                    "question": "What is the capital of France?",
+                    "answers": ["Berlin", "Paris", "Rome", "Madrid"],
+                    "correct_answer": 1,
+                },
+                {
+                    "question": "Which planet is known as the Red Planet?",
+                    "answers": ["Mars", "Venus", "Jupiter", "Saturn"],
+                    "correct_answer": 0,
+                },
+            ],
+        }
+
+        # Create a QuizGame instance using from_dict
+        quiz_game_instance = QuizGame.from_dict(self.sample_questions, sample_data)
+
+        # Check if the instance attributes match the sample data
+        self.assertEqual(quiz_game_instance.question_number, sample_data["question_number"])
+        self.assertEqual(quiz_game_instance.score, sample_data["score"])
+        self.assertEqual(quiz_game_instance.current_question, sample_data["current_question"])
+        self.assertEqual(quiz_game_instance.current_answers, sample_data["current_answers"])
+        self.assertEqual(quiz_game_instance.current_correct_answer, sample_data["current_correct_answer"])
+        self.assertEqual(quiz_game_instance.user_answers, sample_data["user_answers"])
+        self.assertEqual(quiz_game_instance.question_list, sample_data["question_list"])
+
     def test_questions_left_true(self):
         """testing when there are questions left"""
         self.assertTrue(self.game.questions_left())
@@ -36,7 +94,7 @@ class TestQuizGame(unittest.TestCase):
         self.assertEqual(self.game.current_question,
                          "Which planet is known as the Red Planet?")
         self.assertEqual(self.game.current_answers, [
-                         "Mars", "Venus", "Jupiter", "Saturn"])
+            "Mars", "Venus", "Jupiter", "Saturn"])
         self.assertEqual(self.game.current_correct_answer, 0)
 
     def test_ask_question_successful(self):
@@ -75,7 +133,7 @@ class TestQuizGame(unittest.TestCase):
     def test_save_user_answer_correct(self):
         self.game.save_user_answer(1)
         self.assertEqual(self.game.user_answers, {
-                         "What is the capital of France?": "Your answer, Paris, was correct"})
+            "What is the capital of France?": "Your answer, Paris, was correct"})
 
     def test_save_user_answer_incorrect(self):
         self.game.save_user_answer(2)
