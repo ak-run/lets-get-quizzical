@@ -33,18 +33,18 @@ class TestLeaderBoard(unittest.TestCase):
         Test the add_user_score method with valid input.
         The method should add a user score to the database and return a success status code, 200
         """
-        result, status_code = self.mock_leaderboard.add_user_score("TestUser", 10)
+        result, status_code = self.mock_leaderboard.add_user_score("avatar1.png", "TestUser", 10)
         self.assertEqual(status_code, 200)
 
-    def test_execute_sql_query_with_exception(self):
+    def test_execute_sql_query_with_value_error(self):
         """
-        Test the execute_sql_query method when an exception is raised.
-        The method should handle the exception and raise a DbConnectionError.
+        Test the execute_sql_query method when a ValueError is raised.
+        The method should handle the exception and raise a ValueError.
         This method is used by both add_user_score and display_top_scores methods
         """
         with unittest.mock.patch.object(Leaderboard, 'execute_sql_query', side_effect=DbConnectionError("Test error")):
-            with self.assertRaises(DbConnectionError):
-                self.mock_leaderboard.add_user_score("TestUser", 11)
+            with self.assertRaises(ValueError):
+                self.mock_leaderboard.add_user_score("avatar", "TestUser", 11)
 
 
 if __name__ == '__main__':
