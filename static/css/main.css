@@ -84,8 +84,17 @@ h4 {
 .link:hover {
 	text-decoration: none;
 	color: white;
-	font-size: 20px;
 	font-weight: bold;
+	transform: scale(1.05);
+}
+
+.link span {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.link:hover span {
+  transform: scale(1.15);
 }
 
 .navbar-toggler {
@@ -448,7 +457,7 @@ margin: 20px auto;
 .start-quiz-btn:hover {
     font-weight: bold;
 	display: block;
-	height:3.6rem;
+    transform: scale(1.05);
 	text-decoration: none;
 	color: #fff;
 	margin: 10px;
@@ -457,7 +466,15 @@ margin: 20px auto;
 	border: 6px solid white;
 	text-transform: uppercase;
 	width: 20rem;
-	font-size: 20px;
+}
+
+.start-quiz-btn span {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.start-quiz-btn:hover span {
+  transform: scale(1.15);
 }
 
 .buttons-container {
