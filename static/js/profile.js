@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
-    var modal = document.getElementById("avatarModal");
-    var btn = document.getElementById("avatarModalBtn");
-    var span = document.getElementsByClassName("close")[0];
+    const modal = document.getElementById("avatarModal");
+    const btn = document.getElementById("avatarModalBtn");
+    const span = document.getElementsByClassName("close")[0];
 
     btn.onclick = function() {
         modal.style.display = "block";
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.querySelectorAll('#avatarChoices img').forEach(function(img) {
         img.addEventListener('click', function() {
-            var avatarValue = img.getAttribute('src');
+            let avatarValue = img.getAttribute('src');
             document.getElementById('selectedAvatar').value = avatarValue.split('/').pop();
             document.getElementById('avatarPreview').src = avatarValue;
             modal.style.display = "none";
@@ -27,13 +27,13 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Get the nickname input and start button elements
-    var nicknameInput = document.getElementById('nickname');
-    var startButton = document.getElementById('startGame');
+    const nicknameInput = document.getElementById('nickname');
+    const startButton = document.getElementById('startGame');
 
     // Add an event listener to the nickname input
     nicknameInput.addEventListener('input', function() {
         // Enable the start button if the nickname is not empty
-        var isNicknameEntered = nicknameInput.value.trim() !== '';
+        const isNicknameEntered = nicknameInput.value.trim() !== '';
         startButton.disabled = !isNicknameEntered;
 
         // Add or remove the active button class based on the nickname input
