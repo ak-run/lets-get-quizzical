@@ -1,5 +1,8 @@
 from flask import Blueprint, render_template, request, redirect, url_for, session
-from flask_forms import ScoreForm
+from flask_wtf import FlaskForm
+from wtforms import StringField, IntegerField, SubmitField
+from wtforms.validators import DataRequired, NumberRange, Length
+
 from models.db_connection_model import DatabaseConnection, config
 from models.leaderboard_model import Leaderboard
 
@@ -7,6 +10,10 @@ score_bp = Blueprint("score", __name__, static_folder="static", template_folder=
 
 conn = DatabaseConnection(config)
 conn.get_connection_to_db()
+
+
+class ScoreForm(FlaskForm):
+    submit = SubmitField('SUBMIT SCORE TO LEADERBOARD')
 
 
 @score_bp.route("/", methods=["GET", "POST"])
