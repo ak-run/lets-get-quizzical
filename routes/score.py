@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, session
-from flask_forms import ScoreForm
+from routes.flask_forms import ScoreForm
 from models.db_connection_model import DatabaseConnection, config
 from models.leaderboard_model import Leaderboard
 
