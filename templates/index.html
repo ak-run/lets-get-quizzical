@@ -1,0 +1,62 @@
+{% extends "base.html"%}
+{%block title%}
+Quiz
+{% endblock %}
+
+{% block body_class %}home-page{% endblock %}
+
+{% block content %}
+<div class="intro">
+    <img src="{{ url_for('static', filename='img/header-main.png') }}" alt="PUB QUIZ" class="header-image">
+
+<section class="profile-setup">
+    <h2>Create your player profile:</h2>
+    <form id="profileForm" class="profile-form" action="{{ url_for('/.start_quiz') }}" method="post">
+        {{ form.hidden_tag() }}
+        <!-- Nickname Group -->
+        <div class="form-group nickname-group">
+            <label for="nickname" class="form-label">NICKNAME</label>
+            <input type="text" id="nickname" name="nickname" required placeholder="NAME" class="form-input">
+        </div>
+
+        <!-- Avatar Group -->
+        <div class="form-group avatar-group">
+            <label class="form-label">AVATAR</label>
+            <div class="avatar-setup">
+                <input type="hidden" name="avatar" id="selectedAvatar" value="avatar-1.png">
+                <img id="avatarPreview" src="{{ url_for('static', filename='img/avatars/avatar-1.png') }}" alt="Avatar" class="avatar-image">
+                <button type="button" id="avatarModalBtn" class="avatar-btn">&#9662;</button>
+            </div>
+        </div>
+
+    </section>
+        <input type="hidden" id="selectedAvatar" name="selectedAvatar">
+        <button type="submit" id="startGame" class="start-quiz-btn" disabled><span>START QUIZ</span></button>
+    </form>
+
+    <div class="buttons-container">
+        <a href="{{ url_for('/.leaderboard') }}" class="main-button link"><span>LEADERBOARD</span></a>
+        <a href="{{ url_for('/.how_to_play') }}" class="main-button link"><span>HOW TO PLAY</span></a>
+    </div>
+</div>
+
+
+
+           <!-- Modal -->
+    <div id="avatarModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="avatarChoices">
+                {% for avatar_filename in avatar_filenames %}
+                    <img src="{{ url_for('static', filename='img/avatars/avatar-' + avatar_filename) }}" alt="Avatar">
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/profile.js') }}"></script>
+</div>
+{% endblock %}
+
+
+

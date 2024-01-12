@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}
+Leaderboard
+{% endblock %}
+
+{% block header_image %}
+<div class="header-image-container">
+    <img src="{{ url_for('static', filename='img/navbar-image.png') }}" alt="Header Image" class="header-image">
+</div>
+{% endblock %}
+
+{% block content %}
+ <form id="LeaderboardForm" method="GET">
+
+    <div class="leaderboard">
+
+        <h3 id="leaderboard-heading">Leaderboard</h3>
+
+        <table class="leaderboard-table">
+            <tr>
+                <th>#</th>
+                <th>Avatar</th>
+                <th>Nickname</th>
+                <th>Score</th>
+            </tr>
+          {% for position, avatar, nickname, score in scores %}
+            <tr>
+                <td>{{ position }}</td>
+                <td><img src="{{ url_for('static', filename='img/avatars/' + avatar) }}" alt="Avatar" class="avatar-image"></td>
+                <td>{{ nickname }}</td>
+                <td>{{ score }}</td>
+            </tr>
+          {% endfor %}
+        </table>
+
+    </div>
+
+</form>
+
+{% endblock %}
+

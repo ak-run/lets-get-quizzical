@@ -1,0 +1,27 @@
+{% extends "base.html"%}
+{%block title%}
+Quiz
+{% endblock %}
+
+{% block header_image %}
+<div class="header-image-container">
+    <img src="{{ url_for('static', filename='img/navbar-image.png') }}" alt="Header Image" class="header-image">
+</div>
+{% endblock %}
+
+{% block content%}
+
+
+
+	<div class="intro">
+                <h3>Select category</h3>
+          {% for category in categories %}
+                <a href="{{ url_for('/.play_quiz', category=category)}}" class="main-button link">
+                    {{category.replace("_", " ")}}
+                </a>
+          {% endfor %}
+    </div>
+
+
+
+{% endblock %}

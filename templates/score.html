@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}
+Score
+{% endblock %}
+
+{% block header_image %}
+<div class="header-image-container">
+    <img src="{{ url_for('static', filename='img/navbar-image.png') }}" alt="Header Image" class="header-image">
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="intro">
+    <!-- Display user nickname and avatar -->
+    <div class="user-info">
+        <h2>{{ session.get('nickname', 'Player') }}</h2>
+        <img src="{{ url_for('static', filename='img/avatars/' + session.get('avatar', 'default.png')) }}" alt="User Avatar">
+    </div>
+
+
+<div class = "score">
+    <form id="ScoreForm" method="POST" action="{{ url_for('score.score') }}">
+      {{ form.hidden_tag() }}
+
+      <div class="form-group">
+        {{ form.submit (id="score-submit-button")}}
+      </div>
+
+      <div class="results-box">
+        <h1>Your Results</h1>
+      <div class="form-group">
+        <h2>SCORE:  {{ user_score }}/10</h2>
+      </div>
+        <ul>
+            {% for question, answer in user_answers.items() %}
+            <li>
+                <strong>{{ question }}</strong><br>
+                {{ answer }}
+            </li>
+            {% endfor %}
+        </ul>
+      </div>
+    </form>
+</div>
+
+{% endblock %}
